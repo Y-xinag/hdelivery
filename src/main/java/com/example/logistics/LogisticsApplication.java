@@ -12,4 +12,4 @@ public class LogisticsApplication {
         SpringApplication.run(LogisticsApplication.class, args);
     }
 
-}
+}//
