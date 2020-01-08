@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class SyMenusWithBLOBs extends SyMenus {
+import java.io.Serializable;
+
+public class SyMenusWithBLOBs extends SyMenus implements Serializable {
+
+    private static final long serialVersionUID = 5410299046001703636L;
+
     private byte[] text;
 
     private byte[] url;

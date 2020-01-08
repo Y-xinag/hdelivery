@@ -1,9 +1,16 @@
 package com.example.logistics.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SyEmpExample {
+/*
+*  @Description
+* */
+public class SyEmpExample implements Serializable {
+
+    private static final long serialVersionUID = 6306247930583823425L;
+
     protected String orderByClause;
 
     protected boolean distinct;

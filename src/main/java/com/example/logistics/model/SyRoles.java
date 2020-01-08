@@ -1,6 +1,15 @@
 package com.example.logistics.model;
 
-public class SyRoles {
+import java.io.Serializable;
+import java.util.Set;
+
+/*
+* @Description 角色表
+* */
+public class SyRoles implements Serializable {
+
+    private static final long serialVersionUID = 3020593018769358424L;
+
     private Integer id;
 
     private String rolename;
@@ -8,6 +17,9 @@ public class SyRoles {
     private String roledesc;
 
     private Boolean disabled;
+
+    //当前角色的权限
+    private Set<SyMenus> symenus;
 
     public Integer getId() {
         return id;
@@ -39,5 +51,13 @@ public class SyRoles {
 
     public void setDisabled(Boolean disabled) {
         this.disabled = disabled;
+    }
+
+    public Set<SyMenus> getSymenus() {
+        return symenus;
+    }
+
+    public void setSymenus(Set<SyMenus> symenus) {
+        this.symenus = symenus;
     }
 }
