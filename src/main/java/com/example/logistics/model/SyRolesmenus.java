@@ -1,6 +1,15 @@
 package com.example.logistics.model;
 
-public class SyRolesmenus {
+import java.io.Serializable;
+
+/*
+* @Description 角色权限表
+* */
+public class SyRolesmenus implements Serializable {
+
+
+    private static final long serialVersionUID = 2349822912566416090L;
+
     private Integer id;
 
     private Integer roleid;

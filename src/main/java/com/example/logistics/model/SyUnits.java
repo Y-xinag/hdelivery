@@ -1,8 +1,15 @@
 package com.example.logistics.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SyUnits {
+/*
+* @Description  员工单位表
+* */
+public class SyUnits implements Serializable {
+
+    private static final long serialVersionUID = -5141599104700198920L;
+
     private Integer id;
 
     private String name;

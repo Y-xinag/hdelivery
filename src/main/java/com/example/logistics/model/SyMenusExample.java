@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SyMenusExample {
+public class SyMenusExample implements Serializable {
+
+    private static final long serialVersionUID = -1542326380989222206L;
+
     protected String orderByClause;
 
     protected boolean distinct;
