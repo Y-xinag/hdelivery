@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class BasShuttlebus {
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+@Component
+public class BasShuttlebus implements Serializable {
     private Integer id;
 
     private Boolean linetype;
@@ -129,5 +134,24 @@ public class BasShuttlebus {
 
     public void setOperationtime(String operationtime) {
         this.operationtime = operationtime == null ? null : operationtime.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "BasShuttlebus{" +
+                "id=" + id +
+                ", linetype=" + linetype +
+                ", lineid=" + lineid +
+                ", licenseplateint='" + licenseplateint + '\'' +
+                ", carrier='" + carrier + '\'' +
+                ", models='" + models + '\'' +
+                ", driver='" + driver + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", ton=" + ton +
+                ", remarks='" + remarks + '\'' +
+                ", operationunitid=" + operationunitid +
+                ", operatorid=" + operatorid +
+                ", operationtime='" + operationtime + '\'' +
+                '}';
     }
 }

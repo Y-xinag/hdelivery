@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class SorStoragedetails {
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+@Component
+public class SorStoragedetails implements Serializable {
     private Integer id;
 
     private String packageid;
@@ -49,5 +54,16 @@ public class SorStoragedetails {
 
     public void setState(Boolean state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "SorStoragedetails{" +
+                "id=" + id +
+                ", packageid='" + packageid + '\'' +
+                ", weight=" + weight +
+                ", outboundid='" + outboundid + '\'' +
+                ", state=" + state +
+                '}';
     }
 }

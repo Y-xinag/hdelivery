@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class BasZonecustominfo {
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+@Component
+public class BasZonecustominfo implements Serializable {
     private Integer customcode;
 
     private String customname;
@@ -59,5 +64,17 @@ public class BasZonecustominfo {
 
     public void setZonename(String zonename) {
         this.zonename = zonename == null ? null : zonename.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "BasZonecustominfo{" +
+                "customcode=" + customcode +
+                ", customname='" + customname + '\'' +
+                ", mobileno=" + mobileno +
+                ", cityname='" + cityname + '\'' +
+                ", cstomaddress='" + cstomaddress + '\'' +
+                ", zonename='" + zonename + '\'' +
+                '}';
     }
 }

@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class PacPackaging {
+@Component
+public class PacPackaging implements Serializable {
     private Integer id;
 
     private String itemcode;
@@ -142,5 +146,25 @@ public class PacPackaging {
 
     public void setInvalidatetime(Date invalidatetime) {
         this.invalidatetime = invalidatetime;
+    }
+
+    @Override
+    public String toString() {
+        return "PacPackaging{" +
+                "id=" + id +
+                ", itemcode='" + itemcode + '\'' +
+                ", itemname='" + itemname + '\'' +
+                ", plannedprice=" + plannedprice +
+                ", specifications='" + specifications + '\'' +
+                ", type=" + type +
+                ", measurementunit='" + measurementunit + '\'' +
+                ", status=" + status +
+                ", operatorid=" + operatorid +
+                ", operationunitid=" + operationunitid +
+                ", operationtime=" + operationtime +
+                ", invalidatejobint=" + invalidatejobint +
+                ", invalidatename=" + invalidatename +
+                ", invalidatetime=" + invalidatetime +
+                '}';
     }
 }

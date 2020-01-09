@@ -1,15 +1,11 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
-import java.util.Set;
 
-/*
-*  @Description 员工实体类
-* */
+@Component
 public class SyEmp implements Serializable {
-
-    private static final long serialVersionUID = -3922961171777546549L;
-
     private Integer id;
 
     private String empname;
@@ -27,12 +23,6 @@ public class SyEmp implements Serializable {
     private String remark;
 
     private Boolean disabled;
-
-    //角色表
-    private Set<SyRoles> syroles;
-
-    //权限表（栏目表）
-    private Set<SyMenus> symenus;
 
     public Integer getId() {
         return id;
@@ -106,19 +96,18 @@ public class SyEmp implements Serializable {
         this.disabled = disabled;
     }
 
-    public Set<SyRoles> getSyroles() {
-        return syroles;
-    }
-
-    public void setSyroles(Set<SyRoles> syroles) {
-        this.syroles = syroles;
-    }
-
-    public Set<SyMenus> getSymenus() {
-        return symenus;
-    }
-
-    public void setSymenus(Set<SyMenus> symenus) {
-        this.symenus = symenus;
+    @Override
+    public String toString() {
+        return "SyEmp{" +
+                "id=" + id +
+                ", empname='" + empname + '\'' +
+                ", empno='" + empno + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", querypwd='" + querypwd + '\'' +
+                ", roleid=" + roleid +
+                ", empunit=" + empunit +
+                ", remark='" + remark + '\'' +
+                ", disabled=" + disabled +
+                '}';
     }
 }

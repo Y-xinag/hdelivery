@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class LogLogisticsdetails {
+@Component
+public class LogLogisticsdetails implements Serializable {
     private Integer id;
 
     private String logisticsint;
@@ -91,5 +95,20 @@ public class LogLogisticsdetails {
 
     public void setLogisticstype(String logisticstype) {
         this.logisticstype = logisticstype == null ? null : logisticstype.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "LogLogisticsdetails{" +
+                "id=" + id +
+                ", logisticsint='" + logisticsint + '\'' +
+                ", companyname='" + companyname + '\'' +
+                ", expectarrivaldate=" + expectarrivaldate +
+                ", actualarrivaldate=" + actualarrivaldate +
+                ", expectdeparturedate=" + expectdeparturedate +
+                ", actualdeparturedate=" + actualdeparturedate +
+                ", operationperson='" + operationperson + '\'' +
+                ", logisticstype='" + logisticstype + '\'' +
+                '}';
     }
 }

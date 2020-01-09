@@ -1,8 +1,11 @@
 package com.example.logistics.model;
 
-import java.util.Date;
+import org.springframework.stereotype.Component;
 
-public class IaeExtract {
+import java.io.Serializable;
+import java.util.Date;
+@Component
+public class IaeExtract implements Serializable {
     private String id;
 
     private String vehicleint;
@@ -71,5 +74,18 @@ public class IaeExtract {
 
     public void setImportanthints(String importanthints) {
         this.importanthints = importanthints == null ? null : importanthints.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "IaeExtract{" +
+                "id='" + id + '\'' +
+                ", vehicleint='" + vehicleint + '\'' +
+                ", transportway='" + transportway + '\'' +
+                ", waybillid='" + waybillid + '\'' +
+                ", estimatedate=" + estimatedate +
+                ", cargon=" + cargon +
+                ", importanthints='" + importanthints + '\'' +
+                '}';
     }
 }

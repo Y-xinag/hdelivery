@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class BasBasicarchivesentryExample {
     protected String orderByClause;
 

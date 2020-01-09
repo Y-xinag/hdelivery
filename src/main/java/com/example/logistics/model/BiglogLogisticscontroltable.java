@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class BiglogLogisticscontroltable {
+@Component
+public class BiglogLogisticscontroltable implements Serializable {
     private Integer id;
 
     private String worksheetno;
@@ -91,5 +95,20 @@ public class BiglogLogisticscontroltable {
 
     public void setInputcompany(Integer inputcompany) {
         this.inputcompany = inputcompany;
+    }
+
+    @Override
+    public String toString() {
+        return "BiglogLogisticscontroltable{" +
+                "id=" + id +
+                ", worksheetno='" + worksheetno + '\'' +
+                ", ctype=" + ctype +
+                ", corporation='" + corporation + '\'' +
+                ", waybillid='" + waybillid + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", inputperson=" + inputperson +
+                ", inputdate=" + inputdate +
+                ", inputcompany=" + inputcompany +
+                '}';
     }
 }

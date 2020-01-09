@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class PacStock {
+@Component
+public class PacStock implements Serializable {
     private String warehouseno;
 
     private Boolean reservoirtype;
@@ -81,5 +85,19 @@ public class PacStock {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "PacStock{" +
+                "warehouseno='" + warehouseno + '\'' +
+                ", reservoirtype=" + reservoirtype +
+                ", transport='" + transport + '\'' +
+                ", subordinateunit='" + subordinateunit + '\'' +
+                ", drawerno=" + drawerno +
+                ", drawername='" + drawername + '\'' +
+                ", drawertime=" + drawertime +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class PacStockitem extends PacStockitemKey {
+@Component
+public class PacStockitem extends PacStockitemKey implements Serializable {
     private String goodsname;
 
     private Integer storagenum;
@@ -61,5 +65,17 @@ public class PacStockitem extends PacStockitemKey {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "PacStockitem{" +
+                "goodsname='" + goodsname + '\'' +
+                ", storagenum=" + storagenum +
+                ", plannedprice=" + plannedprice +
+                ", specifications='" + specifications + '\'' +
+                ", type=" + type +
+                ", status=" + status +
+                '}';
     }
 }

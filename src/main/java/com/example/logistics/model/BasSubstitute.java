@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class BasSubstitute {
+@Component
+public class BasSubstitute implements Serializable {
     private Integer id;
 
     private String empno;
@@ -111,5 +115,22 @@ public class BasSubstitute {
 
     public void setSubordinateunit(Integer subordinateunit) {
         this.subordinateunit = subordinateunit;
+    }
+
+    @Override
+    public String toString() {
+        return "BasSubstitute{" +
+                "id=" + id +
+                ", empno='" + empno + '\'' +
+                ", empname='" + empname + '\'' +
+                ", mobileno=" + mobileno +
+                ", type=" + type +
+                ", pda=" + pda +
+                ", standardkg=" + standardkg +
+                ", models=" + models +
+                ", plateint='" + plateint + '\'' +
+                ", invalidatemark='" + invalidatemark + '\'' +
+                ", subordinateunit=" + subordinateunit +
+                '}';
     }
 }

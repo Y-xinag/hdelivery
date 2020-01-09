@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class SorAbnormal {
+@Component
+public class SorAbnormal implements Serializable {
     private Integer id;
 
     private Date launchdate;
@@ -111,5 +115,22 @@ public class SorAbnormal {
 
     public void setHandledate(Date handledate) {
         this.handledate = handledate;
+    }
+
+    @Override
+    public String toString() {
+        return "SorAbnormal{" +
+                "id=" + id +
+                ", launchdate=" + launchdate +
+                ", launchperson='" + launchperson + '\'' +
+                ", launchcompany='" + launchcompany + '\'' +
+                ", abnormaltype=" + abnormaltype +
+                ", transferint='" + transferint + '\'' +
+                ", cargoint='" + cargoint + '\'' +
+                ", packageint='" + packageint + '\'' +
+                ", hedgeabnint=" + hedgeabnint +
+                ", abostate=" + abostate +
+                ", handledate=" + handledate +
+                '}';
     }
 }

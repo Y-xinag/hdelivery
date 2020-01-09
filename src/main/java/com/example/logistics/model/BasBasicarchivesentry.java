@@ -1,8 +1,11 @@
 package com.example.logistics.model;
 
-import java.util.Date;
+import org.springframework.stereotype.Component;
 
-public class BasBasicarchivesentry {
+import java.io.Serializable;
+import java.util.Date;
+@Component
+public class BasBasicarchivesentry implements Serializable{
     private Integer id;
 
     private String name;
@@ -91,5 +94,20 @@ public class BasBasicarchivesentry {
 
     public void setOperationtime(Date operationtime) {
         this.operationtime = operationtime;
+    }
+
+    @Override
+    public String toString() {
+        return "BasBasicarchivesentry{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parentid=" + parentid +
+                ", mnemoniccode='" + mnemoniccode + '\'' +
+                ", available=" + available +
+                ", remarks='" + remarks + '\'' +
+                ", operatorid=" + operatorid +
+                ", operationunitid=" + operationunitid +
+                ", operationtime=" + operationtime +
+                '}';
     }
 }

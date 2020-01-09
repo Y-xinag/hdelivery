@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class SorOutbound {
+@Component
+public class SorOutbound implements Serializable {
     private String outboundid;
 
     private Boolean handovertype;
@@ -111,5 +115,22 @@ public class SorOutbound {
 
     public void setEnterdate(Date enterdate) {
         this.enterdate = enterdate;
+    }
+
+    @Override
+    public String toString() {
+        return "SorOutbound{" +
+                "outboundid='" + outboundid + '\'' +
+                ", handovertype=" + handovertype +
+                ", line='" + line + '\'' +
+                ", direction=" + direction +
+                ", acceptperson=" + acceptperson +
+                ", carriers=" + carriers +
+                ", deliveryperson=" + deliveryperson +
+                ", deliverydate=" + deliverydate +
+                ", deliverycompany='" + deliverycompany + '\'' +
+                ", enterperson=" + enterperson +
+                ", enterdate=" + enterdate +
+                '}';
     }
 }

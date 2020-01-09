@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class IaeArrival {
+@Component
+public class IaeArrival implements Serializable {
     private String id;
 
     private String sendcompany;
@@ -101,5 +105,21 @@ public class IaeArrival {
 
     public void setBatch(Date batch) {
         this.batch = batch;
+    }
+
+    @Override
+    public String toString() {
+        return "IaeArrival{" +
+                "id='" + id + '\'' +
+                ", sendcompany='" + sendcompany + '\'' +
+                ", cargoaddress='" + cargoaddress + '\'' +
+                ", issueperson='" + issueperson + '\'' +
+                ", issuedate=" + issuedate +
+                ", workaddress='" + workaddress + '\'' +
+                ", storagedate=" + storagedate +
+                ", outbounddate=" + outbounddate +
+                ", timelimit=" + timelimit +
+                ", batch=" + batch +
+                '}';
     }
 }

@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class SorPackage {
+@Component
+public class SorPackage implements Serializable {
     private Integer id;
 
     private Integer packageperson;
@@ -122,5 +126,23 @@ public class SorPackage {
 
     public void setAsk(Boolean ask) {
         this.ask = ask;
+    }
+
+    @Override
+    public String toString() {
+        return "SorPackage{" +
+                "id=" + id +
+                ", packageperson=" + packageperson +
+                ", sealint='" + sealint + '\'' +
+                ", destination='" + destination + '\'' +
+                ", reckondes='" + reckondes + '\'' +
+                ", timelimit=" + timelimit +
+                ", ticketsum=" + ticketsum +
+                ", cargosum=" + cargosum +
+                ", weightsum=" + weightsum +
+                ", volumesum=" + volumesum +
+                ", state=" + state +
+                ", ask=" + ask +
+                '}';
     }
 }

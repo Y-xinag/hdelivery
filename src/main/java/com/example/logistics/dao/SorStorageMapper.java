@@ -3,6 +3,8 @@ package com.example.logistics.dao;
 import com.example.logistics.model.SorStorage;
 import com.example.logistics.model.SorStorageExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 
 public interface SorStorageMapper {
@@ -27,4 +29,8 @@ public interface SorStorageMapper {
     int updateByPrimaryKeySelective(SorStorage record);
 
     int updateByPrimaryKey(SorStorage record);
+
+    //增加入库
+    //@Insert("INSERT INTO sor_storage(ID,AcceptDate,AcceptPerson,AcceptCompany,DeliveryPerson,DeliveryCompany) VALUES(#{id},NOW(),#{},#{},#{},#{});")
+    int addSorStorage(SorStorage sorStorage);
 }

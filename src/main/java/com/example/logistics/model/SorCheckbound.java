@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class SorCheckbound {
+@Component
+public class SorCheckbound implements Serializable {
     private Integer id;
 
     private Integer scanid;
@@ -61,5 +65,17 @@ public class SorCheckbound {
 
     public void setCheckcompany(String checkcompany) {
         this.checkcompany = checkcompany == null ? null : checkcompany.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SorCheckbound{" +
+                "id=" + id +
+                ", scanid=" + scanid +
+                ", cargosum=" + cargosum +
+                ", checkperson=" + checkperson +
+                ", checkdate=" + checkdate +
+                ", checkcompany='" + checkcompany + '\'' +
+                '}';
     }
 }

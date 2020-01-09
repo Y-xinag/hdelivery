@@ -1,15 +1,11 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
-import java.util.Set;
 
-/*
-* @Description 角色表
-* */
+@Component
 public class SyRoles implements Serializable {
-
-    private static final long serialVersionUID = 3020593018769358424L;
-
     private Integer id;
 
     private String rolename;
@@ -17,9 +13,6 @@ public class SyRoles implements Serializable {
     private String roledesc;
 
     private Boolean disabled;
-
-    //当前角色的权限
-    private Set<SyMenus> symenus;
 
     public Integer getId() {
         return id;
@@ -53,11 +46,13 @@ public class SyRoles implements Serializable {
         this.disabled = disabled;
     }
 
-    public Set<SyMenus> getSymenus() {
-        return symenus;
-    }
-
-    public void setSymenus(Set<SyMenus> symenus) {
-        this.symenus = symenus;
+    @Override
+    public String toString() {
+        return "SyRoles{" +
+                "id=" + id +
+                ", rolename='" + rolename + '\'' +
+                ", roledesc='" + roledesc + '\'' +
+                ", disabled=" + disabled +
+                '}';
     }
 }

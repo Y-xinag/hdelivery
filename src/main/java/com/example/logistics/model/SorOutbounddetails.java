@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class SorOutbounddetails {
+@Component
+public class SorOutbounddetails implements Serializable {
     private Integer id;
 
     private String packageid;
@@ -80,7 +84,23 @@ public class SorOutbounddetails {
         return isdoublestorage;
     }
 
+    @Override
+    public String toString() {
+        return "SorOutbounddetails{" +
+                "id=" + id +
+                ", packageid='" + packageid + '\'' +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", scandate=" + scandate +
+                ", isscan=" + isscan +
+                ", isnextstorage=" + isnextstorage +
+                ", isdoublestorage=" + isdoublestorage +
+                '}';
+    }
+
     public void setIsdoublestorage(Boolean isdoublestorage) {
         this.isdoublestorage = isdoublestorage;
     }
+
+
 }

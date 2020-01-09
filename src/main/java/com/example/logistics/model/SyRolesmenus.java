@@ -1,15 +1,11 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
-/*
-* @Description 角色权限表
-* */
+@Component
 public class SyRolesmenus implements Serializable {
-
-
-    private static final long serialVersionUID = 2349822912566416090L;
-
     private Integer id;
 
     private Integer roleid;
@@ -38,5 +34,14 @@ public class SyRolesmenus implements Serializable {
 
     public void setMenuid(Integer menuid) {
         this.menuid = menuid;
+    }
+
+    @Override
+    public String toString() {
+        return "SyRolesmenus{" +
+                "id=" + id +
+                ", roleid=" + roleid +
+                ", menuid=" + menuid +
+                '}';
     }
 }

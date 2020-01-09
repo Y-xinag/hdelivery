@@ -1,8 +1,14 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class SorStorage {
+@Component
+public class SorStorage implements Serializable {
+    private Integer sid;
+
     private Integer id;
 
     private Date acceptdate;
@@ -14,6 +20,14 @@ public class SorStorage {
     private Integer deliveryperson;
 
     private String deliverycompany;
+
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
 
     public Integer getId() {
         return id;
@@ -44,7 +58,7 @@ public class SorStorage {
     }
 
     public void setAcceptcompany(String acceptcompany) {
-        this.acceptcompany = acceptcompany == null ? null : acceptcompany.trim();
+        this.acceptcompany = acceptcompany;
     }
 
     public Integer getDeliveryperson() {
@@ -60,6 +74,19 @@ public class SorStorage {
     }
 
     public void setDeliverycompany(String deliverycompany) {
-        this.deliverycompany = deliverycompany == null ? null : deliverycompany.trim();
+        this.deliverycompany = deliverycompany;
+    }
+
+    @Override
+    public String toString() {
+        return "SorStorage{" +
+                "sid=" + sid +
+                ", id=" + id +
+                ", acceptdate=" + acceptdate +
+                ", acceptperson=" + acceptperson +
+                ", acceptcompany='" + acceptcompany + '\'' +
+                ", deliveryperson=" + deliveryperson +
+                ", deliverycompany='" + deliverycompany + '\'' +
+                '}';
     }
 }

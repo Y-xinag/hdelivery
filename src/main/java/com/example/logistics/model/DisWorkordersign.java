@@ -1,8 +1,11 @@
 package com.example.logistics.model;
 
-import java.util.Date;
+import org.springframework.stereotype.Component;
 
-public class DisWorkordersign {
+import java.io.Serializable;
+import java.util.Date;
+@Component
+public class DisWorkordersign implements Serializable {
     private Integer id;
 
     private Integer workorderid;
@@ -161,5 +164,27 @@ public class DisWorkordersign {
 
     public void setInputtime(Date inputtime) {
         this.inputtime = inputtime;
+    }
+
+    @Override
+    public String toString() {
+        return "DisWorkordersign{" +
+                "id=" + id +
+                ", workorderid=" + workorderid +
+                ", worksheetno='" + worksheetno + '\'' +
+                ", workordertype=" + workordertype +
+                ", signtype=" + signtype +
+                ", courierint=" + courierint +
+                ", couriername='" + couriername + '\'' +
+                ", recipient='" + recipient + '\'' +
+                ", signunit=" + signunit +
+                ", signtime=" + signtime +
+                ", invalidatemark=" + invalidatemark +
+                ", abnormalmark='" + abnormalmark + '\'' +
+                ", inputpersoncode=" + inputpersoncode +
+                ", inputpersonid=" + inputpersonid +
+                ", inputid=" + inputid +
+                ", inputtime=" + inputtime +
+                '}';
     }
 }

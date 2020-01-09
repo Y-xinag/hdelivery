@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class IaeLineresource {
+@Component
+public class IaeLineresource implements Serializable {
     private String id;
 
     private String resourcetype;
@@ -382,5 +386,49 @@ public class IaeLineresource {
 
     public void setSurplustime(Date surplustime) {
         this.surplustime = surplustime;
+    }
+
+    @Override
+    public String toString() {
+        return "IaeLineresource{" +
+                "id='" + id + '\'' +
+                ", resourcetype='" + resourcetype + '\'' +
+                ", port='" + port + '\'' +
+                ", demand=" + demand +
+                ", vehicleint='" + vehicleint + '\'' +
+                ", capacity='" + capacity + '\'' +
+                ", waybillid='" + waybillid + '\'' +
+                ", carrier='" + carrier + '\'' +
+                ", expectarrivaldate=" + expectarrivaldate +
+                ", expectdeparturedate=" + expectdeparturedate +
+                ", ticket=" + ticket +
+                ", cargo=" + cargo +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", handleperson='" + handleperson + '\'' +
+                ", handledate=" + handledate +
+                ", enterperson=" + enterperson +
+                ", enterdate=" + enterdate +
+                ", entercompany='" + entercompany + '\'' +
+                ", acceptperson=" + acceptperson +
+                ", acceptdate=" + acceptdate +
+                ", acceptcompany='" + acceptcompany + '\'' +
+                ", abnormalremarks='" + abnormalremarks + '\'' +
+                ", workint='" + workint + '\'' +
+                ", transfer=" + transfer +
+                ", actualcount=" + actualcount +
+                ", destination='" + destination + '\'' +
+                ", warename='" + warename + '\'' +
+                ", actualvolume=" + actualvolume +
+                ", timelimit=" + timelimit +
+                ", ask='" + ask + '\'' +
+                ", takecargoperson='" + takecargoperson + '\'' +
+                ", tackcargoaddress='" + tackcargoaddress + '\'' +
+                ", payment=" + payment +
+                ", specialensure='" + specialensure + '\'' +
+                ", deliverytype=" + deliverytype +
+                ", importanthints='" + importanthints + '\'' +
+                ", surplustime=" + surplustime +
+                '}';
     }
 }

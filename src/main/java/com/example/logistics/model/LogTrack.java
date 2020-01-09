@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class LogTrack {
+@Component
+public class LogTrack implements Serializable {
     private Integer id;
 
     private String linetype;
@@ -111,5 +115,22 @@ public class LogTrack {
 
     public void setDescribes(String describes) {
         this.describes = describes == null ? null : describes.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "LogTrack{" +
+                "id=" + id +
+                ", linetype='" + linetype + '\'' +
+                ", linename='" + linename + '\'' +
+                ", logisticscar='" + logisticscar + '\'' +
+                ", linestate=" + linestate +
+                ", nodename='" + nodename + '\'' +
+                ", starttime=" + starttime +
+                ", arrivaltime=" + arrivaltime +
+                ", carint='" + carint + '\'' +
+                ", nextnodeload='" + nextnodeload + '\'' +
+                ", describes='" + describes + '\'' +
+                '}';
     }
 }

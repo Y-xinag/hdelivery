@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class BasZoneinfo {
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+@Component
+public class BasZoneinfo implements Serializable {
     private String zonename;
 
     private String zonecode;
@@ -49,5 +54,16 @@ public class BasZoneinfo {
 
     public void setSubordinateunit(Integer subordinateunit) {
         this.subordinateunit = subordinateunit;
+    }
+
+    @Override
+    public String toString() {
+        return "BasZoneinfo{" +
+                "zonename='" + zonename + '\'' +
+                ", zonecode='" + zonecode + '\'' +
+                ", zonepeople=" + zonepeople +
+                ", telphone='" + telphone + '\'' +
+                ", subordinateunit=" + subordinateunit +
+                '}';
     }
 }

@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class BasStandartime {
+@Component
+public class BasStandartime implements Serializable {
     private Integer id;
 
     private String timename;
@@ -91,5 +95,20 @@ public class BasStandartime {
 
     public void setSundayclosingtime(Date sundayclosingtime) {
         this.sundayclosingtime = sundayclosingtime;
+    }
+
+    @Override
+    public String toString() {
+        return "BasStandartime{" +
+                "id=" + id +
+                ", timename='" + timename + '\'' +
+                ", subordinateunit=" + subordinateunit +
+                ", workingtime=" + workingtime +
+                ", closingtime=" + closingtime +
+                ", saturdayworkingtime=" + saturdayworkingtime +
+                ", saturdayclosingtime=" + saturdayclosingtime +
+                ", sundayworkingtime=" + sundayworkingtime +
+                ", sundayclosingtime=" + sundayclosingtime +
+                '}';
     }
 }

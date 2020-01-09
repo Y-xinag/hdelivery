@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class BasPartition {
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+@Component
+public class BasPartition implements Serializable {
     private Integer id;
 
     private String province;
@@ -89,5 +94,20 @@ public class BasPartition {
 
     public void setSdint(Boolean sdint) {
         this.sdint = sdint;
+    }
+
+    @Override
+    public String toString() {
+        return "BasPartition{" +
+                "id=" + id +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", county='" + county + '\'' +
+                ", zonecode='" + zonecode + '\'' +
+                ", keyword='" + keyword + '\'' +
+                ", startint=" + startint +
+                ", terminateint=" + terminateint +
+                ", sdint=" + sdint +
+                '}';
     }
 }

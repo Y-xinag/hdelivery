@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class RetReturnlist extends RetReturnlistKey {
+@Component
+public class RetReturnlist extends RetReturnlistKey implements Serializable {
     private String worksheetno;
 
     private Boolean returntype;
@@ -191,5 +195,30 @@ public class RetReturnlist extends RetReturnlistKey {
 
     public void setDenialtype(String denialtype) {
         this.denialtype = denialtype == null ? null : denialtype.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "RetReturnlist{" +
+                "worksheetno='" + worksheetno + '\'' +
+                ", returntype=" + returntype +
+                ", apremark='" + apremark + '\'' +
+                ", aploss=" + aploss +
+                ", entrytime=" + entrytime +
+                ", receivegunit=" + receivegunit +
+                ", invalidatesign=" + invalidatesign +
+                ", returnunit=" + returnunit +
+                ", recordingtime=" + recordingtime +
+                ", entryunit=" + entryunit +
+                ", personname='" + personname + '\'' +
+                ", confirmationtime=" + confirmationtime +
+                ", confirmationunit=" + confirmationunit +
+                ", confirmationpersonname='" + confirmationpersonname + '\'' +
+                ", treatmentstate=" + treatmentstate +
+                ", apreturnstatus=" + apreturnstatus +
+                ", identificationsign=" + identificationsign +
+                ", handlingopinions='" + handlingopinions + '\'' +
+                ", denialtype='" + denialtype + '\'' +
+                '}';
     }
 }

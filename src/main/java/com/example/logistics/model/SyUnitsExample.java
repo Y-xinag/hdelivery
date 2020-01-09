@@ -1,14 +1,10 @@
 package com.example.logistics.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SyUnitsExample implements Serializable {
-
-    private static final long serialVersionUID = -3378314786299520382L;
-
+public class SyUnitsExample {
     protected String orderByClause;
 
     protected boolean distinct;

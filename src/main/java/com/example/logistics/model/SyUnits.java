@@ -1,15 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.Date;
 
-/*
-* @Description  员工单位表
-* */
+@Component
 public class SyUnits implements Serializable {
-
-    private static final long serialVersionUID = -5141599104700198920L;
-
     private Integer id;
 
     private String name;
@@ -58,5 +55,16 @@ public class SyUnits implements Serializable {
 
     public void setOperationtime(Date operationtime) {
         this.operationtime = operationtime;
+    }
+
+    @Override
+    public String toString() {
+        return "SyUnits{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", operatorid=" + operatorid +
+                ", operationtime=" + operationtime +
+                '}';
     }
 }

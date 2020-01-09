@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class SorPackagedetails {
+@Component
+public class SorPackagedetails implements Serializable {
     private Integer id;
 
     private Integer warename;
@@ -122,5 +126,23 @@ public class SorPackagedetails {
 
     public void setInputtype(String inputtype) {
         this.inputtype = inputtype == null ? null : inputtype.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SorPackagedetails{" +
+                "id=" + id +
+                ", warename=" + warename +
+                ", destination='" + destination + '\'' +
+                ", ticket=" + ticket +
+                ", actualcargoint=" + actualcargoint +
+                ", cargoint=" + cargoint +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", service=" + service +
+                ", importanthints='" + importanthints + '\'' +
+                ", ask='" + ask + '\'' +
+                ", inputtype='" + inputtype + '\'' +
+                '}';
     }
 }

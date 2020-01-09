@@ -1,11 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
+import java.util.Arrays;
 
+@Component
 public class SyMenusWithBLOBs extends SyMenus implements Serializable {
-
-    private static final long serialVersionUID = 5410299046001703636L;
-
     private byte[] text;
 
     private byte[] url;
@@ -34,5 +35,14 @@ public class SyMenusWithBLOBs extends SyMenus implements Serializable {
 
     public void setTip(byte[] tip) {
         this.tip = tip;
+    }
+
+    @Override
+    public String toString() {
+        return "SyMenusWithBLOBs{" +
+                "text=" + Arrays.toString(text) +
+                ", url=" + Arrays.toString(url) +
+                ", tip=" + Arrays.toString(tip) +
+                '}';
     }
 }

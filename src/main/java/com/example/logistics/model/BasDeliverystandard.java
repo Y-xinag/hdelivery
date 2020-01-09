@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class BasDeliverystandard {
+@Component
+public class BasDeliverystandard implements Serializable {
     private Integer id;
 
     private String name;
@@ -72,5 +76,18 @@ public class BasDeliverystandard {
 
     public void setOperationtime(Date operationtime) {
         this.operationtime = operationtime;
+    }
+
+    @Override
+    public String toString() {
+        return "BasDeliverystandard{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", minweight=" + minweight +
+                ", maxweight=" + maxweight +
+                ", operatorid=" + operatorid +
+                ", operationunitid=" + operationunitid +
+                ", operationtime=" + operationtime +
+                '}';
     }
 }

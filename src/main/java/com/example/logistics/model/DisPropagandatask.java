@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class DisPropagandatask {
+@Component
+public class DisPropagandatask implements Serializable {
     private Integer id;
 
     private String outline;
@@ -61,5 +65,17 @@ public class DisPropagandatask {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "DisPropagandatask{" +
+                "id=" + id +
+                ", outline='" + outline + '\'' +
+                ", releasetime=" + releasetime +
+                ", failuretime=" + failuretime +
+                ", status=" + status +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

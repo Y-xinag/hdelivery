@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class PacStockitemKey {
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+@Component
+public class PacStockitemKey implements Serializable {
     private Integer id;
 
     private String warehouseno;
@@ -39,5 +44,15 @@ public class PacStockitemKey {
 
     public void setActualnum(Integer actualnum) {
         this.actualnum = actualnum;
+    }
+
+    @Override
+    public String toString() {
+        return "PacStockitemKey{" +
+                "id=" + id +
+                ", warehouseno='" + warehouseno + '\'' +
+                ", goodscode='" + goodscode + '\'' +
+                ", actualnum=" + actualnum +
+                '}';
     }
 }

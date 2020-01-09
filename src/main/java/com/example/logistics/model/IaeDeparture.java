@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class IaeDeparture {
+@Component
+public class IaeDeparture implements Serializable {
     private String id;
 
     private String packingid;
@@ -182,5 +186,29 @@ public class IaeDeparture {
 
     public void setEntrustcompany(String entrustcompany) {
         this.entrustcompany = entrustcompany == null ? null : entrustcompany.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "IaeDeparture{" +
+                "id='" + id + '\'' +
+                ", packingid='" + packingid + '\'' +
+                ", transfer=" + transfer +
+                ", actualcount=" + actualcount +
+                ", destination='" + destination + '\'' +
+                ", warename=" + warename +
+                ", cargocount=" + cargocount +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", actualvolume=" + actualvolume +
+                ", timelimit=" + timelimit +
+                ", ask='" + ask + '\'' +
+                ", takecargoperson='" + takecargoperson + '\'' +
+                ", tackcargoaddress='" + tackcargoaddress + '\'' +
+                ", payment=" + payment +
+                ", importanthints='" + importanthints + '\'' +
+                ", surplustime=" + surplustime +
+                ", entrustcompany='" + entrustcompany + '\'' +
+                '}';
     }
 }

@@ -1,9 +1,13 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class SorCheckbounddetails {
+@Component
+public class SorCheckbounddetails implements Serializable {
     private Integer id;
 
     private Integer cargocount;
@@ -82,5 +86,19 @@ public class SorCheckbounddetails {
 
     public void setStoragedate(Date storagedate) {
         this.storagedate = storagedate;
+    }
+
+    @Override
+    public String toString() {
+        return "SorCheckbounddetails{" +
+                "id=" + id +
+                ", cargocount=" + cargocount +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", cargotype=" + cargotype +
+                ", direction='" + direction + '\'' +
+                ", storageperson=" + storageperson +
+                ", storagedate=" + storagedate +
+                '}';
     }
 }

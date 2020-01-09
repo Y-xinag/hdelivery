@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class RetReturnlistKey {
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+@Component
+public class RetReturnlistKey implements Serializable {
     private Integer id;
 
     private String applicationno;

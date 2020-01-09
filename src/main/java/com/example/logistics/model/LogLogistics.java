@@ -1,6 +1,11 @@
 package com.example.logistics.model;
 
-public class LogLogistics {
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+@Component
+public class LogLogistics implements Serializable {
     private Integer id;
 
     private String logisticsint;
@@ -109,5 +114,22 @@ public class LogLogistics {
 
     public void setIscancel(Boolean iscancel) {
         this.iscancel = iscancel;
+    }
+
+    @Override
+    public String toString() {
+        return "LogLogistics{" +
+                "id=" + id +
+                ", logisticsint='" + logisticsint + '\'' +
+                ", linename='" + linename + '\'' +
+                ", startcompany='" + startcompany + '\'' +
+                ", generateperson='" + generateperson + '\'' +
+                ", carint='" + carint + '\'' +
+                ", driver='" + driver + '\'' +
+                ", driverphone='" + driverphone + '\'' +
+                ", cartype='" + cartype + '\'' +
+                ", logisticsstate=" + logisticsstate +
+                ", iscancel=" + iscancel +
+                '}';
     }
 }

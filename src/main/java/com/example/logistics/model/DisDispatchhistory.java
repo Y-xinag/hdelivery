@@ -1,8 +1,12 @@
 package com.example.logistics.model;
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class DisDispatchhistory {
+@Component
+public class DisDispatchhistory implements Serializable {
     private Integer id;
 
     private Integer dispatchsequence;
@@ -91,5 +95,20 @@ public class DisDispatchhistory {
 
     public void setReason(String reason) {
         this.reason = reason == null ? null : reason.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "DisDispatchhistory{" +
+                "id=" + id +
+                ", dispatchsequence=" + dispatchsequence +
+                ", transferredunit=" + transferredunit +
+                ", operatorid=" + operatorid +
+                ", operationunitid=" + operationunitid +
+                ", operationtime=" + operationtime +
+                ", remark='" + remark + '\'' +
+                ", status=" + status +
+                ", reason='" + reason + '\'' +
+                '}';
     }
 }
