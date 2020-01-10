@@ -111,16 +111,16 @@ var SystemMenu = [{
 		icon: '&#xe647;',
 		children: [{
 			title: '包装材料物品管理',
-			href: 'packagingMaterialManagement/packagingMaterialManagement.html'
+			href: '/pmm1'
 		},{
 			title: '入库管理',
-			href: 'packagingMaterialManagement/warehousingManagement.html'
+			href: '/pmm2'
 		},{
 			title: '出库管理',
-			href: 'packagingMaterialManagement/outboundManagement.html'
+			href: '/pmm3'
 		},{
 			title: '库存管理',
-			href: 'packagingMaterialManagement/inventoryManagement.html'
+			href: '/pmm4'
 		}]
 	},{
 		title: '包装',
