@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class SorStorage implements Serializable {
@@ -20,6 +21,8 @@ public class SorStorage implements Serializable {
     private Integer deliveryperson;
 
     private String deliverycompany;
+
+    private List<SyEmp> syEmpList;
 
     public Integer getSid() {
         return sid;
@@ -77,6 +80,14 @@ public class SorStorage implements Serializable {
         this.deliverycompany = deliverycompany;
     }
 
+    public List<SyEmp> getSyEmpList() {
+        return syEmpList;
+    }
+
+    public void setSyEmpList(List<SyEmp> syEmpList) {
+        this.syEmpList = syEmpList;
+    }
+
     @Override
     public String toString() {
         return "SorStorage{" +
@@ -87,6 +98,7 @@ public class SorStorage implements Serializable {
                 ", acceptcompany='" + acceptcompany + '\'' +
                 ", deliveryperson=" + deliveryperson +
                 ", deliverycompany='" + deliverycompany + '\'' +
+                ", syEmpList=" + syEmpList +
                 '}';
     }
 }

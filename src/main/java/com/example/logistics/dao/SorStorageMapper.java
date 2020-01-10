@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SorStorageMapper {
     int countByExample(SorStorageExample example);
 
@@ -33,4 +35,7 @@ public interface SorStorageMapper {
     //增加入库
     //@Insert("INSERT INTO sor_storage(ID,AcceptDate,AcceptPerson,AcceptCompany,DeliveryPerson,DeliveryCompany) VALUES(#{id},NOW(),#{},#{},#{},#{});")
     int addSorStorage(SorStorage sorStorage);
+
+    //查询入库表
+    List<SorStorage> querySorStorage();
 }

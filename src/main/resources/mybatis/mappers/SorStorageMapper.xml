@@ -225,4 +225,33 @@
       DeliveryCompany = #{deliverycompany,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="querySorStorage" resultMap="SorStorageMap">
+      SELECT
+        s1.SID,
+        s1.ID,
+        s1.AcceptDate,
+        s2.EmpName,
+        s1.AcceptCompany,
+        s3.EmpName,
+        s1.DeliveryCompany
+        from sor_storage AS s1,sy_emp AS s2,sy_emp s3
+        where s1.AcceptPerson=s2.ID AND s1.DeliveryPerson=s3.ID
+  </select>
+
+  <resultMap id="SorStorageMap" type="SorStorage">
+    <id column="SID" property="sid"/>
+    <result column="ID" property="id"/>
+    <result column="acceptdate" property="acceptdate"/>
+    <result column="acceptcompany" property="acceptcompany"/>
+    <result column="DeliveryCompany" property="deliverycompany"/>
+    <result column="tname" property="name"/>
+
+    <collection property="syEmpList" ofType="SyEmp">
+      <id column="id" property="Id"/>
+      <result column="EmpName" property="empname"/>
+    </collection>
+
+  </resultMap>
+
 </mapper>
