@@ -124,6 +124,13 @@
             <version>1.4.2</version>
         </dependency>
 
+        <!-- 引入pageHelper分页插件依赖 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.6</version>
+        </dependency>
+
 
     </dependencies>
 
