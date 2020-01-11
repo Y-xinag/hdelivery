@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.SorStorageMapper">
+  <select id="querySorStorage" resultMap="SorStorageMap">
+      SELECT
+        s1.SID,
+        s1.ID,
+        s1.AcceptDate,
+        s2.EmpName,
+        s1.AcceptCompany,
+        s3.EmpName,
+        s1.DeliveryCompany
+        from sor_storage AS s1,sy_emp AS s2,sy_emp s3
+        where s1.AcceptPerson=s2.ID AND s1.DeliveryPerson=s3.ID
+        ORDER BY s1.SID desc
+        limit #{pages},#{count}
+  </select>
+
+  <resultMap id="SorStorageMap" type="SorStorage">
+    <id column="SID" property="sid"/>
+    <result column="ID" property="id"/>
+    <result column="acceptdate" property="acceptdate"/>
+    <result column="acceptcompany" property="acceptcompany"/>
+    <result column="DeliveryCompany" property="deliverycompany"/>
+    <result column="tname" property="name"/>
+
+    <collection property="syEmpList" ofType="SyEmp">
+      <result column="EmpName" property="empname"/>
+    </collection>
+
+  </resultMap>
+
+</mapper>

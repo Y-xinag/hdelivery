@@ -207,21 +207,23 @@
         table.render({
             elem: '#demo'
             ,height: 420
-            ,url: 'json/tabledata.json' //数据接口
+            ,url: '/querySorStroage' //数据接口
             ,title: '用户表'
+            ,limit:5
+            ,limits:[5,10,15,20]
             ,page: true //开启分页
             ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
             ,totalRow: true //开启合计行
             ,cols: [
                 [
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field: 'id', title: '序号', width:50, sort: true, fixed: 'left', totalRowText: '合计：'}
-                    ,{field: 'username', title: '入库交接单号', width:60}
-                    ,{field: 'experience', title: '接货时间', width: 120, sort: true, totalRow: true}
-                    ,{field: 'sex', title: '接货人', width:180, sort: true}
-                    ,{field: 'score', title: '接收单位', width: 130, sort: true, totalRow: true}
-                    ,{field: 'city', title: '发货人', width:110}
-                    ,{field: 'sign', title: '发货单位', width: 150}
+                    ,{field: 'sid', title: '序号', width:50, sort: true, fixed: 'left', totalRowText: '合计：'}
+                    ,{field: 'id', title: '入库交接单号', width:60}
+                    ,{field: 'acceptdate', title: '接货时间', width: 120, sort: true, totalRow: true}
+                    ,{field: 'acceptperson', title: '接货人', width:180, sort: true}
+                    ,{field: 'acceptcompany', title: '接收单位', width: 130, sort: true, totalRow: true}
+                    ,{field: 'deliveryperson', title: '发货人', width:110}
+                    ,{field: 'deliverycompany', title: '发货单位', width: 150}
                     ,{fixed: 'right',title:'操作', width: 220, align:'center', toolbar: '#barDemo'}
                 ]
             ]
@@ -297,6 +299,19 @@
                 }
             });
         }
+
+        //分页
+        laypage.render({
+            elem: 'pageDemo' //分页容器的id
+            ,count: 100 //总页数
+            ,skin: '#1E9FFF' //自定义选中色值
+            //,skip: true //开启跳页
+            ,jump: function(obj, first){
+                if(!first){
+                    layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+                }
+            }
+        });
 
 
 

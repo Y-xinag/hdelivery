@@ -1,8 +1,12 @@
 package com.example.logistics.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.example.logistics.helperentity.SoStroageEntity;
 import com.example.logistics.model.SorStorage;
 import com.example.logistics.model.SyEmp;
 import com.example.logistics.service.SorStroageService;
+import com.example.logistics.util.ObjectJson;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,33 +26,55 @@ public class SorStorageController {
     @Autowired
     private SorStroageService sorStroageService;
 
+    @Autowired
+    private ObjectJson objectJson;
+
+
+
 
     @RequestMapping("/querySorStroage")
-    public ModelAndView querySorStroage(@RequestParam(defaultValue = "0", value = "page") Integer page, @RequestParam(defaultValue = "3", value = "size") Integer size, @RequestParam(value = "meg", defaultValue = "") String meg) throws Exception {
+    public void querySorStroage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int pages=Integer.parseInt(request.getParameter("page"));
+        int count=Integer.parseInt(request.getParameter("limit"));
+
+        System.out.println(pages);
+        System.out.println(count);
+        System.out.println("_______________________");
+
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+
         // 分页查询，并按照ID降序
-        PageHelper.startPage(page, size, "sid desc");
-        List<SorStorage> sorStorageList=sorStroageService.querySorStorage();
-        List list=new ArrayList<>();
+        PageHelper.startPage(pages, count);
+        List<SorStorage> sorStorageList=sorStroageService.querySorStorage((pages-1)*count,count);
+        List list=new ArrayList<SoStroageEntity>();
         for (SorStorage sorStorage : sorStorageList) {
-            list.add(sorStorage.getSid());
-            list.add(sorStorage.getId());
-            list.add(sorStorage.getAcceptdate());
-            list.add(sorStorage.getAcceptcompany());
-            list.add(sorStorage.getDeliverycompany());
+            SoStroageEntity soStroageEntity=new SoStroageEntity();
+            soStroageEntity.setSid(sorStorage.getSid());
+            soStroageEntity.setId(sorStorage.getId());
+            soStroageEntity.setAcceptdate(sorStorage.getAcceptdate());
+            soStroageEntity.setAcceptcompany(sorStorage.getAcceptcompany());
+            soStroageEntity.setDeliverycompany(sorStorage.getDeliverycompany());
             for (SyEmp syEmp : sorStorage.getSyEmpList()) {
-                list.add(syEmp.getEmpname());
+                soStroageEntity.setAcceptperson(syEmp.getEmpname());
+                soStroageEntity.setDeliveryperson(syEmp.getEmpname());
             }
+            list.add(soStroageEntity);
         }
 
-        ////将集合放入SorStorage对象
-        PageInfo<SorStorage> pageInfo = new PageInfo<>(sorStorageList);
+        Integer num=sorStroageService.pagecount();
+        if (list.size()>0){
+            objectJson.setCode(0);
+            objectJson.setData(list);
+            objectJson.setCount(num);
+            objectJson.setMsg("");
+            String jsonString = JSON.toJSONString(objectJson, SerializerFeature.DisableCircularReferenceDetect);
+            System.out.println(jsonString);
+            PrintWriter out = response.getWriter();
+            out.write(jsonString);
+        }
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("page", pageInfo);
-        modelAndView.addObject("meg", meg);
-        modelAndView.setViewName("index");
 
-        return modelAndView;
     }
 
 

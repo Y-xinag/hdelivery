@@ -1,28 +1,23 @@
-package com.example.logistics.model;
+package com.example.logistics.helperentity;
 
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
-@Component
-public class SorStorage implements Serializable {
+public class SoStroageEntity{
     private Integer sid;
 
     private String id;
 
     private Date acceptdate;
 
-    private Integer acceptperson;
+    private String acceptperson;
 
     private String acceptcompany;
 
-    private Integer deliveryperson;
+    private String deliveryperson;
 
     private String deliverycompany;
-
-    private List<SyEmp> syEmpList;
 
     public Integer getSid() {
         return sid;
@@ -48,11 +43,11 @@ public class SorStorage implements Serializable {
         this.acceptdate = acceptdate;
     }
 
-    public Integer getAcceptperson() {
+    public String getAcceptperson() {
         return acceptperson;
     }
 
-    public void setAcceptperson(Integer acceptperson) {
+    public void setAcceptperson(String acceptperson) {
         this.acceptperson = acceptperson;
     }
 
@@ -64,11 +59,11 @@ public class SorStorage implements Serializable {
         this.acceptcompany = acceptcompany;
     }
 
-    public Integer getDeliveryperson() {
+    public String getDeliveryperson() {
         return deliveryperson;
     }
 
-    public void setDeliveryperson(Integer deliveryperson) {
+    public void setDeliveryperson(String deliveryperson) {
         this.deliveryperson = deliveryperson;
     }
 
@@ -78,27 +73,5 @@ public class SorStorage implements Serializable {
 
     public void setDeliverycompany(String deliverycompany) {
         this.deliverycompany = deliverycompany;
-    }
-
-    public List<SyEmp> getSyEmpList() {
-        return syEmpList;
-    }
-
-    public void setSyEmpList(List<SyEmp> syEmpList) {
-        this.syEmpList = syEmpList;
-    }
-
-    @Override
-    public String toString() {
-        return "SorStorage{" +
-                "sid=" + sid +
-                ", id='" + id + '\'' +
-                ", acceptdate=" + acceptdate +
-                ", acceptperson=" + acceptperson +
-                ", acceptcompany='" + acceptcompany + '\'' +
-                ", deliveryperson=" + deliveryperson +
-                ", deliverycompany='" + deliverycompany + '\'' +
-                ", syEmpList=" + syEmpList +
-                '}';
     }
 }
