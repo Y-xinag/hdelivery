@@ -8,7 +8,6 @@ mybatis:
   type-aliases-package: com.example.logistics.model
   configuration:
     map-underscore-to-camel-case: true
-  config-location: classpath:mybatis/mybatis-config.xml
 
 spring:
   mvc:

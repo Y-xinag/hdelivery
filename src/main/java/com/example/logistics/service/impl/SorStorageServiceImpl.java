@@ -5,7 +5,6 @@ import com.example.logistics.model.SorStorage;
 import com.example.logistics.model.SorStorageExample;
 import com.example.logistics.service.SorStroageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
