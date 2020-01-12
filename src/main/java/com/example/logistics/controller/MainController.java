@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
     @RequestMapping("/query1")
     public ModelAndView query() throws Exception {
-        System.out.println("2020");
         ModelAndView mv=new ModelAndView();
         mv.setViewName("pages/main");
         return mv;

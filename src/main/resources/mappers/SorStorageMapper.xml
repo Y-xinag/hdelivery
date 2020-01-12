@@ -1,228 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.logistics.dao.SorStorageMapper" >
-  <resultMap id="BaseResultMap" type="com.example.logistics.model.SorStorage" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="AcceptDate" property="acceptdate" jdbcType="TIMESTAMP" />
-    <result column="AcceptPerson" property="acceptperson" jdbcType="INTEGER" />
-    <result column="AcceptCompany" property="acceptcompany" jdbcType="VARCHAR" />
-    <result column="DeliveryPerson" property="deliveryperson" jdbcType="INTEGER" />
-    <result column="DeliveryCompany" property="deliverycompany" jdbcType="VARCHAR" />
+<mapper namespace="com.example.logistics.dao.SorStorageMapper">
+  <select id="querySorStorage" resultMap="SorStorageMap">
+      SELECT
+        s1.SID,
+        s1.ID,
+        s1.AcceptDate,
+        s2.EmpName,
+        s1.AcceptCompany,
+        s3.EmpName,
+        s1.DeliveryCompany
+        from sor_storage AS s1,sy_emp AS s2,sy_emp s3
+        where s1.AcceptPerson=s2.ID AND s1.DeliveryPerson=s3.ID
+        ORDER BY s1.SID desc
+        limit #{pages},#{count}
+  </select>
+
+  <resultMap id="SorStorageMap" type="SorStorage">
+    <id column="SID" property="sid"/>
+    <result column="ID" property="id"/>
+    <result column="acceptdate" property="acceptdate"/>
+    <result column="acceptcompany" property="acceptcompany"/>
+    <result column="DeliveryCompany" property="deliverycompany"/>
+    <result column="tname" property="name"/>
+
+    <collection property="syEmpList" ofType="SyEmp">
+      <result column="EmpName" property="empname"/>
+    </collection>
+
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    ID, AcceptDate, AcceptPerson, AcceptCompany, DeliveryPerson, DeliveryCompany
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.SorStorageExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sor_storage
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from sor_storage
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from sor_storage
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.example.logistics.model.SorStorageExample" >
-    delete from sor_storage
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.logistics.model.SorStorage" >
-    insert into sor_storage (ID, AcceptDate, AcceptPerson, 
-      AcceptCompany, DeliveryPerson, DeliveryCompany
-      )
-    values (#{id,jdbcType=INTEGER}, #{acceptdate,jdbcType=TIMESTAMP}, #{acceptperson,jdbcType=INTEGER}, 
-      #{acceptcompany,jdbcType=VARCHAR}, #{deliveryperson,jdbcType=INTEGER}, #{deliverycompany,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.logistics.model.SorStorage" >
-    insert into sor_storage
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="acceptdate != null" >
-        AcceptDate,
-      </if>
-      <if test="acceptperson != null" >
-        AcceptPerson,
-      </if>
-      <if test="acceptcompany != null" >
-        AcceptCompany,
-      </if>
-      <if test="deliveryperson != null" >
-        DeliveryPerson,
-      </if>
-      <if test="deliverycompany != null" >
-        DeliveryCompany,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="acceptdate != null" >
-        #{acceptdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="acceptperson != null" >
-        #{acceptperson,jdbcType=INTEGER},
-      </if>
-      <if test="acceptcompany != null" >
-        #{acceptcompany,jdbcType=VARCHAR},
-      </if>
-      <if test="deliveryperson != null" >
-        #{deliveryperson,jdbcType=INTEGER},
-      </if>
-      <if test="deliverycompany != null" >
-        #{deliverycompany,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.example.logistics.model.SorStorageExample" resultType="java.lang.Integer" >
-    select count(*) from sor_storage
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update sor_storage
-    <set >
-      <if test="record.id != null" >
-        ID = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.acceptdate != null" >
-        AcceptDate = #{record.acceptdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.acceptperson != null" >
-        AcceptPerson = #{record.acceptperson,jdbcType=INTEGER},
-      </if>
-      <if test="record.acceptcompany != null" >
-        AcceptCompany = #{record.acceptcompany,jdbcType=VARCHAR},
-      </if>
-      <if test="record.deliveryperson != null" >
-        DeliveryPerson = #{record.deliveryperson,jdbcType=INTEGER},
-      </if>
-      <if test="record.deliverycompany != null" >
-        DeliveryCompany = #{record.deliverycompany,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update sor_storage
-    set ID = #{record.id,jdbcType=INTEGER},
-      AcceptDate = #{record.acceptdate,jdbcType=TIMESTAMP},
-      AcceptPerson = #{record.acceptperson,jdbcType=INTEGER},
-      AcceptCompany = #{record.acceptcompany,jdbcType=VARCHAR},
-      DeliveryPerson = #{record.deliveryperson,jdbcType=INTEGER},
-      DeliveryCompany = #{record.deliverycompany,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.SorStorage" >
-    update sor_storage
-    <set >
-      <if test="acceptdate != null" >
-        AcceptDate = #{acceptdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="acceptperson != null" >
-        AcceptPerson = #{acceptperson,jdbcType=INTEGER},
-      </if>
-      <if test="acceptcompany != null" >
-        AcceptCompany = #{acceptcompany,jdbcType=VARCHAR},
-      </if>
-      <if test="deliveryperson != null" >
-        DeliveryPerson = #{deliveryperson,jdbcType=INTEGER},
-      </if>
-      <if test="deliverycompany != null" >
-        DeliveryCompany = #{deliverycompany,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.SorStorage" >
-    update sor_storage
-    set AcceptDate = #{acceptdate,jdbcType=TIMESTAMP},
-      AcceptPerson = #{acceptperson,jdbcType=INTEGER},
-      AcceptCompany = #{acceptcompany,jdbcType=VARCHAR},
-      DeliveryPerson = #{deliveryperson,jdbcType=INTEGER},
-      DeliveryCompany = #{deliverycompany,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>
