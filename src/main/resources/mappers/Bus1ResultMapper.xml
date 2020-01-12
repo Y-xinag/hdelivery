@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.Bus1Mapper">
+    <!--<select id="findAll" resultMap="bus1Query">
+        select BusinessNoticeNo,bus.CustomCode,bus.CustomName,Linkman,TelPhone,PickupAddress,
+        custom.CityName,ArriveCity,ImportantHints,ReservationTime
+        from acc_businessadmissibility bus LEFT JOIN
+        bas_zonecustominfo custom on bus.CustomCode=custom.CustomCode
+    </select>
+    <resultMap id="bus1Query" type="com.example.logistics.model.Bus1Result">
+        <id property="businessNoticeNo" column="BusinessNoticeNo"></id>
+        <result property="customCode" column="CustomCode"></result>
+        <result property="customName" column="CustomName"></result>
+        <result property="linkman" column="Linkman"></result>
+        <result property="telPhone" column="TelPhone"></result>
+        <result property="pickupAddress" column="PickupAddress"></result>
+        <result property="cityName" column="CityName"></result>
+        <result property="arriveCity" column="ArriveCity"></result>
+        <result property="importantHints" column="ImportantHints"></result>
+        <result property="reservationTime" column="ReservationTime"></result>
+    </resultMap>-->
+
+    <select id="testQuery" resultType="com.example.logistics.model.AccBusinessAdmissibility">
+        select * from acc_businessadmissibility
+    </select>
+</mapper>

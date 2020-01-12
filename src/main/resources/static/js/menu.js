@@ -63,13 +63,13 @@ var SystemMenu = [{
 		isCurrent: true,
 		children: [{
 			title: '业务受理',
-			href: 'acceptance/businessAcceptance.html'
+			href: '/bus1'
 		},{
 			title: '工作单快速录入',
-			href: 'acceptance/worksheetQuickInput.html'
+			href: '/bus2'
 		},{
 			title: '工作单查询',
-			href: 'acceptance/worksheetQuery.html'
+			href: '/bus3'
 		}]
 	},{
 		title: '调度',
