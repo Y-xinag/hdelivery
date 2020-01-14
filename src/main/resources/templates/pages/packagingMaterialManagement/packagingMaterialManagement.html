@@ -170,30 +170,25 @@
             elem: '#demo'
             , height: 420
             , url: '/initialization1' //数据接口
-            , title: '用户表'
-            //,where: {type: ${type}}
+            //, title: '用户表'
             //, page: true //开启分页
             //, toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
             , totalRow: true //开启合计行
             , cols: [
                 [
                     {type: 'checkbox', fixed: 'left'},
-                    {field: 'id', title: '序号', width: '5%', sort: true, fixed: 'left', totalRowText: '合计：'}
+                    {field: 'id', title: '序号', width: '7%', sort: true, fixed: 'left', totalRowText: '合计：'}
                     , {field: 'itemcode', title: '物品编码', width: '20%'}
                     , {field: 'itemname', title: '物品名称', width: '15%'}
                     , {field: 'plannedprice', title: '计划价格', width: '15%', sort: true, totalRow: true}
                     , {field: 'specifications', title: '规格', width: '10%'}
-                    , {field: 'type', title: '类型', width: '11%', template: function (aa) {
-						if(aa.type){
-                            return "正常";
-						}
-                    }}
+                    , {field: 'type', title: '类型', width: '10%'}
                     , {field: 'measurementunit', title: '计量单位', width: '10%'}
-                    , {field: 'status', title: '状态', width: '10%', template: function (dd) {
-                        if (dd.status == "true") {
-                            return "正常";
+                    , {field: 'status', title: '状态', width: '10%', templet: function(d){
+                        if(d.status) {
+                            return '正常';
 						}else {
-                            return "作废";
+                            return '作废';
 						}
                     }}
                 ]
