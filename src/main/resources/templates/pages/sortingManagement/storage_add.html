@@ -130,7 +130,7 @@
 		<tr>
 			<td colspan="5">
 				<button class="layui-btn" style="background: #1da02b;">确定</button>
-				<button type="button" class="layui-btn layui-btn-primary">取消</button>
+				<button type="button" class="layui-btn layui-btn-primary" lay-submit="" lay-filter="demo1">取消</button>
 			</td>
 		</tr>
 		</tbody>
@@ -188,31 +188,12 @@
 
             //监听提交
             form.on('submit(demo1)', function(data){
+                alert(111);
                 layer.alert(JSON.stringify(data.field), {
                     title: '最终的提交信息'
                 })
                 return false;
             });
-
-            //表单赋值
-            layui.$('#LAY-component-form-setval').on('click', function(){
-                form.val('example', {
-                    "username": "贤心" // "name": "value"
-                    ,"password": "123456"
-                    ,"interest": 1
-                    ,"like[write]": true //复选框选中状态
-                    ,"close": true //开关状态
-                    ,"sex": "女"
-                    ,"desc": "我爱 layui"
-                });
-            });
-
-            //表单取值
-            layui.$('#LAY-component-form-getval').on('click', function(){
-                var data = form.val('example');
-                alert(JSON.stringify(data));
-            });
-
         });
 
       
