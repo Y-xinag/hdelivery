@@ -1,6 +1,7 @@
 package com.example.logistics.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.logistics.helperentity.SoStroageEntity;
 import com.example.logistics.model.SorStorage;
@@ -30,6 +31,21 @@ public class SorStorageController {
     private ObjectJson objectJson;
 
 
+
+//    @RequestMapping("/addSorStorage")
+//    public void  addSorStorage(HttpServletRequest request, HttpServletResponse response) throws Exception{
+//        response.setContentType("text/html;charset=utf-8");
+//        response.setCharacterEncoding("UTF-8");
+//        // 获取前台传递的Json对象
+//        String formData = request.getParameter("formData");
+//        SorStorage sorStorage=JSONObject.parseObject(formData, SorStorage.class);
+//        int a = sorStroageService.addSorStorage(sorStorage);
+//        if (a > 0) {
+//            response.getWriter().write("success");
+//        } else {
+//            response.getWriter().write("error");
+//        }
+//    }
 
 
     @RequestMapping("/querySorStroage")

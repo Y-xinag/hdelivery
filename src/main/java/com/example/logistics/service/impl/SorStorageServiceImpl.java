@@ -14,7 +14,7 @@ public class SorStorageServiceImpl implements SorStroageService {
 
     @Override
     public int addSorStorage(SorStorage sorStorage) {
-        return 0;
+        return sorStorageMapper.addSorStorage(sorStorage);
     }
 
     @Override

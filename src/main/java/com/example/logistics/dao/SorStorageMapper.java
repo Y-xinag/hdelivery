@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SorStorageMapper {
     //增加入库
-    //@Insert("INSERT INTO sor_storage(ID,AcceptDate,AcceptPerson,AcceptCompany,DeliveryPerson,DeliveryCompany) VALUES(#{id},NOW(),#{},#{},#{},#{});")
+    @Insert("INSERT INTO sor_storage(ID,AcceptDate,AcceptPerson,AcceptCompany,DeliveryPerson,DeliveryCompany) VALUES(#{id},NOW(),#{acceptperson},#{acceptcompany},#{deliveryperson},#{deliverycompany});")
     int addSorStorage(SorStorage sorStorage);
 
     //查询入库表
