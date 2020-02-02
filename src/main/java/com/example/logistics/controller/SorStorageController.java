@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,20 +33,20 @@ public class SorStorageController {
 
 
 
-//    @RequestMapping("/addSorStorage")
-//    public void  addSorStorage(HttpServletRequest request, HttpServletResponse response) throws Exception{
-//        response.setContentType("text/html;charset=utf-8");
-//        response.setCharacterEncoding("UTF-8");
-//        // 获取前台传递的Json对象
-//        String formData = request.getParameter("formData");
-//        SorStorage sorStorage=JSONObject.parseObject(formData, SorStorage.class);
-//        int a = sorStroageService.addSorStorage(sorStorage);
-//        if (a > 0) {
-//            response.getWriter().write("success");
-//        } else {
-//            response.getWriter().write("error");
-//        }
-//    }
+    @RequestMapping("/addSorStorage")
+    public void  addSorStorage(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        // 获取前台传递的Json对象
+        String formData = request.getParameter("formData");
+        SorStorage sorStorage=JSONObject.parseObject(formData, SorStorage.class);
+        int a = sorStroageService.addSorStorage(sorStorage);
+        if (a > 0) {
+            response.getWriter().write("success");
+        } else {
+            response.getWriter().write("error");
+        }
+    }
 
 
     @RequestMapping("/querySorStroage")
@@ -90,12 +91,6 @@ public class SorStorageController {
             out.write(jsonString);
         }
 
-
-    }
-
-
-    @RequestMapping("addSorStorage")
-    public void addSorStorage(SorStorage sorStorage){
 
     }
 
