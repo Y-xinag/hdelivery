@@ -61,19 +61,23 @@
 
 		<tr>
 			<td>
-				<input type="text" name="title" placeholder="请输入单号" autocomplete="off" class="layui-input" value="">
+				<input type="text" name="sid" placeholder="请输入单号" autocomplete="off" class="layui-input" value="">
 			</td>
 			<td>
-				<input type="text" name="title" placeholder="请输入合包号" autocomplete="off" class="layui-input" value="">
+				<input type="text" name="packageid" placeholder="请输入合包号" autocomplete="off" class="layui-input" value="">
 			</td>
 			<td>
-				<input type="text" name="title" placeholder="请输入重量" autocomplete="off" class="layui-input" value="">
+				<input type="text" name="weight" placeholder="请输入重量" autocomplete="off" class="layui-input" value="">
 			</td>
 			<td>
-				<input type="text" name="title" placeholder="关联出库交接单" autocomplete="off" class="layui-input" value="">
+				<select name="outboundid" lay-verify="required">
+					<option value=""></option>
+					<option>asd001</option>
+					<option>asd002</option>
+				</select>
 			</td>
 			<td>
-				<select name="city" lay-verify="required">
+				<select name="state" lay-verify="required">
 					<option value=""></option>
 					<option value="0">中转入库</option>
 					<option value="1">二次入库</option>

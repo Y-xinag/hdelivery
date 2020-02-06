@@ -3,28 +3,21 @@ package com.example.logistics.dao;
 import com.example.logistics.model.SorStoragedetails;
 import com.example.logistics.model.SorStoragedetailsExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SorStoragedetailsMapper {
-    int countByExample(SorStoragedetailsExample example);
+    @Insert("insert into sor_storagedetails(SID,PackageID,Weight,OutBoundID,State) values(#{sid},#{packageid},#{weight},#{outboundid},#{state})")
+    int addSorStoragedetails(SorStoragedetails sorStoragedetails);
 
-    int deleteByExample(SorStoragedetailsExample example);
+    @Select("select *from sor_storagedetails LIMIT #{pages},#{count}")
+    List<SorStoragedetails> querySorStoragedetails(@Param("pages") int pages,@Param("count") int count);
 
-    int deleteByPrimaryKey(Integer id);
+    @Select("select count(1) from sor_storagedetails")
+    Integer pagecount();
 
-    int insert(SorStoragedetails record);
-
-    int insertSelective(SorStoragedetails record);
-
-    List<SorStoragedetails> selectByExample(SorStoragedetailsExample example);
-
-    SorStoragedetails selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") SorStoragedetails record, @Param("example") SorStoragedetailsExample example);
-
-    int updateByExample(@Param("record") SorStoragedetails record, @Param("example") SorStoragedetailsExample example);
-
-    int updateByPrimaryKeySelective(SorStoragedetails record);
-
-    int updateByPrimaryKey(SorStoragedetails record);
 }

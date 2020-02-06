@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.logistics.helperentity.SoStroageEntity;
 import com.example.logistics.model.SorStorage;
+import com.example.logistics.model.SorStoragedetails;
 import com.example.logistics.model.SyEmp;
+import com.example.logistics.service.SorStoragedetailsService;
 import com.example.logistics.service.SorStroageService;
 import com.example.logistics.util.ObjectJson;
 import com.github.pagehelper.PageHelper;
@@ -31,6 +33,8 @@ public class SorStorageController {
     @Autowired
     private ObjectJson objectJson;
 
+    @Autowired
+    private SorStoragedetailsService sorStoragedetailsService;
 
 
     @RequestMapping("/addSorStorage")
@@ -40,7 +44,13 @@ public class SorStorageController {
         // 获取前台传递的Json对象
         String formData = request.getParameter("formData");
         SorStorage sorStorage=JSONObject.parseObject(formData, SorStorage.class);
+        SorStoragedetails sorStoragedetails = JSONObject.parseObject(formData, SorStoragedetails.class);
         int a = sorStroageService.addSorStorage(sorStorage);
+
+
+        int i = sorStoragedetailsService.addSorStoragedetails(sorStoragedetails);
+
+
         if (a > 0) {
             response.getWriter().write("success");
         } else {
@@ -54,9 +64,6 @@ public class SorStorageController {
         int pages=Integer.parseInt(request.getParameter("page"));
         int count=Integer.parseInt(request.getParameter("limit"));
 
-        System.out.println(pages);
-        System.out.println(count);
-        System.out.println("_______________________");
 
         response.setContentType("text/html;charset=utf-8");
         response.setCharacterEncoding("utf-8");
@@ -86,7 +93,6 @@ public class SorStorageController {
             objectJson.setCount(num);
             objectJson.setMsg("");
             String jsonString = JSON.toJSONString(objectJson, SerializerFeature.DisableCircularReferenceDetect);
-            System.out.println(jsonString);
             PrintWriter out = response.getWriter();
             out.write(jsonString);
         }

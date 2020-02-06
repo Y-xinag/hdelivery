@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Component
 public class SorStoragedetails implements Serializable {
-    private Integer id;
+    private Integer sid;
 
     private String packageid;
 
@@ -14,14 +14,14 @@ public class SorStoragedetails implements Serializable {
 
     private String outboundid;
 
-    private Boolean state;
+    private int state;
 
-    public Integer getId() {
-        return id;
+    public Integer getSid() {
+        return sid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setSid(Integer sid) {
+        this.sid = sid;
     }
 
     public String getPackageid() {
@@ -29,7 +29,7 @@ public class SorStoragedetails implements Serializable {
     }
 
     public void setPackageid(String packageid) {
-        this.packageid = packageid == null ? null : packageid.trim();
+        this.packageid = packageid;
     }
 
     public Integer getWeight() {
@@ -45,21 +45,21 @@ public class SorStoragedetails implements Serializable {
     }
 
     public void setOutboundid(String outboundid) {
-        this.outboundid = outboundid == null ? null : outboundid.trim();
+        this.outboundid = outboundid;
     }
 
-    public Boolean getState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(Boolean state) {
+    public void setState(int state) {
         this.state = state;
     }
 
     @Override
     public String toString() {
         return "SorStoragedetails{" +
-                "id=" + id +
+                "sid=" + sid +
                 ", packageid='" + packageid + '\'' +
                 ", weight=" + weight +
                 ", outboundid='" + outboundid + '\'' +
