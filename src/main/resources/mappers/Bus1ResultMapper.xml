@@ -23,7 +23,7 @@
     <select id="testQuery" resultType="com.example.logistics.model.AccBusinessAdmissibility">
         select * from acc_businessadmissibility
     </select>
-    <insert id="addBus" parameterType="com.example.logistics.model.AccBusinessAdmissibility" >
+   <!-- <insert id="addBus" parameterType="com.example.logistics.model.AccBusinessAdmissibility" >
         insert into acc_businessadmissibility values(#{businessNoticeNo,#{reservationTime},#{customName},#{pickupAddress},#{customCode},#{linkman},#{telPhone},#{weight},#{volume},#{importantHints},#{arriveCity},#{pickerInfo},#{sendAddress},#{processingUnit},#{notificationSource},#{customNoModifyFlag},#{singleType},#{packagesNum},#{actualWeight},#{billingWeight},#{billingWeight},#{actualPacking})
-    </insert>
+    </insert>-->
 </mapper>
