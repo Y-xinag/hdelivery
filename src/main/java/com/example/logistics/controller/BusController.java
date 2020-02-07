@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,10 +30,46 @@ public class BusController {
         mav.setViewName("pages/acceptance/businessAcceptance");
         return  mav;
     }
-    @RequestMapping("/bus1Add")
+    @RequestMapping("/bus1Load")
     public ModelAndView bus1Add() throws Exception{
         ModelAndView mav=new ModelAndView();
         mav.setViewName("pages/acceptance/businessAcceptance_add");
+        return  mav;
+    }
+
+    @RequestMapping("/bus1Add")
+    public ModelAndView bus1Add(Model model) throws Exception{
+        //添加数据
+        AccBusinessAdmissibility accBus=new AccBusinessAdmissibility();
+        accBus.setBusinessNoticeNo("ywsl202001080000003");
+        accBus.setReservationTime(new Date());
+        accBus.setCustomName("TAO");
+        accBus.setPickupAddress("巴基斯阿");
+        accBus.setCustomCode(5);
+        accBus.setLinkman("老王");
+        accBus.setTelPhone("15378994555");
+        accBus.setWeight(12.5);
+        accBus.setVolume(10.3);
+        accBus.setImportantHints("易碎物品");
+        accBus.setArriveCity("郴州市");
+        accBus.setPickerInfo(5);
+        accBus.setSendAddress("郴州市详细地址");
+        accBus.setProcessingUnit(9);
+        accBus.setNotificationSource(false);
+        accBus.setCustomNoModifyFlag(false);
+        accBus.setSingleType("分单类型");
+        accBus.setPackagesNum(1);
+        accBus.setActualWeight(6.6);
+        accBus.setBillingWeight(7.1);
+        accBus.setPackingFee(2.0);
+        accBus.setActualPacking(false);
+        busService.addBus(accBus);
+        //重新查询数据
+        ModelAndView mav=new ModelAndView();
+        List<AccBusinessAdmissibility> list=busService.testQuery();
+        System.out.printf(list.get(0)+"");
+        model.addAttribute("list",list);
+        mav.setViewName("pages/acceptance/businessAcceptance");
         return  mav;
     }
 

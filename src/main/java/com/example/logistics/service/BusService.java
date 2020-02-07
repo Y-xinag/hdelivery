@@ -9,4 +9,5 @@ import java.util.Map;
 public interface BusService {
     Map<Integer,Bus1Result> findAll();
     List<AccBusinessAdmissibility> testQuery();
+    String addBus(AccBusinessAdmissibility accBusinessAdmissibility);
 }
