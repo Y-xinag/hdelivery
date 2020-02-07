@@ -239,7 +239,7 @@
                         url:"",
                         type:"POST",
                         data:{
-                            id:data.id
+                            sid:data.sid
                         },
                         success:function(result){
                             if(result="success"){
@@ -258,7 +258,7 @@
                 });
             } else if(layEvent === 'edit'){
                 //修改操作
-                EditLay('修改','/query4',400,800);
+                EditLay('修改','/query4',data.sid,800,300);
             }
         });
 
@@ -285,15 +285,15 @@
                 shadeClose: true,
                 shade: 0.4,
                 title: title,
-                content: '/query4',
+                content: '/query4?sid='+data.sid,
                 end:function(){
                     location.reload();
                 },
                 success: function(layero, index) {
                     //向iframe页的id=house的元素传值  // 参考 https://yq.aliyun.com/ziliao/133150
                     var body = layer.getChildFrame('body', index);
-                    body.contents().find("#dataId").val(id);
-                    console.log(id);
+                    body.contents().find("#dataId").val(sid);
+                    console.log(sid);
                 },
                 error: function(layero, index) {
                     alert("异常错误！");
