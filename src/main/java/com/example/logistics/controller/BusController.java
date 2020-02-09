@@ -63,7 +63,7 @@ public class BusController {
         accBus.setBillingWeight(7.1);
         accBus.setPackingFee(2.0);
         accBus.setActualPacking(false);
-        busService.addBus(accBus);
+       // busService.addBus(accBus);
         //重新查询数据
         ModelAndView mav=new ModelAndView();
         List<AccBusinessAdmissibility> list=busService.testQuery();
