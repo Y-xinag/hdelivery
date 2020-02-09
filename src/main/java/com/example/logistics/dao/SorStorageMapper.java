@@ -4,10 +4,7 @@ import com.example.logistics.model.SorStorage;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,4 +28,8 @@ public interface SorStorageMapper {
     //修改入库表
     @Update("update sor_storage set ID=#{id},AcceptDate=NOW(),AcceptPerson=#{acceptperson},AcceptCompany=#{acceptcompany},DeliveryPerson=#{deliveryperson},DeliveryCompany=#{deliverycompany} where SID=#{sid}")
     int updateSorStorage(SorStorage sorStorage);
+
+    //删除入库表
+    @Delete("delete from sor_storage where SID=#{sid}")
+    int delSorStorage(int sid);
 }

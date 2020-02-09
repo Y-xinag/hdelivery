@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
 </head> 
 <body>
-	<form class="layui-form">
+	<form class="layui-form"  lay-filter="example">
 	<table class="layui-table" style="width: 98%;margin: 1px auto;text-align: center;">
 	  	<tbody>
 		<input type="hidden" id="sid" name="sid">
@@ -100,19 +100,19 @@
 	<script type="text/javascript" src="/customs/jquery.min.js"></script>
 	<script type="text/javascript" src="/layui/layui.js"></script>
 	<script type="text/javascript">
-        var sid=getQueryString('sid');
-        alert(sid)
-        function getQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return r[2];
-            return null;
-        }
+        var sid=[[${sid}]];
+        // function getQueryString(name) {
+        //     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        //     var r = window.location.search.substr(1).match(reg);
+        //     if (r != null) return r[2];
+        //     return null;
+        // }
         //加载'form'模块，使checkbox、select、radio初始化
         // layui.use('form', function(){
         //
         // });
         layui.use(['form', 'layedit', 'laydate'], function(){
+            alert(sid)
             $=layui.jquery;
             var form = layui.form
                 ,layer = layui.layer
@@ -128,6 +128,7 @@
                 dataType:'json',
                 success:function(data){
                     if(data!=null){
+                        alert('不为空')
                         //表单赋值
                         form.val('example', {
                             "id": data.id// "name": "value"

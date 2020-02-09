@@ -36,4 +36,9 @@ public class SorStorageServiceImpl implements SorStroageService {
     public int updateSorStorage(SorStorage sorStorage) {
         return sorStorageMapper.updateSorStorage(sorStorage);
     }
+
+    @Override
+    public int delSorStorage(int sid) {
+        return sorStorageMapper.delSorStorage(sid);
+    }
 }

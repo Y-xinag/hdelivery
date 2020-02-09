@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,8 +33,21 @@ public class SorStorageController {
     private ObjectJson objectJson;
 
 
+    @RequestMapping("/delSorStorage")
+    public void delSorStorage(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
 
-    @RequestMapping("queryById")
+        String sid = request.getParameter("sid");
+        int i = sorStroageService.delSorStorage(Integer.parseInt(sid));
+        if (i>0){
+            response.getWriter().write("success");
+        }else {
+            response.getWriter().write("error");
+        }
+    }
+
+    @RequestMapping("/queryById")
     public void queryById(HttpServletRequest request, HttpServletResponse response) throws  Exception{
         response.setContentType("text/html;charset=utf-8");
         response.setCharacterEncoding("UTF-8");
@@ -42,10 +56,12 @@ public class SorStorageController {
         String sid = request.getParameter("sid");
         System.out.println("sid="+sid);
         if (sid!=null){
+            System.out.println("进来了");
             SorStorage sorStorage = sorStroageService.queryById(Integer.parseInt(sid));
             // 判断返回的person对象是否为空
             // 使用JSON转换格式
-            String jsonString = JSON.toJSONString(sorStorage,true);
+            String jsonString = JSON.toJSONString(sorStorage,SerializerFeature.DisableCircularReferenceDetect);
+            System.out.println(jsonString);
             response.getWriter().write(jsonString);
         }
 
@@ -94,10 +110,6 @@ public class SorStorageController {
         int pages=Integer.parseInt(request.getParameter("page"));
         int count=Integer.parseInt(request.getParameter("limit"));
 
-        System.out.println(pages);
-        System.out.println(count);
-        System.out.println("_______________________");
-
         response.setContentType("text/html;charset=utf-8");
         response.setCharacterEncoding("utf-8");
 
@@ -126,7 +138,6 @@ public class SorStorageController {
             objectJson.setCount(num);
             objectJson.setMsg("");
             String jsonString = JSON.toJSONString(objectJson, SerializerFeature.DisableCircularReferenceDetect);
-            System.out.println(jsonString);
             PrintWriter out = response.getWriter();
             out.write(jsonString);
         }
@@ -146,15 +157,13 @@ public class SorStorageController {
         mv.setViewName("pages/sortingManagement/storage_add.html");
         return mv;
     }
-    @RequestMapping("/query4")
-    public ModelAndView query4(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        response.setContentType("text/html;charset=utf-8");
-        response.setCharacterEncoding("UTF-8");
-
-        String sid = request.getParameter("sid");
+    @RequestMapping("/query4/{a}")
+    public ModelAndView query4(@PathVariable("a") String sid) throws Exception{
         System.out.println(sid);
+
         ModelAndView mv=new ModelAndView();
         mv.setViewName("pages/sortingManagement/storage_edit.html");
+        mv.addObject("sid",sid);
         return mv;
     }
     @RequestMapping("/query5")
