@@ -19,7 +19,4 @@ public class BusServiceImpl implements BusService {
         return bus1Mapper.findAll();
     }
     public List<AccBusinessAdmissibility> testQuery(){return  bus1Mapper.testQuery();}
-    public String addBus(AccBusinessAdmissibility accBusinessAdmissibility){
-        return bus1Mapper.addBus(accBusinessAdmissibility);
-    }
 }
