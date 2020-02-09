@@ -30,8 +30,8 @@ public class BusController {
         mav.setViewName("pages/acceptance/businessAcceptance");
         return  mav;
     }
-    @RequestMapping("/bus1Load")
-    public ModelAndView bus1Add() throws Exception{
+    @RequestMapping("/bus1LoadAdd")
+    public ModelAndView bus1LoadAdd() throws Exception{
         ModelAndView mav=new ModelAndView();
         mav.setViewName("pages/acceptance/businessAcceptance_add");
         return  mav;
@@ -70,6 +70,13 @@ public class BusController {
         System.out.printf(list.get(0)+"");
         model.addAttribute("list",list);
         mav.setViewName("pages/acceptance/businessAcceptance");
+        return  mav;
+    }
+
+    @RequestMapping("/bus1LoadUpdate")
+    public ModelAndView bus1LoadUpdate() throws Exception{
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("pages/acceptance/businessAcceptance_update");
         return  mav;
     }
 
