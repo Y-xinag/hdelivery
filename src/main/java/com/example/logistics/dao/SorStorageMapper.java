@@ -4,9 +4,7 @@ import com.example.logistics.model.SorStorage;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -22,4 +20,16 @@ public interface SorStorageMapper {
     //查询入库表数量
     @Select("SELECT count(1) from sor_storage AS s1,sy_emp AS s2,sy_emp s3 where s1.AcceptPerson=s2.ID AND s1.DeliveryPerson=s3.ID")
     Integer pagecount();
+
+    //根据单个id查询
+    @Select("select *from sor_storage where SID=#{sid}")
+    SorStorage queryById(int id);
+
+    //修改入库表
+    @Update("update sor_storage set ID=#{id},AcceptDate=NOW(),AcceptPerson=#{acceptperson},AcceptCompany=#{acceptcompany},DeliveryPerson=#{deliveryperson},DeliveryCompany=#{deliverycompany} where SID=#{sid}")
+    int updateSorStorage(SorStorage sorStorage);
+
+    //删除入库表
+    @Delete("delete from sor_storage where SID=#{sid}")
+    int delSorStorage(int sid);
 }

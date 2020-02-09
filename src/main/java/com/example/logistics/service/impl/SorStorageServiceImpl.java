@@ -26,4 +26,19 @@ public class SorStorageServiceImpl implements SorStroageService {
     public Integer pagecount() {
         return sorStorageMapper.pagecount();
     }
+
+    @Override
+    public SorStorage queryById(int id) {
+        return sorStorageMapper.queryById(id);
+    }
+
+    @Override
+    public int updateSorStorage(SorStorage sorStorage) {
+        return sorStorageMapper.updateSorStorage(sorStorage);
+    }
+
+    @Override
+    public int delSorStorage(int sid) {
+        return sorStorageMapper.delSorStorage(sid);
+    }
 }
