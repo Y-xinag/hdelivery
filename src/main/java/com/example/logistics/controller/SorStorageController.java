@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.logistics.helperentity.SoStroageEntity;
 import com.example.logistics.model.SorStorage;
+import com.example.logistics.model.SorStoragedetails;
 import com.example.logistics.model.SyEmp;
+import com.example.logistics.service.SorStoragedetailsService;
 import com.example.logistics.service.SorStroageService;
 import com.example.logistics.util.ObjectJson;
 import com.github.pagehelper.PageHelper;
@@ -32,6 +34,8 @@ public class SorStorageController {
     @Autowired
     private ObjectJson objectJson;
 
+    @Autowired
+    private SorStoragedetailsService sorStoragedetailsService;
 
     @RequestMapping("/delSorStorage")
     public void delSorStorage(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -97,7 +101,10 @@ public class SorStorageController {
         String formData = request.getParameter("formData");
         SorStorage sorStorage=JSONObject.parseObject(formData, SorStorage.class);
         int a = sorStroageService.addSorStorage(sorStorage);
+
         if (a > 0) {
+            SorStoragedetails sorStoragedetails = JSONObject.parseObject(formData, SorStoragedetails.class);
+            sorStoragedetailsService.addSorStoragedetails(sorStoragedetails);
             response.getWriter().write("success");
         } else {
             response.getWriter().write("error");

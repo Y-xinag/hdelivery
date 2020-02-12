@@ -13,77 +13,79 @@
 	<!-- 操作区域 -->
 	<div class="operation">
 		<!-- 向上间距 -->
-		<form class="layui-form" action="">
-			<!-- 数据表格 -->
-			<table class="layui-table">
-				<colgroup>
-				    <col width="60">
-				    <col width="110">
-				    <col width="110">
-				    <col width="100">
-				    <col width="160">
-				    <col>
-			  	</colgroup>
-			  	<thead>
-				    <tr>
-				    	<th>序号</th>
-				      	<th>单号</th>
-				      	<th>合包号</th>
-				      	<th>重量</th>
-					  	<th>关联出库交接单</th>
-					  	<th>状态</th>
-				    </tr> 
-			  	</thead>
-			  	<tbody>
-				    <tr>
-				      	<td>1</td>
-				      	<td>DH1001</td>
-				      	<td>HBH1001</td>
-				      	<td>12</td>
-				      	<td>CKJJD1101</td>
-				      	<td>中转入库</td>
-				    </tr>
-					<tr>
-						<td>1</td>
-						<td>DH1001</td>
-						<td>HBH1001</td>
-						<td>12</td>
-						<td>CKJJD1101</td>
-						<td>中转入库</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>DH1001</td>
-						<td>HBH1001</td>
-						<td>12</td>
-						<td>CKJJD1101</td>
-						<td>中转入库</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>DH1001</td>
-						<td>HBH1001</td>
-						<td>12</td>
-						<td>CKJJD1101</td>
-						<td>中转入库</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>DH1001</td>
-						<td>HBH1001</td>
-						<td>12</td>
-						<td>CKJJD1101</td>
-						<td>中转入库</td>
-					</tr>
+		<!--<form class="layui-form" action="">-->
+			<!--&lt;!&ndash; 数据表格 &ndash;&gt;-->
+			<!--<table class="layui-table">-->
+				<!--<colgroup>-->
+				    <!--<col width="60">-->
+				    <!--<col width="110">-->
+				    <!--<col width="110">-->
+				    <!--<col width="100">-->
+				    <!--<col width="160">-->
+				    <!--<col>-->
+			  	<!--</colgroup>-->
+			  	<!--<thead>-->
+				    <!--<tr>-->
+				    	<!--<th>序号</th>-->
+				      	<!--<th>单号</th>-->
+				      	<!--<th>合包号</th>-->
+				      	<!--<th>重量</th>-->
+					  	<!--<th>关联出库交接单</th>-->
+					  	<!--<th>状态</th>-->
+				    <!--</tr> -->
+			  	<!--</thead>-->
+			  	<!--<tbody>-->
+				    <!--<tr>-->
+				      	<!--<td>1</td>-->
+				      	<!--<td>DH1001</td>-->
+				      	<!--<td>HBH1001</td>-->
+				      	<!--<td>12</td>-->
+				      	<!--<td>CKJJD1101</td>-->
+				      	<!--<td>中转入库</td>-->
+				    <!--</tr>-->
+					<!--<tr>-->
+						<!--<td>1</td>-->
+						<!--<td>DH1001</td>-->
+						<!--<td>HBH1001</td>-->
+						<!--<td>12</td>-->
+						<!--<td>CKJJD1101</td>-->
+						<!--<td>中转入库</td>-->
+					<!--</tr>-->
+					<!--<tr>-->
+						<!--<td>1</td>-->
+						<!--<td>DH1001</td>-->
+						<!--<td>HBH1001</td>-->
+						<!--<td>12</td>-->
+						<!--<td>CKJJD1101</td>-->
+						<!--<td>中转入库</td>-->
+					<!--</tr>-->
+					<!--<tr>-->
+						<!--<td>1</td>-->
+						<!--<td>DH1001</td>-->
+						<!--<td>HBH1001</td>-->
+						<!--<td>12</td>-->
+						<!--<td>CKJJD1101</td>-->
+						<!--<td>中转入库</td>-->
+					<!--</tr>-->
+					<!--<tr>-->
+						<!--<td>1</td>-->
+						<!--<td>DH1001</td>-->
+						<!--<td>HBH1001</td>-->
+						<!--<td>12</td>-->
+						<!--<td>CKJJD1101</td>-->
+						<!--<td>中转入库</td>-->
+					<!--</tr>-->
 
-			  	</tbody>
-			</table>
-		</div>
-		</form>
+			  	<!--</tbody>-->
+			<!--</table>-->
+
+		<!--</form>-->
+		<table class="layui-hide" id="demo" lay-filter="test"></table>
 	</div>
 </div>
-<script type="text/javascript" src="../../../static/customs/jquery.min.js"></script>
-<script type="text/javascript" src="../../../static/layui/layui.js"></script>
+<script type="text/javascript" src="/customs/jquery.min.js"></script>
+<script type="text/javascript" src="/layer/layer.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript">     
 //加载'form'模块，使checkbox、select、radio初始化
 layui.use('form', function(){
@@ -94,6 +96,44 @@ layui.use('form', function(){
 layui.use('table', function(){
   var table = layui.table;
 });
+
+layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function() {
+    $ = layui.jquery;
+    var laydate = layui.laydate //日期
+        , laypage = layui.laypage //分页
+        , layer = layui.layer //弹层
+        , table = layui.table //表格
+        , carousel = layui.carousel //轮播
+        , upload = layui.upload //上传
+        , element = layui.element //元素操作
+        , slider = layui.slider //滑块
+
+
+    table.render({
+        elem: '#demo'
+        , height: 420
+        , url: '/querySorStoragedetails' //数据接口
+        , title: '用户表'
+        , limit: 5
+        , limits: [5, 10, 15, 20]
+        , page: true //开启分页
+        //, toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+        // ,totalRow: true //开启合计行
+        , cols: [
+            [
+
+                {field: 'sid', title: '单号', width: 50, sort: true, fixed: 'left', totalRowText: '合计：'}
+                , {field: 'packageid', title: '合包号', width: 60}
+                , {field: 'weight', title: '重量', width: 120, sort: true, totalRow: true}
+                , {field: 'outboundid', title: '关联出库交接单', width: 180, sort: true}
+                , {field: 'state', title: '状态', width: 130, sort: true, totalRow: true}
+
+            ]
+        ]
+    });
+
+})
+
 
 
 </script>

@@ -26,4 +26,9 @@ public class SorStoragedetailsServiceImpl implements SorStoragedetailsService {
     public Integer pagecount() {
         return sorStoragedetailsMapper.pagecount();
     }
+
+    @Override
+    public int delSorStoragedetails(SorStoragedetails sorStoragedetails) {
+        return sorStoragedetailsMapper.delSorStoragedetails(sorStoragedetails);
+    }
 }
