@@ -152,7 +152,7 @@ var SystemMenu = [{
 			href: '/query2'
 		},{
 			title: '出库',
-			href: 'sortingManagement/theLibrary.html'
+			href: '/ruku'
 		},{
 			title: '盘库',
 			href: 'sortingManagement/check.html'
