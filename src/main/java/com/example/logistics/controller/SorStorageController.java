@@ -179,4 +179,11 @@ public class SorStorageController {
         mv.setViewName("pages/sortingManagement/storage_list.html");
         return mv;
     }
+
+    @RequestMapping("/churukucx")
+    public ModelAndView churukucx() throws Exception{
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("pages/sortingManagement/outOfStorageQuery.html");
+        return mv;
+    }
 }

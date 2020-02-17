@@ -16,25 +16,35 @@ public class SorOutBoundController {
 
     @RequestMapping("/rukuadd")
     public ModelAndView rukuadd() throws Exception{
+        System.out.println("进了");
         ModelAndView mv=new ModelAndView();
-        mv.setViewName("pages/sortingManagement/theLibrary_add.html'");
+        mv.setViewName("pages/sortingManagement/theLibrary_add.html");
         return mv;
     }
 
     @RequestMapping("/rukuselect")
     public ModelAndView rukuselect() throws Exception{
+        System.out.println("进了");
         ModelAndView mv=new ModelAndView();
-        mv.setViewName("pages/sortingManagement/theLibrary_list.html'");
+        mv.setViewName("pages/sortingManagement/theLibrary_list.html");
         return mv;
     }
 
     @RequestMapping("/rukuupdate")
     public ModelAndView rukuupdate() throws Exception{
+        System.out.println("进了");
         ModelAndView mv=new ModelAndView();
-        mv.setViewName("pages/sortingManagement/theLibrary_edit.html'");
+        mv.setViewName("pages/sortingManagement/theLibrary_edit.html");
         return mv;
     }
 
+    @RequestMapping("/kucuncx")
+    public ModelAndView kucuncx() throws Exception{
+        System.out.println("进了");
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("pages/sortingManagement/stockQuery.html");
+        return mv;
+    }
 
 
 }

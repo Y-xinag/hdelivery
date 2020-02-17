@@ -155,44 +155,44 @@ var SystemMenu = [{
 			href: '/ruku'
 		},{
 			title: '盘库',
-			href: 'sortingManagement/check.html'
+			href: '/panku'
 		},{
 			title: '合包',
-			href: 'sortingManagement/package.html'
+			href: '/hebao'
 		},{
 			title: '拆包',
-			href: 'sortingManagement/unpacking.html'
+			href: '/chaibao'
 		},{
 			title: '出入库查询',
-			href: 'sortingManagement/outOfStorageQuery.html'
+			href: '/churukucx'
 		},{
 			title: '库存查询',
-			href: 'sortingManagement/stockQuery.html'
+			href: '/kucuncx'
 		},{
 			title: '合包查询',
-			href: 'sortingManagement/packageQuery.html'
+			href: '/hebaocx'
 		},{
 			title: '单货异常监控',
-			href: 'sortingManagement/singleCargoExceptionMonitoring.html'
+			href: '/danhuoyc'
 		}]
 	},{
 		title: '进出港管理',
 		icon: '&#xe62f;',
 		children: [{
 			title: '出港配载',
-			href: 'portEntryManagement/departureStowage.html'
+			href: '/chugangpz'
 		},{
 			title: '提货管理',
-			href: 'portEntryManagement/deliveryManagement.html'
+			href: '/tihuogl'
 		},{
 			title: '进港分单',
-			href: 'portEntryManagement/entryOrder.html'
+			href: '/jingangfd'
 		},{
 			title: '出港配载查询',
-			href: 'portEntryManagement/departureStowageQuery.html'
+			href: '/chugangpzcx'
 		},{
 			title: '到达时间录入',
-			href: 'portEntryManagement/arrivalTimeInput.html'
+			href: '/daodasjlr'
 		}]
 
 	},{
