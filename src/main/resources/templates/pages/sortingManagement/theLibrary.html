@@ -203,7 +203,7 @@
 
             </div>
 
-            <!-- 操作按扭组 -->
+             <!--操作按扭组-->
             <div class="layui-form-item" style="padding-left: 11px;height: 30px;">
                 <div class="layui-inline">
                     <button type="button" class="layui-btn layui-btn-small btnQuery" id="opAdd">新增出库</button>
@@ -212,64 +212,73 @@
                 </div>
             </div>
 
-            <!-- 数据表格 -->
-            <table class="layui-table">
-                <colgroup>
-                    <col width="50">
-                    <col width="80">
-                    <col width="160">
-                    <col width="180">
-                    <col width="140">
-                    <col width="110">
-                    <col width="110">
-                    <col width="110">
-                    <col width="110">
-                    <col width="110">
-                    <col width="110">
-                    <col width="110">
-                    <col width="110">
-                    <col>
-                </colgroup>
-                <thead>
-                <tr>
-                    <th><input type="checkbox" name="check" lay-skin="primary"></th>
-                    <th>序号</th>
-                    <th>出库交接单号</th>
-                    <th>交接单类型</th>
-                    <th>线路资源</th>
-                    <th>物流方向</th>
-                    <th>接货人</th>
-                    <th>承运商</th>
-                    <th>出货人</th>
-                    <th>出货时间</th>
-                    <th>出货单位</th>
-                    <th>确认人</th>
-                    <th>确认时间</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><input type="checkbox" name="check" lay-skin="primary"></td>
-                    <td>1</td>
-                    <td>JJD1001</td>
-                    <td>2017-11-11 11:11:11</td>
-                    <td>老王</td>
-                    <td>长沙分部</td>
-                    <td>老张</td>
-                    <td>深圳分部</td>
-                    <td>深圳分部</td>
-                    <td>深圳分部</td>
-                    <td>深圳分部</td>
-                    <td>深圳分部</td>
-                    <td>深圳分部</td>
-                    <td>
-                        <button type="button" class="layui-btn layui-btn-small btnQuery" id="opQueryDetail">查看明细</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div>
+                <table class="layui-hide" id="demo" lay-filter="test"></table>
+                <script type="text/html" id="barDemo">
+                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                </script>
+            </div>
+
+            <!--&lt;!&ndash; 数据表格 &ndash;&gt;-->
+            <!--<table class="layui-table">-->
+                <!--<colgroup>-->
+                    <!--<col width="50">-->
+                    <!--<col width="80">-->
+                    <!--<col width="160">-->
+                    <!--<col width="180">-->
+                    <!--<col width="140">-->
+                    <!--<col width="110">-->
+                    <!--<col width="110">-->
+                    <!--<col width="110">-->
+                    <!--<col width="110">-->
+                    <!--<col width="110">-->
+                    <!--<col width="110">-->
+                    <!--<col width="110">-->
+                    <!--<col width="110">-->
+                    <!--<col>-->
+                <!--</colgroup>-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th><input type="checkbox" name="check" lay-skin="primary"></th>-->
+                    <!--<th>序号</th>-->
+                    <!--<th>出库交接单号</th>-->
+                    <!--<th>交接单类型</th>-->
+                    <!--<th>线路资源</th>-->
+                    <!--<th>物流方向</th>-->
+                    <!--<th>接货人</th>-->
+                    <!--<th>承运商</th>-->
+                    <!--<th>出货人</th>-->
+                    <!--<th>出货时间</th>-->
+                    <!--<th>出货单位</th>-->
+                    <!--<th>确认人</th>-->
+                    <!--<th>确认时间</th>-->
+                    <!--<th>操作</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td><input type="checkbox" name="check" lay-skin="primary"></td>-->
+                    <!--<td>1</td>-->
+                    <!--<td>JJD1001</td>-->
+                    <!--<td>2017-11-11 11:11:11</td>-->
+                    <!--<td>老王</td>-->
+                    <!--<td>长沙分部</td>-->
+                    <!--<td>老张</td>-->
+                    <!--<td>深圳分部</td>-->
+                    <!--<td>深圳分部</td>-->
+                    <!--<td>深圳分部</td>-->
+                    <!--<td>深圳分部</td>-->
+                    <!--<td>深圳分部</td>-->
+                    <!--<td>深圳分部</td>-->
+                    <!--<td>-->
+                        <!--<button type="button" class="layui-btn layui-btn-small btnQuery" id="opQueryDetail">查看明细</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
     </form>
+
 </div>
 </div>
 <script type="text/javascript" src="/customs/jquery.min.js"></script>
@@ -285,6 +294,143 @@
     layui.use('table', function(){
         var table = layui.table;
     });
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function() {
+        $=layui.jquery;
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , carousel = layui.carousel //轮播
+            , upload = layui.upload //上传
+            , element = layui.element //元素操作
+            , slider = layui.slider //滑块
+
+
+
+        table.render({
+            elem: '#demo'
+            ,height: 420
+            ,url: '/querySorOutbound' //数据接口
+            ,title: '用户表'
+            ,limit:5
+            ,limits:[5,10,15,20]
+            ,page: true //开启分页
+            ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,cols: [
+                [
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field: 'outboundid', title: '出库交接单号', width:50, sort: true, fixed: 'left', totalRowText: '合计：'}
+                    ,{field: 'handovertype', title: '交接单类型', width:80}
+                    ,{field: 'line', title: '线路资源', width: 160, sort: true, totalRow: true}
+                    ,{field: 'direction', title: '物流方向', width:180, sort: true}
+                    ,{field: 'acceptperson', title: '接货人', width: 140, sort: true, totalRow: true}
+                    ,{field: 'carriers', title: '承运商', width:110}
+                    ,{field: 'deliveryperson', title: '出货人', width: 110}
+                    ,{field: 'deliverydate', title: '出货时间', width: 110}
+                    ,{field: 'deliverycompany', title: '出货单位', width: 110}
+                    ,{field: 'enterperson', title: '确认人', width: 110}
+                    ,{field: 'enterdate', title: '确认时间', width: 110}
+                    ,{fixed: 'right',title:'操作', width: 220, align:'center', toolbar: '#barDemo'}
+                ]
+            ]
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    $.ajax({
+                        url:"/delSorStorage",
+                        type:"POST",
+                        data:{
+                            sid:data.sid
+                        },
+                        success:function(result){
+                            if(result="success"){
+                                obj.del();//删除对应行（tr）的DOM结构
+                                layer.close(index);//关闭窗口
+                                location.reload();
+                                //向服务端发送删除指令
+                            }else{
+                                layer.alert("删除失败");
+                            }
+                        }
+                    });
+                    //obj.del(); //删除对应行（tr）的DOM结构
+                    //layer.close(index);	//关闭窗口
+                    //向服务端发送删除指令
+
+                });
+            } else if(layEvent === 'edit'){
+                //修改操作
+                EditLay('修改','/query4',data.sid,800,300);
+
+                function EditLay(title, url, id, w, h) {
+                    if(title == null || title == '') {
+                        title = false;
+                    };
+                    if(url == null || url == '') {
+                        url = "404.html";
+                    };
+                    if(w == null || w == '') {
+                        w = ($(window).width() * 0.9);
+                    };
+                    if(h == null || h == '') {
+                        h = ($(window).height() - 50);
+                    };
+                    layer.open({
+                        type: 2,
+                        area: [w + 'px', h + 'px'],
+                        fix: false, //不固定
+                        maxmin: true,
+                        shadeClose: true,
+                        shade: 0.4,
+                        title: title,
+                        content: '/query4/'+data.sid+'',
+                        end:function(){
+                            location.reload();
+                        },
+                        success: function(layero, index) {
+                            //向iframe页的id=house的元素传值  // 参考 https://yq.aliyun.com/ziliao/133150
+                            var body = layer.getChildFrame('body', index);
+                            body.contents().find("#dataId").val(id);
+                            console.log(id);
+                        },
+                        error: function(layero, index) {
+                            alert("异常错误！");
+                        }
+                    });
+                }
+            }
+        });
+
+        //分页
+        laypage.render({
+            elem: 'pageDemo' //分页容器的id
+            ,count: 100 //总页数
+            ,skin: '#1E9FFF' //自定义选中色值
+            //,skip: true //开启跳页
+            ,jump: function(obj, first){
+                if(!first){
+                    layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+                }
+            }
+        });
+
+    });
+
+
+
+
+
+
+
+
+
+
+
 
     //加载'laydate'时间组件
     layui.use('laydate', function(){

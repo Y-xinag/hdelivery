@@ -1,36 +1,23 @@
-package com.example.logistics.model;
+package com.example.logistics.helperentity;
 
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Component
-public class SorOutbound implements Serializable {
+public class SorOutboundEntity implements Serializable {
     private String outboundid;
-
     private int handovertype;
-
     private String line;
-
     private String direction;
-
-    private Integer acceptperson;
-
+    private String acceptperson;
     private String carriers;
-
-    private Integer deliveryperson;
-
+    private String deliveryperson;
     private Date deliverydate;
-
     private String deliverycompany;
-
-    private Integer enterperson;
-
+    private String enterperson;
     private Date enterdate;
-
-    private List<SyEmp> syEmpList;
 
     public String getOutboundid() {
         return outboundid;
@@ -64,11 +51,11 @@ public class SorOutbound implements Serializable {
         this.direction = direction;
     }
 
-    public Integer getAcceptperson() {
+    public String getAcceptperson() {
         return acceptperson;
     }
 
-    public void setAcceptperson(Integer acceptperson) {
+    public void setAcceptperson(String acceptperson) {
         this.acceptperson = acceptperson;
     }
 
@@ -80,11 +67,11 @@ public class SorOutbound implements Serializable {
         this.carriers = carriers;
     }
 
-    public Integer getDeliveryperson() {
+    public String getDeliveryperson() {
         return deliveryperson;
     }
 
-    public void setDeliveryperson(Integer deliveryperson) {
+    public void setDeliveryperson(String deliveryperson) {
         this.deliveryperson = deliveryperson;
     }
 
@@ -104,11 +91,11 @@ public class SorOutbound implements Serializable {
         this.deliverycompany = deliverycompany;
     }
 
-    public Integer getEnterperson() {
+    public String getEnterperson() {
         return enterperson;
     }
 
-    public void setEnterperson(Integer enterperson) {
+    public void setEnterperson(String enterperson) {
         this.enterperson = enterperson;
     }
 
@@ -120,29 +107,20 @@ public class SorOutbound implements Serializable {
         this.enterdate = enterdate;
     }
 
-    public List<SyEmp> getSyEmpList() {
-        return syEmpList;
-    }
-
-    public void setSyEmpList(List<SyEmp> syEmpList) {
-        this.syEmpList = syEmpList;
-    }
-
     @Override
     public String toString() {
-        return "SorOutbound{" +
+        return "SorOutboundEntity{" +
                 "outboundid='" + outboundid + '\'' +
                 ", handovertype=" + handovertype +
                 ", line='" + line + '\'' +
                 ", direction='" + direction + '\'' +
-                ", acceptperson=" + acceptperson +
+                ", acceptperson='" + acceptperson + '\'' +
                 ", carriers='" + carriers + '\'' +
-                ", deliveryperson=" + deliveryperson +
+                ", deliveryperson='" + deliveryperson + '\'' +
                 ", deliverydate=" + deliverydate +
                 ", deliverycompany='" + deliverycompany + '\'' +
-                ", enterperson=" + enterperson +
+                ", enterperson='" + enterperson + '\'' +
                 ", enterdate=" + enterdate +
-                ", syEmpList=" + syEmpList +
                 '}';
     }
 }

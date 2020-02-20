@@ -1,30 +1,18 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.model.SorOutbound;
-import com.example.logistics.model.SorOutboundExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SorOutboundMapper {
-    int countByExample(SorOutboundExample example);
+    //分页查询
+    List<SorOutbound> querySorOutbound(@Param("pages") int pages,@Param("count") int count);
 
-    int deleteByExample(SorOutboundExample example);
-
-    int deleteByPrimaryKey(String outboundid);
-
-    int insert(SorOutbound record);
-
-    int insertSelective(SorOutbound record);
-
-    List<SorOutbound> selectByExample(SorOutboundExample example);
-
-    SorOutbound selectByPrimaryKey(String outboundid);
-
-    int updateByExampleSelective(@Param("record") SorOutbound record, @Param("example") SorOutboundExample example);
-
-    int updateByExample(@Param("record") SorOutbound record, @Param("example") SorOutboundExample example);
-
-    int updateByPrimaryKeySelective(SorOutbound record);
-
-    int updateByPrimaryKey(SorOutbound record);
+    //查询入库表数量
+    @Select("SELECT count(1) from sor_outbound")
+    Integer pagecount();
 }

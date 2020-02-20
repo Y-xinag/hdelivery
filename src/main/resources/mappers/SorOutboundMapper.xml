@@ -1,306 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.logistics.dao.SorOutboundMapper" >
-  <resultMap id="BaseResultMap" type="com.example.logistics.model.SorOutbound" >
-    <id column="OutBoundID" property="outboundid" jdbcType="VARCHAR" />
-    <result column="HandoverType" property="handovertype" jdbcType="BIT" />
-    <result column="Line" property="line" jdbcType="VARCHAR" />
-    <result column="Direction" property="direction" jdbcType="INTEGER" />
-    <result column="AcceptPerson" property="acceptperson" jdbcType="INTEGER" />
-    <result column="Carriers" property="carriers" jdbcType="INTEGER" />
-    <result column="DeliveryPerson" property="deliveryperson" jdbcType="INTEGER" />
-    <result column="DeliveryDate" property="deliverydate" jdbcType="TIMESTAMP" />
-    <result column="DeliveryCompany" property="deliverycompany" jdbcType="VARCHAR" />
-    <result column="EnterPerson" property="enterperson" jdbcType="INTEGER" />
-    <result column="EnterDate" property="enterdate" jdbcType="TIMESTAMP" />
+  <select id="querySorOutbound" resultMap="SorOutboundMap">
+    SELECT
+      s1.OutBoundID,
+      s1.HandoverType,
+      s1.Line,
+      s1.Direction,
+      s2.EmpName,
+      s1.Carriers,
+      s2.EmpName,
+      s1.DeliveryDate,
+      s1.DeliveryCompany,
+      s2.EmpName,
+      s1.EnterDate from sor_outbound AS s1, sy_emp AS s2
+      where s1.AcceptPerson=s2.ID
+      ORDER BY s1.DeliveryDate asc
+      LIMIT #{pages},#{count}
+  </select>
+
+  <resultMap id="SorOutboundMap" type="SorOutbound">
+    <id column="OutBoundID" property="outboundid"/>
+    <result column="HandoverType" property="handovertype"/>
+    <result column="Line" property="line"/>
+    <result column="Direction" property="direction"/>
+    <result column="Carriers" property="carriers"/>
+    <result column="DeliveryDate" property="deliverydate"/>
+    <result column="DeliveryCompany" property="deliverycompany"/>
+    <result column="EnterDate" property="enterdate"/>
+
+    <collection property="syEmpList" ofType="SyEmp">
+      <result column="EmpName" property="empname"/>
+    </collection>
+
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    OutBoundID, HandoverType, Line, Direction, AcceptPerson, Carriers, DeliveryPerson, 
-    DeliveryDate, DeliveryCompany, EnterPerson, EnterDate
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.SorOutboundExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sor_outbound
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from sor_outbound
-    where OutBoundID = #{outboundid,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from sor_outbound
-    where OutBoundID = #{outboundid,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.example.logistics.model.SorOutboundExample" >
-    delete from sor_outbound
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.logistics.model.SorOutbound" >
-    insert into sor_outbound (OutBoundID, HandoverType, Line, 
-      Direction, AcceptPerson, Carriers, 
-      DeliveryPerson, DeliveryDate, DeliveryCompany, 
-      EnterPerson, EnterDate)
-    values (#{outboundid,jdbcType=VARCHAR}, #{handovertype,jdbcType=BIT}, #{line,jdbcType=VARCHAR}, 
-      #{direction,jdbcType=INTEGER}, #{acceptperson,jdbcType=INTEGER}, #{carriers,jdbcType=INTEGER}, 
-      #{deliveryperson,jdbcType=INTEGER}, #{deliverydate,jdbcType=TIMESTAMP}, #{deliverycompany,jdbcType=VARCHAR}, 
-      #{enterperson,jdbcType=INTEGER}, #{enterdate,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.logistics.model.SorOutbound" >
-    insert into sor_outbound
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="outboundid != null" >
-        OutBoundID,
-      </if>
-      <if test="handovertype != null" >
-        HandoverType,
-      </if>
-      <if test="line != null" >
-        Line,
-      </if>
-      <if test="direction != null" >
-        Direction,
-      </if>
-      <if test="acceptperson != null" >
-        AcceptPerson,
-      </if>
-      <if test="carriers != null" >
-        Carriers,
-      </if>
-      <if test="deliveryperson != null" >
-        DeliveryPerson,
-      </if>
-      <if test="deliverydate != null" >
-        DeliveryDate,
-      </if>
-      <if test="deliverycompany != null" >
-        DeliveryCompany,
-      </if>
-      <if test="enterperson != null" >
-        EnterPerson,
-      </if>
-      <if test="enterdate != null" >
-        EnterDate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="outboundid != null" >
-        #{outboundid,jdbcType=VARCHAR},
-      </if>
-      <if test="handovertype != null" >
-        #{handovertype,jdbcType=BIT},
-      </if>
-      <if test="line != null" >
-        #{line,jdbcType=VARCHAR},
-      </if>
-      <if test="direction != null" >
-        #{direction,jdbcType=INTEGER},
-      </if>
-      <if test="acceptperson != null" >
-        #{acceptperson,jdbcType=INTEGER},
-      </if>
-      <if test="carriers != null" >
-        #{carriers,jdbcType=INTEGER},
-      </if>
-      <if test="deliveryperson != null" >
-        #{deliveryperson,jdbcType=INTEGER},
-      </if>
-      <if test="deliverydate != null" >
-        #{deliverydate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deliverycompany != null" >
-        #{deliverycompany,jdbcType=VARCHAR},
-      </if>
-      <if test="enterperson != null" >
-        #{enterperson,jdbcType=INTEGER},
-      </if>
-      <if test="enterdate != null" >
-        #{enterdate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.example.logistics.model.SorOutboundExample" resultType="java.lang.Integer" >
-    select count(*) from sor_outbound
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update sor_outbound
-    <set >
-      <if test="record.outboundid != null" >
-        OutBoundID = #{record.outboundid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.handovertype != null" >
-        HandoverType = #{record.handovertype,jdbcType=BIT},
-      </if>
-      <if test="record.line != null" >
-        Line = #{record.line,jdbcType=VARCHAR},
-      </if>
-      <if test="record.direction != null" >
-        Direction = #{record.direction,jdbcType=INTEGER},
-      </if>
-      <if test="record.acceptperson != null" >
-        AcceptPerson = #{record.acceptperson,jdbcType=INTEGER},
-      </if>
-      <if test="record.carriers != null" >
-        Carriers = #{record.carriers,jdbcType=INTEGER},
-      </if>
-      <if test="record.deliveryperson != null" >
-        DeliveryPerson = #{record.deliveryperson,jdbcType=INTEGER},
-      </if>
-      <if test="record.deliverydate != null" >
-        DeliveryDate = #{record.deliverydate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.deliverycompany != null" >
-        DeliveryCompany = #{record.deliverycompany,jdbcType=VARCHAR},
-      </if>
-      <if test="record.enterperson != null" >
-        EnterPerson = #{record.enterperson,jdbcType=INTEGER},
-      </if>
-      <if test="record.enterdate != null" >
-        EnterDate = #{record.enterdate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update sor_outbound
-    set OutBoundID = #{record.outboundid,jdbcType=VARCHAR},
-      HandoverType = #{record.handovertype,jdbcType=BIT},
-      Line = #{record.line,jdbcType=VARCHAR},
-      Direction = #{record.direction,jdbcType=INTEGER},
-      AcceptPerson = #{record.acceptperson,jdbcType=INTEGER},
-      Carriers = #{record.carriers,jdbcType=INTEGER},
-      DeliveryPerson = #{record.deliveryperson,jdbcType=INTEGER},
-      DeliveryDate = #{record.deliverydate,jdbcType=TIMESTAMP},
-      DeliveryCompany = #{record.deliverycompany,jdbcType=VARCHAR},
-      EnterPerson = #{record.enterperson,jdbcType=INTEGER},
-      EnterDate = #{record.enterdate,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.SorOutbound" >
-    update sor_outbound
-    <set >
-      <if test="handovertype != null" >
-        HandoverType = #{handovertype,jdbcType=BIT},
-      </if>
-      <if test="line != null" >
-        Line = #{line,jdbcType=VARCHAR},
-      </if>
-      <if test="direction != null" >
-        Direction = #{direction,jdbcType=INTEGER},
-      </if>
-      <if test="acceptperson != null" >
-        AcceptPerson = #{acceptperson,jdbcType=INTEGER},
-      </if>
-      <if test="carriers != null" >
-        Carriers = #{carriers,jdbcType=INTEGER},
-      </if>
-      <if test="deliveryperson != null" >
-        DeliveryPerson = #{deliveryperson,jdbcType=INTEGER},
-      </if>
-      <if test="deliverydate != null" >
-        DeliveryDate = #{deliverydate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deliverycompany != null" >
-        DeliveryCompany = #{deliverycompany,jdbcType=VARCHAR},
-      </if>
-      <if test="enterperson != null" >
-        EnterPerson = #{enterperson,jdbcType=INTEGER},
-      </if>
-      <if test="enterdate != null" >
-        EnterDate = #{enterdate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where OutBoundID = #{outboundid,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.SorOutbound" >
-    update sor_outbound
-    set HandoverType = #{handovertype,jdbcType=BIT},
-      Line = #{line,jdbcType=VARCHAR},
-      Direction = #{direction,jdbcType=INTEGER},
-      AcceptPerson = #{acceptperson,jdbcType=INTEGER},
-      Carriers = #{carriers,jdbcType=INTEGER},
-      DeliveryPerson = #{deliveryperson,jdbcType=INTEGER},
-      DeliveryDate = #{deliverydate,jdbcType=TIMESTAMP},
-      DeliveryCompany = #{deliverycompany,jdbcType=VARCHAR},
-      EnterPerson = #{enterperson,jdbcType=INTEGER},
-      EnterDate = #{enterdate,jdbcType=TIMESTAMP}
-    where OutBoundID = #{outboundid,jdbcType=VARCHAR}
-  </update>
+
+
 </mapper>
