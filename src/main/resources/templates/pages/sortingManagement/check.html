@@ -81,48 +81,56 @@
             </div>
 
             <!-- 数据表格 -->
-            <table class="layui-table">
-                <colgroup>
-                    <col width="50">
-                    <col width="60">
-                    <col width="150">
-                    <col width="180">
-                    <col width="130">
-                    <col width="110">
-                    <col width="200">
-                    <col width="110">
-                    <col>
-                </colgroup>
-                <thead>
-                <tr>
-                    <th><input type="checkbox" name="check" lay-skin="primary"></th>
-                    <th>序号</th>
-                    <th>盘库单号</th>
-                    <th>扫描设备号</th>
-                    <th>总件数</th>
-                    <th>盘库人</th>
-                    <th>盘库时间</th>
-                    <th>操作单位</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><input type="checkbox" name="check" lay-skin="primary"></td>
-                    <td>1</td>
-                    <td>PKD1001</td>
-                    <td>SMSB1001</td>
-                    <td>10</td>
-                    <td>老王</td>
-                    <td>2017-11-11 11:11:11</td>
-                    <td>长沙分部</td>
-                    <th>
-                        <button id="opDetailed" type="button" class="layui-btn layui-btn-small btnQuery">明细数据</button>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
+            <!--<table class="layui-table">-->
+                <!--<colgroup>-->
+                    <!--<col width="50">-->
+                    <!--<col width="60">-->
+                    <!--<col width="150">-->
+                    <!--<col width="180">-->
+                    <!--<col width="130">-->
+                    <!--<col width="110">-->
+                    <!--<col width="200">-->
+                    <!--<col width="110">-->
+                    <!--<col>-->
+                <!--</colgroup>-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th><input type="checkbox" name="check" lay-skin="primary"></th>-->
+                    <!--<th>序号</th>-->
+                    <!--<th>盘库单号</th>-->
+                    <!--<th>扫描设备号</th>-->
+                    <!--<th>总件数</th>-->
+                    <!--<th>盘库人</th>-->
+                    <!--<th>盘库时间</th>-->
+                    <!--<th>操作单位</th>-->
+                    <!--<th>操作</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td><input type="checkbox" name="check" lay-skin="primary"></td>-->
+                    <!--<td>1</td>-->
+                    <!--<td>PKD1001</td>-->
+                    <!--<td>SMSB1001</td>-->
+                    <!--<td>10</td>-->
+                    <!--<td>老王</td>-->
+                    <!--<td>2017-11-11 11:11:11</td>-->
+                    <!--<td>长沙分部</td>-->
+                    <!--<th>-->
+                        <!--<button id="opDetailed" type="button" class="layui-btn layui-btn-small btnQuery">明细数据</button>-->
+                    <!--</th>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <div>
     </div>
+            <div>
+                <table class="layui-hide" id="demo" lay-filter="test"></table>
+                <script type="text/html" id="barDemo">
+                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                </script>
+            </div>
     </form>
 </div>
 </div>
@@ -139,6 +147,135 @@
     layui.use('table', function(){
         var table = layui.table;
     });
+
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function() {
+        $=layui.jquery;
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , carousel = layui.carousel //轮播
+            , upload = layui.upload //上传
+            , element = layui.element //元素操作
+            , slider = layui.slider //滑块
+
+
+
+        table.render({
+            elem: '#demo'
+            ,height: 420
+            ,url: '/querySorCheckbound' //数据接口
+            ,title: '用户表'
+            ,limit:5
+            ,limits:[5,10,15,20]
+            ,page: true //开启分页
+            ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,cols: [
+                [
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field: 'cid', title: '盘库单号', width:110, sort: true, fixed: 'left', totalRowText: '合计：'}
+                    ,{field: 'scanid', title: '扫描设备号', width:110}
+                    ,{field: 'cargosum', title: '总件数', width:110}
+                    ,{field: 'checkperson', title: '盘库人', width: 120, sort: true, totalRow: true}
+                    ,{field: 'checkdate', title: '盘库时间', width:180, sort: true}
+                    ,{field: 'checkcompany', title: '操作单位', width: 110, sort: true, totalRow: true}
+                    ,{fixed: 'right',title:'操作', width: 220, align:'center', toolbar: '#barDemo'}
+                ]
+            ]
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    $.ajax({
+                        url:"/delSorStorage",
+                        type:"POST",
+                        data:{
+                            sid:data.sid
+                        },
+                        success:function(result){
+                            if(result="success"){
+                                obj.del();//删除对应行（tr）的DOM结构
+                                layer.close(index);//关闭窗口
+                                location.reload();
+                                //向服务端发送删除指令
+                            }else{
+                                layer.alert("删除失败");
+                            }
+                        }
+                    });
+                    //obj.del(); //删除对应行（tr）的DOM结构
+                    //layer.close(index);	//关闭窗口
+                    //向服务端发送删除指令
+
+                });
+            } else if(layEvent === 'edit'){
+                //修改操作
+                EditLay('修改','/query4',data.sid,800,300);
+
+                function EditLay(title, url, id, w, h) {
+                    if(title == null || title == '') {
+                        title = false;
+                    };
+                    if(url == null || url == '') {
+                        url = "404.html";
+                    };
+                    if(w == null || w == '') {
+                        w = ($(window).width() * 0.9);
+                    };
+                    if(h == null || h == '') {
+                        h = ($(window).height() - 50);
+                    };
+                    layer.open({
+                        type: 2,
+                        area: [w + 'px', h + 'px'],
+                        fix: false, //不固定
+                        maxmin: true,
+                        shadeClose: true,
+                        shade: 0.4,
+                        title: title,
+                        content: '/query4/'+data.sid+'',
+                        end:function(){
+                            location.reload();
+                        },
+                        success: function(layero, index) {
+                            //向iframe页的id=house的元素传值  // 参考 https://yq.aliyun.com/ziliao/133150
+                            var body = layer.getChildFrame('body', index);
+                            body.contents().find("#dataId").val(id);
+                            console.log(id);
+                        },
+                        error: function(layero, index) {
+                            alert("异常错误！");
+                        }
+                    });
+                }
+            }
+        });
+
+        //分页
+        laypage.render({
+            elem: 'pageDemo' //分页容器的id
+            ,count: 100 //总页数
+            ,skin: '#1E9FFF' //自定义选中色值
+            //,skip: true //开启跳页
+            ,jump: function(obj, first){
+                if(!first){
+                    layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+                }
+            }
+        });
+
+    });
+
+
+
+
+
+
+
 
     //加载'laydate'时间组件
     layui.use('laydate', function(){

@@ -1,26 +1,23 @@
-package com.example.logistics.model;
+package com.example.logistics.helperentity;
 
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Component
-public class SorCheckbound implements Serializable {
+public class SorCheckboundEntity implements Serializable {
     private Integer cid;
 
     private Integer scanid;
 
     private Integer cargosum;
 
-    private Integer checkperson;
+    private String checkperson;
 
     private Date checkdate;
 
     private String checkcompany;
-
-    private List<SyEmp> syEmpList;
 
     public Integer getCid() {
         return cid;
@@ -46,11 +43,11 @@ public class SorCheckbound implements Serializable {
         this.cargosum = cargosum;
     }
 
-    public Integer getCheckperson() {
+    public String getCheckperson() {
         return checkperson;
     }
 
-    public void setCheckperson(Integer checkperson) {
+    public void setCheckperson(String checkperson) {
         this.checkperson = checkperson;
     }
 
@@ -70,24 +67,15 @@ public class SorCheckbound implements Serializable {
         this.checkcompany = checkcompany;
     }
 
-    public List<SyEmp> getSyEmpList() {
-        return syEmpList;
-    }
-
-    public void setSyEmpList(List<SyEmp> syEmpList) {
-        this.syEmpList = syEmpList;
-    }
-
     @Override
     public String toString() {
-        return "SorCheckbound{" +
+        return "SorCheckboundEntity{" +
                 "cid=" + cid +
                 ", scanid=" + scanid +
                 ", cargosum=" + cargosum +
-                ", checkperson=" + checkperson +
+                ", checkperson='" + checkperson + '\'' +
                 ", checkdate=" + checkdate +
                 ", checkcompany='" + checkcompany + '\'' +
-                ", syEmpList=" + syEmpList +
                 '}';
     }
 }

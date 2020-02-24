@@ -1,30 +1,19 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.model.SorCheckbound;
-import com.example.logistics.model.SorCheckboundExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface SorCheckboundMapper {
-    int countByExample(SorCheckboundExample example);
+    //查询分页
+    List<SorCheckbound> querySorCheckbound(@Param("pages") int pages, @Param("count") int count);
 
-    int deleteByExample(SorCheckboundExample example);
+    //查询入库表数量
+    @Select("SELECT count(1) from sor_checkbound")
+    Integer pagecount();
 
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(SorCheckbound record);
-
-    int insertSelective(SorCheckbound record);
-
-    List<SorCheckbound> selectByExample(SorCheckboundExample example);
-
-    SorCheckbound selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") SorCheckbound record, @Param("example") SorCheckboundExample example);
-
-    int updateByExample(@Param("record") SorCheckbound record, @Param("example") SorCheckboundExample example);
-
-    int updateByPrimaryKeySelective(SorCheckbound record);
-
-    int updateByPrimaryKey(SorCheckbound record);
 }

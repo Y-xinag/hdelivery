@@ -1,228 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.logistics.dao.SorCheckboundMapper" >
-  <resultMap id="BaseResultMap" type="com.example.logistics.model.SorCheckbound" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="ScanID" property="scanid" jdbcType="INTEGER" />
-    <result column="CargoSum" property="cargosum" jdbcType="INTEGER" />
-    <result column="CheckPerson" property="checkperson" jdbcType="INTEGER" />
-    <result column="CheckDate" property="checkdate" jdbcType="TIMESTAMP" />
-    <result column="CheckCompany" property="checkcompany" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    ID, ScanID, CargoSum, CheckPerson, CheckDate, CheckCompany
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.SorCheckboundExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sor_checkbound
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+    <select id="querySorCheckbound" resultMap="SorCheckboundMap">
+      SELECT
+      s1.CID,
+      s1.ScanID,
+      s1.CargoSum,
+      s2.EmpName,
+      s1.CheckDate,
+      s1.CheckCompany from sor_checkbound AS s1, sy_emp  AS s2
+      where s1.CheckPerson =s2.ID
+      ORDER BY s1.CheckDate desc
+      LIMIT #{pages},#{count}
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from sor_checkbound
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from sor_checkbound
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.example.logistics.model.SorCheckboundExample" >
-    delete from sor_checkbound
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.logistics.model.SorCheckbound" >
-    insert into sor_checkbound (ID, ScanID, CargoSum, 
-      CheckPerson, CheckDate, CheckCompany
-      )
-    values (#{id,jdbcType=INTEGER}, #{scanid,jdbcType=INTEGER}, #{cargosum,jdbcType=INTEGER}, 
-      #{checkperson,jdbcType=INTEGER}, #{checkdate,jdbcType=TIMESTAMP}, #{checkcompany,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.logistics.model.SorCheckbound" >
-    insert into sor_checkbound
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="scanid != null" >
-        ScanID,
-      </if>
-      <if test="cargosum != null" >
-        CargoSum,
-      </if>
-      <if test="checkperson != null" >
-        CheckPerson,
-      </if>
-      <if test="checkdate != null" >
-        CheckDate,
-      </if>
-      <if test="checkcompany != null" >
-        CheckCompany,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="scanid != null" >
-        #{scanid,jdbcType=INTEGER},
-      </if>
-      <if test="cargosum != null" >
-        #{cargosum,jdbcType=INTEGER},
-      </if>
-      <if test="checkperson != null" >
-        #{checkperson,jdbcType=INTEGER},
-      </if>
-      <if test="checkdate != null" >
-        #{checkdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checkcompany != null" >
-        #{checkcompany,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.example.logistics.model.SorCheckboundExample" resultType="java.lang.Integer" >
-    select count(*) from sor_checkbound
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update sor_checkbound
-    <set >
-      <if test="record.id != null" >
-        ID = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.scanid != null" >
-        ScanID = #{record.scanid,jdbcType=INTEGER},
-      </if>
-      <if test="record.cargosum != null" >
-        CargoSum = #{record.cargosum,jdbcType=INTEGER},
-      </if>
-      <if test="record.checkperson != null" >
-        CheckPerson = #{record.checkperson,jdbcType=INTEGER},
-      </if>
-      <if test="record.checkdate != null" >
-        CheckDate = #{record.checkdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.checkcompany != null" >
-        CheckCompany = #{record.checkcompany,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update sor_checkbound
-    set ID = #{record.id,jdbcType=INTEGER},
-      ScanID = #{record.scanid,jdbcType=INTEGER},
-      CargoSum = #{record.cargosum,jdbcType=INTEGER},
-      CheckPerson = #{record.checkperson,jdbcType=INTEGER},
-      CheckDate = #{record.checkdate,jdbcType=TIMESTAMP},
-      CheckCompany = #{record.checkcompany,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.SorCheckbound" >
-    update sor_checkbound
-    <set >
-      <if test="scanid != null" >
-        ScanID = #{scanid,jdbcType=INTEGER},
-      </if>
-      <if test="cargosum != null" >
-        CargoSum = #{cargosum,jdbcType=INTEGER},
-      </if>
-      <if test="checkperson != null" >
-        CheckPerson = #{checkperson,jdbcType=INTEGER},
-      </if>
-      <if test="checkdate != null" >
-        CheckDate = #{checkdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checkcompany != null" >
-        CheckCompany = #{checkcompany,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.SorCheckbound" >
-    update sor_checkbound
-    set ScanID = #{scanid,jdbcType=INTEGER},
-      CargoSum = #{cargosum,jdbcType=INTEGER},
-      CheckPerson = #{checkperson,jdbcType=INTEGER},
-      CheckDate = #{checkdate,jdbcType=TIMESTAMP},
-      CheckCompany = #{checkcompany,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+
+    <resultMap id="SorCheckboundMap" type="SorCheckbound">
+        <id column="CID" property="cid"/>
+        <result column="ScanID" property="scanid"/>
+        <result column="CargoSum" property="cargosum"/>
+        <result column="CheckPerson" property="checkperson"/>
+        <result column="CheckDate" property="checkdate"/>
+        <result column="CheckCompany" property="checkcompany"/>
+
+
+        <collection property="syEmpList" ofType="SyEmp">
+            <result column="EmpName" property="empname"/>
+        </collection>
+
+    </resultMap>
+
 </mapper>
