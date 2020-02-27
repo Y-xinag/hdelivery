@@ -23,4 +23,24 @@ public class SorOutboundServiceImpl implements SorOutboundService {
     public Integer pagecount() {
         return sorOutboundMapper.pagecount();
     }
+
+    @Override
+    public int addSorOutbound(SorOutbound sorOutbound) {
+        return sorOutboundMapper.addSorOutbound(sorOutbound);
+    }
+
+    @Override
+    public int delSorOutbound(String id) {
+        return sorOutboundMapper.delSorOutbound(id);
+    }
+
+    @Override
+    public SorOutbound queryById(String id) {
+        return sorOutboundMapper.queryById(id);
+    }
+
+    @Override
+    public int updateSorOutbound(SorOutbound sorOutbound) {
+        return sorOutboundMapper.updateSorOutbound(sorOutbound);
+    }
 }

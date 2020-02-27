@@ -1,9 +1,12 @@
 package com.example.logistics.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.logistics.helperentity.SorOutboundEntity;
 import com.example.logistics.model.SorOutbound;
+import com.example.logistics.model.SorStorage;
+import com.example.logistics.model.SorStoragedetails;
 import com.example.logistics.model.SyEmp;
 import com.example.logistics.service.SorOutboundService;
 import com.example.logistics.util.ObjectJson;
@@ -27,6 +30,25 @@ public class SorOutBoundController {
 
     @Autowired
     private ObjectJson objectJson;
+
+    @RequestMapping("/addSorOutbound")
+    public void  addSorOutbound(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        // 获取前台传递的Json对象
+        String formData = request.getParameter("formData");
+        SorOutbound sorOutbound = JSONObject.parseObject(formData, SorOutbound.class);
+        int a = sorOutboundService.addSorOutbound(sorOutbound);
+
+        if (a > 0) {
+            response.getWriter().write("success");
+        } else {
+            response.getWriter().write("error");
+        }
+    }
+
+
+
 
     @RequestMapping("/querySorOutbound")
     public void querySorOutbound(HttpServletRequest request, HttpServletResponse response) throws Exception {
