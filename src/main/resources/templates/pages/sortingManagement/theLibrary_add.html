@@ -9,21 +9,25 @@
     <link rel="stylesheet" type="text/css" href="/css/page.css">
 </head>
 <body>
-<div class="external">
-    <!-- 操作按扭组 -->
-    <div class="layui-form-item" style="padding-left: 11px;height: 30px;">
-        <div class="layui-inline">
-            <button type="button" class="layui-btn layui-btn-small btnQuery" id="opDetailAdd">新增明细行</button>
-            <button type="button" class="layui-btn layui-btn-small btnQuery" id="opDetailDelete">删除明细行</button>
-            <button type="button" class="layui-btn layui-btn-small btnOther" id="opSave">保存</button>
-            <button type="button" class="layui-btn layui-btn-small btnOther" id="opClose">关闭</button>
-        </div>
-    </div>
-</div>
+
 <form class="layui-form">
     <table class="layui-table" style="width: 98%;margin: 1px auto;text-align: center;">
         <tbody>
         <tr>
+            <td class="layui-bg-gray" width="13%">出库单号</td>
+            <td width="20%">
+                <input type="text" name="outboundid" placeholder="请输入出库单号" autocomplete="off" class="layui-input" value="">
+            </td>
+            <td class="layui-bg-gray" width="13%">确认人</td>
+            <td width="20%">
+                <select name="deliveryperson" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0"></option>
+                    <option value="1">老王</option>
+                    <option value="2">老王</option>
+                    <option value="3">老王</option>
+                </select>
+            </td>
             <td class="layui-bg-gray" width="13%">交接单类型</td>
             <td width="20%">
                 <select name="handovertype" lay-verify="required">
@@ -34,20 +38,27 @@
                     <option value="1">发货交接单</option>
                 </select>
             </td>
+
+        </tr>
+
+
+        <tr>
             <td class="layui-bg-gray" width="13%">线路资源</td>
             <td width="20%">
                 <input type="text" name="line" placeholder="请输入线路资源" autocomplete="off" class="layui-input" value="">
             </td>
             <td class="layui-bg-gray" width="14%">物流方向</td>
             <td width="20%">
-                <input type="text" name="direction" placeholder="请输入物流方向" autocomplete="off" class="layui-input" value="" disabled>
+                <input type="text" name="direction" placeholder="请输入物流方向" autocomplete="off" class="layui-input" value="">
             </td>
-        </tr>
-        <tr>
             <td class="layui-bg-gray">出货时间</td>
             <td>
-                <input type="text" name="DeliveryDate" placeholder="请输入出货时间" autocomplete="off" class="layui-input" value="">
+                <input type="text" name="DeliveryDate" placeholder="默认当前时间" autocomplete="off" class="layui-input" value="" disabled>
             </td>
+        </tr>
+
+        <tr>
+
             <td class="layui-bg-gray">承运商</td>
             <td>
                 <input type="text" name="carriers" placeholder="请输入承运商" autocomplete="off" class="layui-input" value="">
@@ -62,9 +73,6 @@
                     <option value="3">老王</option>
                 </select>
             </td>
-        </tr>
-        <tr>
-
             <td class="layui-bg-gray">交货人</td>
             <td>
                 <select name="EnterPerson" lay-verify="required">
@@ -75,9 +83,12 @@
                     <option value="3">老王</option>
                 </select>
             </td>
+        </tr>
+
+        <tr>
             <td class="layui-bg-gray">交货时间</td>
             <td>
-                <input type="text" name="EnterDate" placeholder="请输入交货时间" autocomplete="off" class="layui-input" value="">
+                <input type="text" name="EnterDate" placeholder="默认当前时间" autocomplete="off" class="layui-input" value="" disabled>
             </td>
             <td class="layui-bg-gray">交货单位</td>
             <td>
@@ -128,7 +139,7 @@
                 <input type="text" name="title" placeholder="体积" autocomplete="off" class="layui-input" value="">
             </td>
             <td>
-                <input type="text" name="title" placeholder="扫描时间" autocomplete="off" class="layui-input" value="">
+                <input type="text" name="title" placeholder="扫描时间" autocomplete="off" class="layui-input" value="" disabled>
             </td>
             <td>
                 <select name="city" lay-verify="required">
@@ -153,6 +164,13 @@
             </td>
         </tr>
 
+        <tr>
+            <td colspan="9">
+                <button style="background: #1da02b;" type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">确定</button>
+                <button type="button" class="layui-btn layui-btn-primary">取消</button>
+            </td>
+        </tr>
+
 
         </tbody>
     </table>
@@ -161,10 +179,86 @@
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript">
 
-    //加载'form'模块，使checkbox、select、radio初始化
-    layui.use('form', function(){
+   // 加载'form'模块，使checkbox、select、radio初始化
+   //  layui.use('form', function(){
+   //
+   //  });
 
-    });
+   var bool = true;
+   layui.use(['form', 'layedit', 'laydate'], function(){
+       $=layui.jquery;
+       var form = layui.form
+           ,layer = layui.layer
+           ,layedit = layui.layedit
+           ,laydate = layui.laydate;
+
+       //日期
+       laydate.render({
+           elem: '#date'
+       });
+       laydate.render({
+           elem: '#date1'
+       });
+
+       //创建一个编辑器
+       var editIndex = layedit.build('LAY_demo_editor');
+
+       //自定义验证规则
+       // form.verify({
+       //     title: function(value){
+       //         if(value.length < 5){
+       //             return '标题至少得5个字符啊';
+       //         }
+       //     }
+       //     ,pass: [
+       //         /^[\S]{6,12}$/
+       //         ,'密码必须6到12位，且不能出现空格'
+       //     ]
+       //     ,content: function(value){
+       //         layedit.sync(editIndex);
+       //     }
+       // });
+
+       //监听指定开关
+       // form.on('switch(switchTest)', function(data){
+       //     layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+       //         offset: '6px'
+       //     });
+       //     layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+       // });
+
+       //监听提交
+       form.on('submit(demo1)', function(data){
+           // layer.alert(JSON.stringify(data.field), {
+           //     title: '最终的提交信息'
+           // })
+           if (bool=true){
+               var formData = JSON.stringify(data.field);
+               alert(formData)
+               $.ajax({
+                   url : "/addSorOutbound",
+                   type : "POST",
+                   data : {
+                       formData : formData
+                   },
+                   success : function(data){
+                       if (data == "success") {
+                           //window.location.href = "list.jsp";
+                           //获得Frame索引
+                           var index=parent.layer.getFrameIndex(window.name);
+                           //关闭当前frame
+                           parent.layer.close(index);
+                       } else {
+                           layer.alert("添加失败");
+                       }
+                   }
+               });
+           }
+
+           return false;
+       });
+   });
+
 
 </script>
 </body>
