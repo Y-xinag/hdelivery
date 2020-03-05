@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.logistics.helperentity.SorOutboundEntity;
-import com.example.logistics.model.SorOutbound;
-import com.example.logistics.model.SorStorage;
-import com.example.logistics.model.SorStoragedetails;
-import com.example.logistics.model.SyEmp;
+import com.example.logistics.model.*;
 import com.example.logistics.service.SorOutboundService;
+import com.example.logistics.service.SorOutbounddetailsService;
 import com.example.logistics.util.ObjectJson;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,8 @@ public class SorOutBoundController {
     private SorOutboundService sorOutboundService;
 
     @Autowired
+    private SorOutbounddetailsService sorOutbounddetailsService;
+    @Autowired
     private ObjectJson objectJson;
 
     @RequestMapping("/addSorOutbound")
@@ -41,6 +41,8 @@ public class SorOutBoundController {
         int a = sorOutboundService.addSorOutbound(sorOutbound);
 
         if (a > 0) {
+            SorOutbounddetails sorOutbounddetails = JSONObject.parseObject(formData, SorOutbounddetails.class);
+            sorOutbounddetailsService.addSorOutbounddetails(sorOutbounddetails);
             response.getWriter().write("success");
         } else {
             response.getWriter().write("error");

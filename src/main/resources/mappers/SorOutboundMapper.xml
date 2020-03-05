@@ -15,7 +15,7 @@
       s2.EmpName,
       s1.EnterDate from sor_outbound AS s1, sy_emp AS s2
       where s1.AcceptPerson=s2.ID
-      ORDER BY s1.DeliveryDate asc
+      ORDER BY s1.DeliveryDate desc
       LIMIT #{pages},#{count}
   </select>
 
