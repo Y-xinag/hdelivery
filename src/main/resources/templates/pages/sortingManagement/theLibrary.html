@@ -315,7 +315,8 @@
             ,limit:5
             ,limits:[5,10,15,20]
             ,page: true //开启分页
-            ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,toolbar: true //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,totalRow:true
             ,cols: [
                 [
                     {type: 'checkbox', fixed: 'left'}
@@ -365,7 +366,7 @@
                 });
             } else if(layEvent === 'edit'){
                 //修改操作
-                EditLay('修改','/query4',data.sid,800,300);
+                EditLay('修改','/rukuupdate',data.outboundid,800,300);
 
                 function EditLay(title, url, id, w, h) {
                     if(title == null || title == '') {
@@ -388,7 +389,7 @@
                         shadeClose: true,
                         shade: 0.4,
                         title: title,
-                        content: '/query4/'+data.sid+'',
+                        content: '/rukuupdate/'+data.outboundid+'',
                         end:function(){
                             location.reload();
                         },

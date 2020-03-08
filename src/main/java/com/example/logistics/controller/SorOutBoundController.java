@@ -11,6 +11,7 @@ import com.example.logistics.util.ObjectJson;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +31,49 @@ public class SorOutBoundController {
     private SorOutbounddetailsService sorOutbounddetailsService;
     @Autowired
     private ObjectJson objectJson;
+
+
+    @RequestMapping("/queryByoutId")
+    public void queryByoutId(HttpServletRequest request, HttpServletResponse response) throws  Exception{
+        System.out.println("进了");
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+
+        // 获取前台传递的参数
+        String outboundid = request.getParameter("outboundid");
+        System.out.println("outboundid="+outboundid);
+        if (outboundid!=null){
+            System.out.println("进来了");
+            SorOutbound sorOutbound = sorOutboundService.queryById(outboundid);
+            // 判断返回的person对象是否为空
+            // 使用JSON转换格式
+            String jsonString = JSON.toJSONString(sorOutbound,SerializerFeature.DisableCircularReferenceDetect);
+            System.out.println(jsonString);
+            response.getWriter().write(jsonString);
+        }
+
+    }
+
+    @RequestMapping("/updateSorOutbound")
+    public void updateSorOutbound(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        // 获取前台传递的Json对象
+        String formData = request.getParameter("formData");
+
+        // 将json字符串转换为对象
+        SorOutbound sorOutbound = JSONObject.parseObject(formData, SorOutbound.class);
+        int a = sorOutboundService.updateSorOutbound(sorOutbound);
+        // 根据返回结果进行不同的处理
+        if (a > 0) {
+            response.getWriter().write("success");
+        } else {
+            response.getWriter().write("error");
+        }
+    }
 
     @RequestMapping("/addSorOutbound")
     public void  addSorOutbound(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -90,7 +134,6 @@ public class SorOutBoundController {
             objectJson.setCount(num);
             objectJson.setMsg("");
             String jsonString = JSON.toJSONString(objectJson, SerializerFeature.DisableCircularReferenceDetect);
-            System.out.println(jsonString);
             PrintWriter out = response.getWriter();
             out.write(jsonString);
         }
@@ -121,11 +164,12 @@ public class SorOutBoundController {
         return mv;
     }
 
-    @RequestMapping("/rukuupdate")
-    public ModelAndView rukuupdate() throws Exception{
-        System.out.println("进了");
+    @RequestMapping("/rukuupdate/{a}")
+    public ModelAndView rukuupdate(@PathVariable("a") String outboundid) throws Exception{
+        System.out.println(outboundid);
         ModelAndView mv=new ModelAndView();
         mv.setViewName("pages/sortingManagement/theLibrary_edit.html");
+        mv.addObject("outboundid",outboundid);
         return mv;
     }
 

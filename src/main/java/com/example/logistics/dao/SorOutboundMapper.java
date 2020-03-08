@@ -29,6 +29,6 @@ public interface SorOutboundMapper {
     SorOutbound queryById(String id);
 
     //更改入库
-    @Update("update sor_outbound set OutBoundID=#{outboundid},HandoverType=#{handovertype},Line=#{line},Direction=#{direction},AcceptPerson=#{acceptperson},Carriers=#{carriers},DeliveryPerson=#{deliveryperson},DeliveryDate=NOW(),DeliveryCompany=#{deliverycompany},EnterPerson=#{enterperson},EnterDate=NOW()")
+    @Update("update sor_outbound set HandoverType=#{handovertype},Line=#{line},Direction=#{direction},AcceptPerson=#{acceptperson},Carriers=#{carriers},DeliveryPerson=#{deliveryperson},DeliveryDate=NOW(),DeliveryCompany=#{deliverycompany},EnterPerson=#{enterperson},EnterDate=NOW() where OutBoundID=#{outboundid}")
     int updateSorOutbound(SorOutbound sorOutbound);
 }
