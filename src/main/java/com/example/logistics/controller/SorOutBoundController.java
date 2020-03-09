@@ -32,6 +32,19 @@ public class SorOutBoundController {
     @Autowired
     private ObjectJson objectJson;
 
+    @RequestMapping("/delSorOutbound")
+    public void delSorOutbound(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+
+        String outboundid = request.getParameter("outboundid");
+        int i = sorOutboundService.delSorOutbound(outboundid);
+        if (i>0){
+            response.getWriter().write("success");
+        }else {
+            response.getWriter().write("error");
+        }
+    }
 
     @RequestMapping("/queryByoutId")
     public void queryByoutId(HttpServletRequest request, HttpServletResponse response) throws  Exception{

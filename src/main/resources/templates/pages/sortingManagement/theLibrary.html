@@ -207,8 +207,9 @@
             <div class="layui-form-item" style="padding-left: 11px;height: 30px;">
                 <div class="layui-inline">
                     <button type="button" class="layui-btn layui-btn-small btnQuery" id="opAdd">新增出库</button>
-                    <button type="button" class="layui-btn layui-btn-small btnOther" id="opEdit">修改</button>
-                    <button type="button" class="layui-btn layui-btn-small btnOther" id="opDelete">删除</button>
+                    <button type="button" class="layui-btn layui-btn-small btnQuery" id="opQueryDetail">查看明细</button>
+                    <!--<button type="button" class="layui-btn layui-btn-small btnOther" id="opEdit">修改</button>-->
+                    <!--<button type="button" class="layui-btn layui-btn-small btnOther" id="opDelete">删除</button>-->
                 </div>
             </div>
 
@@ -343,10 +344,10 @@
             if(layEvent === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     $.ajax({
-                        url:"/delSorStorage",
+                        url:"/delSorOutbound",
                         type:"POST",
                         data:{
-                            sid:data.sid
+                            outboundid:data.outboundid
                         },
                         success:function(result){
                             if(result="success"){
