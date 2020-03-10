@@ -22,4 +22,24 @@ public class SorCheckboundServiceImpl implements SorCheckboundService {
     public Integer pagecount() {
         return sorCheckboundMapper.pagecount();
     }
+
+    @Override
+    public int addSorCheckbound(SorCheckbound sorCheckbound) {
+        return sorCheckboundMapper.addSorCheckbound(sorCheckbound);
+    }
+
+    @Override
+    public int delSorCheckbound(int cid) {
+        return sorCheckboundMapper.delSorCheckbound(cid);
+    }
+
+    @Override
+    public SorCheckbound queryByCid(int cid) {
+        return sorCheckboundMapper.queryByCid(cid);
+    }
+
+    @Override
+    public int updateSorCheckbound(SorCheckbound sorCheckbound) {
+        return sorCheckboundMapper.updateSorCheckbound(sorCheckbound);
+    }
 }
