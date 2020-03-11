@@ -14,79 +14,38 @@
     <table class="layui-table" style="width: 98%;margin: 1px auto;text-align: center;">
         <tbody>
         <tr>
-            <td class="layui-bg-gray" width="13%">出库单号</td>
+            <td class="layui-bg-gray" width="13%">盘库单号</td>
             <td width="20%">
-                <input type="text" id="outboundid" name="outboundid" placeholder="请输入出库单号" autocomplete="off" class="layui-input" value="">
+                <input type="text" id="cid" name="cid" placeholder="请输入盘库单号" autocomplete="off" class="layui-input" value="">
             </td>
-            <td class="layui-bg-gray" width="13%">确认人</td>
+            <td class="layui-bg-gray" width="13%">扫描设备号</td>
             <td width="20%">
-                <select id="deliveryperson" name="deliveryperson" lay-verify="required">
-                    <option value="1">老王</option>
-                    <option value="2">老高</option>
-                    <option value="3">老狗</option>
-                </select>
+                <input type="text" id="scanid" name="scanid" placeholder="请输入扫描设备号" autocomplete="off" class="layui-input" value="">
             </td>
-            <td class="layui-bg-gray" width="13%">交接单类型</td>
+            <td class="layui-bg-gray" width="13%">总件数</td>
             <td width="20%">
-                <select id="handovertype" name="handovertype" lay-verify="required">
+                <input type="text" id="cargosum" name="cargosum" placeholder="请输入总件数" autocomplete="off" class="layui-input" value="">
+            </td>
+
+        </tr>
+        <tr>
+            <td class="layui-bg-gray">盘库人</td>
+            <td>
+                <select id="checkperson" name="checkperson" lay-verify="required">
                     <option value=""></option>
-                    <option value="0">市内物流交接单</option>
-                    <option value="1">长途物流交接单</option>
-                    <option value="2">派送清单</option>
-                    <option value="3">发货交接单</option>
-                </select>
-            </td>
-
-        </tr>
-
-
-        <tr>
-            <td class="layui-bg-gray" width="13%">线路资源</td>
-            <td width="20%">
-                <input type="text" id="line" name="line" placeholder="请输入线路资源" autocomplete="off" class="layui-input" value="">
-            </td>
-            <td class="layui-bg-gray" width="14%">物流方向</td>
-            <td width="20%">
-                <input type="text" id="direction" name="direction" placeholder="请输入物流方向" autocomplete="off" class="layui-input" value="">
-            </td>
-            <td class="layui-bg-gray">出货时间</td>
-            <td>
-                <input type="text"  name="DeliveryDate" placeholder="默认当前时间" autocomplete="off" class="layui-input" value="" disabled>
-            </td>
-        </tr>
-
-        <tr>
-
-            <td class="layui-bg-gray">承运商</td>
-            <td>
-                <input type="text" id="carriers" name="carriers" placeholder="请输入承运商" autocomplete="off" class="layui-input" value="">
-            </td>
-            <td class="layui-bg-gray">接货人</td>
-            <td>
-                <select id="AcceptPerson" name="AcceptPerson" lay-verify="required">
+                    <option value="0"></option>
                     <option value="1">老王</option>
-                    <option value="2">老高</option>
-                    <option value="3">老狗</option>
+                    <option value="2">老炸麻花</option>
+                    <option value="3">老王</option>
                 </select>
             </td>
-            <td class="layui-bg-gray">交货人</td>
+            <td class="layui-bg-gray">盘库时间</td>
             <td>
-                <select id="enterperson" name="enterperson" lay-verify="required">
-                    <option value="1">老王</option>
-                    <option value="2">老高</option>
-                    <option value="3">老狗</option>
-                </select>
+                <input type="text" id="checkdate" name="checkdate" placeholder="默认系统当前时间" autocomplete="off" class="layui-input" value="" disabled="disabled">
             </td>
-        </tr>
-
-        <tr>
-            <td class="layui-bg-gray">交货时间</td>
+            <td class="layui-bg-gray">操作单位</td>
             <td>
-                <input type="text"  name="EnterDate" placeholder="默认当前时间" autocomplete="off" class="layui-input" value="" disabled>
-            </td>
-            <td class="layui-bg-gray">交货单位</td>
-            <td>
-                <input type="text" id="deliverycompany" name="deliverycompany" placeholder="请输入交货单位" autocomplete="off" class="layui-input" value="">
+                <input type="text" id="checkcompany" name="checkcompany" placeholder="请输入操作单位" autocomplete="off" class="layui-input" value="">
             </td>
         </tr>
 
@@ -94,38 +53,32 @@
     </table>
     <table class="layui-table" style="width: 98%;margin: 5px auto;text-align: center;">
         <!--<colgroup>-->
-            <!--<col width="60">-->
-            <!--<col width="100">-->
-            <!--<col width="100">-->
-            <!--<col width="90">-->
-            <!--<col width="90">-->
             <!--<col width="120">-->
             <!--<col width="120">-->
             <!--<col width="120">-->
             <!--<col>-->
         <!--</colgroup>-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th>序号</th>-->
-            <!--<th>单号</th>-->
-            <!--<th>合包号</th>-->
-            <!--<th>重量</th>-->
-            <!--<th>体积</th>-->
-            <!--<th>扫描时间</th>-->
-            <!--<th>扫描</th>-->
-            <!--<th>下环节入库</th>-->
-            <!--<th>二次入库</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
         <tbody>
         <!--<tr>-->
-            <!--<td>1</td>-->
             <!--<td>-->
-                <!--<input type="text" name="id" placeholder="单号" autocomplete="off" class="layui-input" value="">-->
+                <!--<input type="text" name="id" placeholder="工作单号" autocomplete="off" class="layui-input" value="">-->
             <!--</td>-->
             <!--<td>-->
-                <!--<input type="text" name="packageid" placeholder="合包号" autocomplete="off" class="layui-input" value="">-->
+                <!--<input type="text" name="PackageID" placeholder="合包号" autocomplete="off" class="layui-input" value="">-->
             <!--</td>-->
+            <!--<td>-->
+                <!--<input type="text" name="cargocount" placeholder="数量" autocomplete="off" class="layui-input" value="">-->
+            <!--</td>-->
+        <!--</tr>-->
+
+
+        <!--<colgroup>-->
+            <!--<col width="120">-->
+            <!--<col width="120">-->
+            <!--<col width="120">-->
+            <!--<col>-->
+        <!--</colgroup>-->
+        <!--<tr>-->
             <!--<td>-->
                 <!--<input type="text" name="weight" placeholder="重量" autocomplete="off" class="layui-input" value="">-->
             <!--</td>-->
@@ -133,27 +86,30 @@
                 <!--<input type="text" name="volume" placeholder="体积" autocomplete="off" class="layui-input" value="">-->
             <!--</td>-->
             <!--<td>-->
-                <!--<input type="text" name="scandate" placeholder="扫描时间" autocomplete="off" class="layui-input" value="" disabled>-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<select name="isscan" lay-verify="required">-->
+                <!--<select name="cargotype" lay-verify="required">-->
                     <!--<option value=""></option>-->
-                    <!--<option value="0">否</option>-->
-                    <!--<option value="1">是</option>-->
+                    <!--<option value="0">杂货</option>-->
+                    <!--<option value="1">好货</option>-->
                 <!--</select>-->
             <!--</td>-->
+        <!--</tr>-->
+
+        <!--<colgroup>-->
+            <!--<col width="120">-->
+            <!--<col width="120">-->
+            <!--<col>-->
+        <!--</colgroup>-->
+        <!--<tr>-->
             <!--<td>-->
-                <!--<select name="isnextstorage" lay-verify="required">-->
-                    <!--<option value=""></option>-->
-                    <!--<option value="0">否</option>-->
-                    <!--<option value="1">是</option>-->
-                <!--</select>-->
+                <!--<input type="text" name="direction" placeholder="方向" autocomplete="off" class="layui-input" value="">-->
             <!--</td>-->
             <!--<td>-->
-                <!--<select name="isdoublestorage" lay-verify="required">-->
+                <!--<select name="storageperson" lay-verify="required">-->
                     <!--<option value=""></option>-->
-                    <!--<option value="0">否</option>-->
-                    <!--<option value="1">是</option>-->
+                    <!--<option value="0">小红</option>-->
+                    <!--<option value="1">老王</option>-->
+                    <!--<option value="3">小红</option>-->
+                    <!--<option value="4">老王</option>-->
                 <!--</select>-->
             <!--</td>-->
         <!--</tr>-->
@@ -165,14 +121,13 @@
             </td>
         </tr>
 
-
         </tbody>
     </table>
 </form>
 <script type="text/javascript" src="/customs/jquery.min.js"></script>
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript">
-    var outboundid='[[${outboundid}]]';
+    var cid=[[${cid}]];
     // 加载'form'模块，使checkbox、select、radio初始化
     //  layui.use('form', function(){
     //     alert(1)
@@ -184,28 +139,22 @@
             ,layedit = layui.layedit
             ,laydate = layui.laydate;
         $.ajax({
-            url:"/queryByoutId",
+            url:"/queryByCid",
             type:"POST",
             data : {
                 //id : window.sessionStorage.getItem("id")
-                "outboundid":outboundid
+                "cid":cid
             },
             dataType:'json',
             success:function(data){
                 if(data!=null){
                     //表单赋值
                     form.val('example', {
-                        "outboundid": data.outboundid// "name": "value"
-                        ,"handovertype": data.handovertype
-                        ,"line":data.line
-                        ,"direction": data.direction
-                        ,"AcceptPerson":data.acceptperson
-                        ,"carriers":data.carriers
-                        ,"deliveryperson":data.deliveryperson
-                        ,"deliverycompany":data.deliverycompany
-                        ,"enterperson":data.enterperson
-
-                        //,"desc": "我爱 layui"
+                        "cid": data.cid// "name": "value"
+                        ,"scanid": data.scanid
+                        ,"cargosum":data.cargosum
+                        ,"checkperson": data.checkperson
+                        ,"checkcompany":data.checkcompany
                     });
                 }
 
@@ -256,7 +205,7 @@
             var formData = JSON.stringify(data.field);
             alert(formData)
             $.ajax({
-                url : "/updateSorOutbound",
+                url : "/updateSorCheckbound",
                 type : "POST",
                 data : {
                     formData : formData

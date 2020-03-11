@@ -10,6 +10,8 @@ import java.util.Date;
 public class SorCheckbounddetails implements Serializable {
     private Integer id;
 
+    private int packageid;
+
     private Integer cargocount;
 
     private BigDecimal weight;
@@ -30,6 +32,14 @@ public class SorCheckbounddetails implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getPackageid() {
+        return packageid;
+    }
+
+    public void setPackageid(int packageid) {
+        this.packageid = packageid;
     }
 
     public Integer getCargocount() {
@@ -69,7 +79,7 @@ public class SorCheckbounddetails implements Serializable {
     }
 
     public void setDirection(String direction) {
-        this.direction = direction == null ? null : direction.trim();
+        this.direction = direction;
     }
 
     public Integer getStorageperson() {
@@ -92,6 +102,7 @@ public class SorCheckbounddetails implements Serializable {
     public String toString() {
         return "SorCheckbounddetails{" +
                 "id=" + id +
+                ", packageid=" + packageid +
                 ", cargocount=" + cargocount +
                 ", weight=" + weight +
                 ", volume=" + volume +

@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.logistics.helperentity.SorCheckboundEntity;
-import com.example.logistics.model.SorCheckbound;
-import com.example.logistics.model.SorOutbound;
-import com.example.logistics.model.SorOutbounddetails;
-import com.example.logistics.model.SyEmp;
+import com.example.logistics.model.*;
 import com.example.logistics.service.SorCheckboundService;
+import com.example.logistics.service.SorCheckbounddetailsService;
 import com.example.logistics.util.ObjectJson;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,9 @@ public class SorCheckBoundController {
 
     @Autowired
     private ObjectJson objectJson;
+
+    @Autowired
+    private SorCheckbounddetailsService sorCheckbounddetailsService;
 
     @RequestMapping("/delSorCheckbound")
     public void delSorCheckbound(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -97,8 +98,8 @@ public class SorCheckBoundController {
         int a = sorCheckboundService.addSorCheckbound(sorCheckbound);
 
         if (a > 0) {
-//            SorOutbounddetails sorOutbounddetails = JSONObject.parseObject(formData, SorOutbounddetails.class);
-//            sorOutbounddetailsService.addSorOutbounddetails(sorOutbounddetails);
+            SorCheckbounddetails sorCheckbounddetails = JSONObject.parseObject(formData, SorCheckbounddetails.class);
+            sorCheckbounddetailsService.addSorCheckbounddetails(sorCheckbounddetails);
             response.getWriter().write("success");
         } else {
             response.getWriter().write("error");
@@ -136,7 +137,6 @@ public class SorCheckBoundController {
             objectJson.setCount(num);
             objectJson.setMsg("");
             String jsonString = JSON.toJSONString(objectJson, SerializerFeature.DisableCircularReferenceDetect);
-            System.out.println(jsonString);
             PrintWriter out = response.getWriter();
             out.write(jsonString);
         }
@@ -155,7 +155,7 @@ public class SorCheckBoundController {
         mv.setViewName("pages/sortingManagement/invoiceComparisonTable_add.html");
         return mv;
     }
-    @RequestMapping("/pankuedit/{cid}")
+    @RequestMapping("/pankuedit/{a}")
     public ModelAndView pankuedit(@PathVariable("a") String cid) throws Exception{
         System.out.println(cid);
         ModelAndView mv=new ModelAndView();
