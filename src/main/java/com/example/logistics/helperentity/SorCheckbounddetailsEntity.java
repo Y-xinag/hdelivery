@@ -1,14 +1,13 @@
-package com.example.logistics.model;
+package com.example.logistics.helperentity;
 
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Component
-public class SorCheckbounddetails implements Serializable {
+public class SorCheckbounddetailsEntity implements Serializable {
     private Integer id;
 
     private int packageid;
@@ -23,11 +22,9 @@ public class SorCheckbounddetails implements Serializable {
 
     private String direction;
 
-    private Integer storageperson;
+    private String storageperson;
 
     private Date storagedate;
-
-    private List<SyEmp> syEmpList;
 
     public Integer getId() {
         return id;
@@ -85,11 +82,11 @@ public class SorCheckbounddetails implements Serializable {
         this.direction = direction;
     }
 
-    public Integer getStorageperson() {
+    public String getStorageperson() {
         return storageperson;
     }
 
-    public void setStorageperson(Integer storageperson) {
+    public void setStorageperson(String storageperson) {
         this.storageperson = storageperson;
     }
 
@@ -101,17 +98,9 @@ public class SorCheckbounddetails implements Serializable {
         this.storagedate = storagedate;
     }
 
-    public List<SyEmp> getSyEmpList() {
-        return syEmpList;
-    }
-
-    public void setSyEmpList(List<SyEmp> syEmpList) {
-        this.syEmpList = syEmpList;
-    }
-
     @Override
     public String toString() {
-        return "SorCheckbounddetails{" +
+        return "sorCheckbounddetailsEntity{" +
                 "id=" + id +
                 ", packageid=" + packageid +
                 ", cargocount=" + cargocount +
@@ -119,9 +108,8 @@ public class SorCheckbounddetails implements Serializable {
                 ", volume=" + volume +
                 ", cargotype=" + cargotype +
                 ", direction='" + direction + '\'' +
-                ", storageperson=" + storageperson +
+                ", storageperson='" + storageperson + '\'' +
                 ", storagedate=" + storagedate +
-                ", syEmpList=" + syEmpList +
                 '}';
     }
 }
