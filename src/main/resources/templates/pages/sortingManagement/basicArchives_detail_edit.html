@@ -10,47 +10,7 @@
 </head>
 <body>
 
-<form class="layui-form">
-    <table class="layui-table" style="width: 98%;margin: 1px auto;text-align: center;">
-        <tbody>
-        <tr>
-            <td class="layui-bg-gray" width="13%">盘库单号</td>
-            <td width="20%">
-                <input type="text" name="cid" placeholder="请输入盘库单号" autocomplete="off" class="layui-input" value="">
-            </td>
-            <td class="layui-bg-gray" width="13%">扫描设备号</td>
-            <td width="20%">
-                <input type="text" name="scanid" placeholder="请输入扫描设备号" autocomplete="off" class="layui-input" value="">
-            </td>
-            <td class="layui-bg-gray" width="13%">总件数</td>
-            <td width="20%">
-                <input type="text" name="cargosum" placeholder="请输入总件数" autocomplete="off" class="layui-input" value="">
-            </td>
-
-        </tr>
-        <tr>
-            <td class="layui-bg-gray">盘库人</td>
-            <td>
-                <select name="checkperson" lay-verify="required">
-                    <option value=""></option>
-                    <option value="0"></option>
-                    <option value="1">老王</option>
-                    <option value="2">老炸麻花</option>
-                    <option value="3">老王</option>
-                </select>
-            </td>
-            <td class="layui-bg-gray">盘库时间</td>
-            <td>
-                <input type="text" name="checkdate" placeholder="默认系统当前时间" autocomplete="off" class="layui-input" value="" disabled="disabled">
-            </td>
-            <td class="layui-bg-gray">操作单位</td>
-            <td>
-                <input type="text" name="checkcompany" placeholder="请输入操作单位" autocomplete="off" class="layui-input" value="">
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
+<form class="layui-form"  lay-filter="example">
     <table class="layui-table" style="width: 98%;margin: 5px auto;text-align: center;">
         <colgroup>
             <col width="120">
@@ -61,13 +21,13 @@
         <tbody>
         <tr>
             <td>
-                <input type="text" name="id" placeholder="工作单号" autocomplete="off" class="layui-input" value="">
+                <input type="text" id="id" name="id" placeholder="工作单号" autocomplete="off" class="layui-input" value="">
             </td>
             <td>
-                <input type="text" name="PackageID" placeholder="合包号" autocomplete="off" class="layui-input" value="">
+                <input type="text" id="packageid" name="packageid" placeholder="合包号" autocomplete="off" class="layui-input" value="">
             </td>
             <td>
-                <input type="text" name="cargocount" placeholder="数量" autocomplete="off" class="layui-input" value="">
+                <input type="text" id="cargocount" name="cargocount" placeholder="数量" autocomplete="off" class="layui-input" value="">
             </td>
         </tr>
 
@@ -80,16 +40,15 @@
         </colgroup>
         <tr>
             <td>
-                <input type="text" name="weight" placeholder="重量" autocomplete="off" class="layui-input" value="">
+                <input type="text" id="weight" name="weight" placeholder="重量" autocomplete="off" class="layui-input" value="">
             </td>
             <td>
-                <input type="text" name="volume" placeholder="体积" autocomplete="off" class="layui-input" value="">
+                <input type="text" id="volume" name="volume" placeholder="体积" autocomplete="off" class="layui-input" value="">
             </td>
             <td>
-                <select name="cargotype" lay-verify="required">
-                    <option value=""></option>
-                    <option value="0">杂货</option>
-                    <option value="1">好货</option>
+                <select id="cargotype" name="cargotype" lay-verify="required">
+                    <option value="true" >杂货</option>
+                    <option value="false" >好货</option>
                 </select>
             </td>
         </tr>
@@ -101,10 +60,10 @@
         </colgroup>
         <tr>
             <td>
-                <input type="text" name="direction" placeholder="方向" autocomplete="off" class="layui-input" value="">
+                <input type="text" id="direction" name="direction" placeholder="方向" autocomplete="off" class="layui-input" value="">
             </td>
             <td>
-                <select name="storageperson" lay-verify="required">
+                <select id="storageperson" name="storageperson" lay-verify="required">
                     <option value=""></option>
                     <option value="0">小红</option>
                     <option value="1">老王</option>
@@ -132,85 +91,108 @@
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript">
 
-   // 加载'form'模块，使checkbox、select、radio初始化
-   //  layui.use('form', function(){
-   //
-   //  });
+    var id=[[${id}]];
+    // 加载'form'模块，使checkbox、select、radio初始化
+    //  layui.use('form', function(){
+    //     alert(1)
+    //  });
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        $=layui.jquery;
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+        $.ajax({
+            url:"/queryByCdid",
+            type:"POST",
+            data : {
+                //id : window.sessionStorage.getItem("id")
+                "id":id
+            },
+            dataType:'json',
+            success:function(data){
+                if(data!=null){
+                    //表单赋值
+                    form.val('example', {
+                        "id": data.id// "name": "value"
+                        ,"packageid": data.packageid
+                        ,"cargocount":data.cargocount
+                        ,"weight": data.weight
+                        ,"volume":data.volume
+                        ,"cargotype":data.cargotype
+                        ,"direction":data.direction
+                        ,"storageperson":data.storageperson
+                    });
+                }
 
-   var bool = true;
-   layui.use(['form', 'layedit', 'laydate'], function(){
-       $=layui.jquery;
-       var form = layui.form
-           ,layer = layui.layer
-           ,layedit = layui.layedit
-           ,laydate = layui.laydate;
+            }
+        });
 
-       //日期
-       laydate.render({
-           elem: '#date'
-       });
-       laydate.render({
-           elem: '#date1'
-       });
 
-       //创建一个编辑器
-       var editIndex = layedit.build('LAY_demo_editor');
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
 
-       //自定义验证规则
-       // form.verify({
-       //     title: function(value){
-       //         if(value.length < 5){
-       //             return '标题至少得5个字符啊';
-       //         }
-       //     }
-       //     ,pass: [
-       //         /^[\S]{6,12}$/
-       //         ,'密码必须6到12位，且不能出现空格'
-       //     ]
-       //     ,content: function(value){
-       //         layedit.sync(editIndex);
-       //     }
-       // });
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
 
-       //监听指定开关
-       // form.on('switch(switchTest)', function(data){
-       //     layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
-       //         offset: '6px'
-       //     });
-       //     layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-       // });
+        //自定义验证规则
+        // form.verify({
+        //     title: function(value){
+        //         if(value.length < 5){
+        //             return '标题至少得5个字符啊';
+        //         }
+        //     }
+        //     ,pass: [
+        //         /^[\S]{6,12}$/
+        //         ,'密码必须6到12位，且不能出现空格'
+        //     ]
+        //     ,content: function(value){
+        //         layedit.sync(editIndex);
+        //     }
+        // });
 
-       //监听提交
-       form.on('submit(demo1)', function(data){
-           // layer.alert(JSON.stringify(data.field), {
-           //     title: '最终的提交信息'
-           // })
-           if (bool=true){
-               var formData = JSON.stringify(data.field);
-               alert(formData)
-               $.ajax({
-                   url : "/addSorCheckbound",
-                   type : "POST",
-                   data : {
-                       formData : formData
-                   },
-                   success : function(data){
-                       if (data == "success") {
-                           //window.location.href = "list.jsp";
-                           //获得Frame索引
-                           var index=parent.layer.getFrameIndex(window.name);
-                           //关闭当前frame
-                           parent.layer.close(index);
-                       } else {
-                           layer.alert("添加失败");
-                       }
-                   }
-               });
-           }
+        //监听指定开关
+        // form.on('switch(switchTest)', function(data){
+        //     layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+        //         offset: '6px'
+        //     });
+        //     layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        // });
 
-           return false;
-       });
-   });
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // })
+            var formData = JSON.stringify(data.field);
+            alert(formData)
+            $.ajax({
+                url : "/updateSorCheckbounddetails",
+                type : "POST",
+                data : {
+                    formData : formData
+                },
+                success : function(data){
+                    if (data == "success") {
+                        //window.location.href = "list.jsp";
+                        //获得Frame索引
+                        var index=parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                    } else {
+                        layer.alert("更改失败");
+                    }
+                }
+            });
+
+            return false;
+        });
+    });
 
 
 </script>

@@ -23,57 +23,62 @@
 	<div class="operation">
 		<!-- 向上间距 -->
 		<div style="height: 10px;"></div>
-		<form class="layui-form" action="">
-			<!-- 数据表格 -->
-			<table class="layui-table">
-				<colgroup>
-				    <col width="50">
-				    <col width="60">
-				    <col width="100">
-				    <col width="90">
-				    <col width="80">
-				    <col width="80">
-				    <col width="80">
-				    <col width="100">
-				    <col width="110">
-				    <col width="80">
-				    <col>
-			  	</colgroup>
-			  	<thead>
-				    <tr>
-				    	<th><input type="checkbox" name="check" lay-skin="primary"></th>
-				    	<th>序号</th>
-				      	<th>工作单号</th>
-				      	<th>合包号</th>
-				      	<th>件数</th>
-					  	<th>重量</th>
-					  	<th>体积</th>
-					  	<th>类型</th>
-					  	<th>方向</th>
-					  	<th>入库人</th>
-					  	<th>入库时间</th>
-				    </tr>
-			  	</thead>
-			  	<tbody>
-				    <tr>
-				      	<td><input type="checkbox" name="check" lay-skin="primary"></td>
-				      	<td>1</td>
-				      	<td>GZD1001</td>
-				      	<td>HB001</td>
-				      	<td>10</td>
-				      	<td>10</td>
-				      	<td>10</td>
-				      	<td>电子产品</td>
-				      	<td>方向方向</td>
-				      	<td>老王</td>
-				      	<td>2017:11:11 11:11:11</td>
-				    </tr>
+		<!--<form class="layui-form" action="">-->
+			<!--&lt;!&ndash; 数据表格 &ndash;&gt;-->
+			<!--<table class="layui-table">-->
+				<!--<colgroup>-->
+				    <!--<col width="50">-->
+				    <!--<col width="60">-->
+				    <!--<col width="100">-->
+				    <!--<col width="90">-->
+				    <!--<col width="80">-->
+				    <!--<col width="80">-->
+				    <!--<col width="80">-->
+				    <!--<col width="100">-->
+				    <!--<col width="110">-->
+				    <!--<col width="80">-->
+				    <!--<col>-->
+			  	<!--</colgroup>-->
+			  	<!--<thead>-->
+				    <!--<tr>-->
+				    	<!--<th><input type="checkbox" name="check" lay-skin="primary"></th>-->
+				    	<!--<th>序号</th>-->
+				      	<!--<th>工作单号</th>-->
+				      	<!--<th>合包号</th>-->
+				      	<!--<th>件数</th>-->
+					  	<!--<th>重量</th>-->
+					  	<!--<th>体积</th>-->
+					  	<!--<th>类型</th>-->
+					  	<!--<th>方向</th>-->
+					  	<!--<th>入库人</th>-->
+					  	<!--<th>入库时间</th>-->
+				    <!--</tr>-->
+			  	<!--</thead>-->
+			  	<!--<tbody>-->
+				    <!--<tr>-->
+				      	<!--<td><input type="checkbox" name="check" lay-skin="primary"></td>-->
+				      	<!--<td>1</td>-->
+				      	<!--<td>GZD1001</td>-->
+				      	<!--<td>HB001</td>-->
+				      	<!--<td>10</td>-->
+				      	<!--<td>10</td>-->
+				      	<!--<td>10</td>-->
+				      	<!--<td>电子产品</td>-->
+				      	<!--<td>方向方向</td>-->
+				      	<!--<td>老王</td>-->
+				      	<!--<td>2017:11:11 11:11:11</td>-->
+				    <!--</tr>-->
 
-			  	</tbody>
-			</table>
-			<div>
-		</div>
-		</form>
+			  	<!--</tbody>-->
+			<!--</table>-->
+			<!--<div>-->
+		<!--</div>-->
+		<!--</form>-->
+		<table class="layui-hide" id="demo" lay-filter="test"></table>
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		</script>
 	</div>
 </div>
 <script type="text/javascript" src="/customs/jquery.min.js"></script>
@@ -90,6 +95,143 @@ layui.use('table', function(){
   var table = layui.table;
 });
 
+layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function() {
+    $=layui.jquery;
+    var laydate = layui.laydate //日期
+        , laypage = layui.laypage //分页
+        , layer = layui.layer //弹层
+        , table = layui.table //表格
+        , carousel = layui.carousel //轮播
+        , upload = layui.upload //上传
+        , element = layui.element //元素操作
+        , slider = layui.slider //滑块
+
+
+
+    table.render({
+        elem: '#demo'
+        ,height: 420
+        ,url: '/querySorCheckbounddetails' //数据接口
+        ,title: '用户表'
+        ,limit:5
+        ,limits:[5,10,15,20]
+        ,page: true //开启分页
+        ,toolbar: true //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+        ,totalRow:true
+        ,cols: [
+            [
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'id', title: '工作单号', width:50, sort: true, fixed: 'left', totalRowText: '合计：'}
+                ,{field: 'packageid', title: '合包号', width:60}
+                ,{field: 'cargocount', title: '件数', width: 120, sort: true, totalRow: true}
+                ,{field: 'weight', title: '重量', width:180, sort: true}
+                ,{field: 'volume', title: '体积', width: 130, sort: true, totalRow: true}
+                ,{field: 'cargotype', title: '类型', width:110}
+                ,{field: 'direction', title: '方向', width:110}
+                ,{field: 'storageperson', title: '入库人', width: 150}
+                ,{field: 'storagedate', title: '入库时间', width: 150}
+                ,{fixed: 'right',title:'操作', width: 220, align:'center', toolbar: '#barDemo'}
+            ]
+        ]
+    });
+
+    //监听行工具事件
+    table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        var data = obj.data //获得当前行数据
+            ,layEvent = obj.event; //获得 lay-event 对应的值
+        if(layEvent === 'del'){
+            layer.confirm('真的删除行么', function(index){
+                $.ajax({
+                    url:"/delSorCheckbounddetails",
+                    type:"POST",
+                    data:{
+                        id:data.id
+                    },
+                    success:function(result){
+                        if(result="success"){
+                            obj.del();//删除对应行（tr）的DOM结构
+                            layer.close(index);//关闭窗口
+                            location.reload();
+                            //向服务端发送删除指令
+                        }else{
+                            layer.alert("删除失败");
+                        }
+                    }
+                });
+                //obj.del(); //删除对应行（tr）的DOM结构
+                //layer.close(index);	//关闭窗口
+                //向服务端发送删除指令
+
+            });
+        } else if(layEvent === 'edit'){
+            //修改操作
+            EditLay('修改','/pankuxcedit',data.id,800,300);
+
+            function EditLay(title, url, id, w, h) {
+                if(title == null || title == '') {
+                    title = false;
+                };
+                if(url == null || url == '') {
+                    url = "404.html";
+                };
+                if(w == null || w == '') {
+                    w = ($(window).width() * 0.9);
+                };
+                if(h == null || h == '') {
+                    h = ($(window).height() - 50);
+                };
+                layer.open({
+                    type: 2,
+                    area: [w + 'px', h + 'px'],
+                    fix: false, //不固定
+                    maxmin: true,
+                    shadeClose: true,
+                    shade: 0.4,
+                    title: title,
+                    content: '/pankuxcedit/'+data.id+'',
+                    end:function(){
+                        location.reload();
+                    },
+                    success: function(layero, index) {
+                        //向iframe页的id=house的元素传值  // 参考 https://yq.aliyun.com/ziliao/133150
+                        var body = layer.getChildFrame('body', index);
+                        body.contents().find("#dataId").val(id);
+                        console.log(id);
+                    },
+                    error: function(layero, index) {
+                        alert("异常错误！");
+                    }
+                });
+            }
+        }
+    });
+
+
+
+
+
+    //分页
+    laypage.render({
+        elem: 'pageDemo' //分页容器的id
+        ,count: 100 //总页数
+        ,skin: '#1E9FFF' //自定义选中色值
+        //,skip: true //开启跳页
+        ,jump: function(obj, first){
+            if(!first){
+                layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+            }
+        }
+    });
+
+
+
+
+});
+
+
+
+
+
 $(function(){
 
 	//新增详细信息
@@ -100,7 +242,10 @@ $(function(){
 		  type: 2,
 		  //skin: 'layui-layer-rim', //加上边框
 		  area: ['650px', '375px'], //宽高
-		  content: '/pankuxcadd'
+		  content: '/pankuxcadd',
+			end:function(){
+                location.reload();
+            }
 		});
 	});
 

@@ -11,6 +11,7 @@ import com.example.logistics.util.ObjectJson;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +22,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Controller
 public class SorCheckbounddetailsController {
     @Autowired
     private SorCheckbounddetailsService sorCheckbounddetailsService;
@@ -127,6 +128,7 @@ public class SorCheckbounddetailsController {
             }
 
             list.add(sorCheckbounddetailsEntity);
+            System.out.println(sorCheckbounddetailsEntity.getStorageperson());
         }
 
         Integer num = sorCheckbounddetailsService.pagecount();
@@ -136,6 +138,7 @@ public class SorCheckbounddetailsController {
             objectJson.setCount(num);
             objectJson.setMsg("");
             String jsonString = JSON.toJSONString(objectJson, SerializerFeature.DisableCircularReferenceDetect);
+            System.out.println(jsonString);
             PrintWriter out = response.getWriter();
             out.write(jsonString);
         }

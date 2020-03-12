@@ -10,9 +10,9 @@
         s1.Volume,
         s1.CargoType,
         s1.Direction,
-        s2.EmpNo,
+        s2.EmpName,
         s1.StorageDate from sor_checkbounddetails AS s1,sy_emp AS s2
-        where s1.StoragePerson=s2.id
+        where s1.StoragePerson=s2.ID
         ORDER BY s1.StorageDate desc
         LIMIT #{pages},#{count}
   </select>

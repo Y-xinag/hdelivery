@@ -11,46 +11,6 @@
 <body>
 
 <form class="layui-form">
-    <table class="layui-table" style="width: 98%;margin: 1px auto;text-align: center;">
-        <tbody>
-        <tr>
-            <td class="layui-bg-gray" width="13%">盘库单号</td>
-            <td width="20%">
-                <input type="text" name="cid" placeholder="请输入盘库单号" autocomplete="off" class="layui-input" value="">
-            </td>
-            <td class="layui-bg-gray" width="13%">扫描设备号</td>
-            <td width="20%">
-                <input type="text" name="scanid" placeholder="请输入扫描设备号" autocomplete="off" class="layui-input" value="">
-            </td>
-            <td class="layui-bg-gray" width="13%">总件数</td>
-            <td width="20%">
-                <input type="text" name="cargosum" placeholder="请输入总件数" autocomplete="off" class="layui-input" value="">
-            </td>
-
-        </tr>
-        <tr>
-            <td class="layui-bg-gray">盘库人</td>
-            <td>
-                <select name="checkperson" lay-verify="required">
-                    <option value=""></option>
-                    <option value="0"></option>
-                    <option value="1">老王</option>
-                    <option value="2">老炸麻花</option>
-                    <option value="3">老王</option>
-                </select>
-            </td>
-            <td class="layui-bg-gray">盘库时间</td>
-            <td>
-                <input type="text" name="checkdate" placeholder="默认系统当前时间" autocomplete="off" class="layui-input" value="" disabled="disabled">
-            </td>
-            <td class="layui-bg-gray">操作单位</td>
-            <td>
-                <input type="text" name="checkcompany" placeholder="请输入操作单位" autocomplete="off" class="layui-input" value="">
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
     <table class="layui-table" style="width: 98%;margin: 5px auto;text-align: center;">
         <colgroup>
             <col width="120">
@@ -189,7 +149,7 @@
                var formData = JSON.stringify(data.field);
                alert(formData)
                $.ajax({
-                   url : "/addSorCheckbound",
+                   url : "/addSorCheckbounddetails",
                    type : "POST",
                    data : {
                        formData : formData
