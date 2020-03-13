@@ -10,7 +10,7 @@ import java.util.Date;
 public class SorPackagedetails implements Serializable {
     private Integer id;
 
-    private Integer warename;
+    private String warename;
 
     private String destination;
 
@@ -40,11 +40,11 @@ public class SorPackagedetails implements Serializable {
         this.id = id;
     }
 
-    public Integer getWarename() {
+    public String getWarename() {
         return warename;
     }
 
-    public void setWarename(Integer warename) {
+    public void setWarename(String warename) {
         this.warename = warename;
     }
 
@@ -53,7 +53,7 @@ public class SorPackagedetails implements Serializable {
     }
 
     public void setDestination(String destination) {
-        this.destination = destination == null ? null : destination.trim();
+        this.destination = destination;
     }
 
     public Integer getTicket() {
@@ -109,7 +109,7 @@ public class SorPackagedetails implements Serializable {
     }
 
     public void setImportanthints(String importanthints) {
-        this.importanthints = importanthints == null ? null : importanthints.trim();
+        this.importanthints = importanthints;
     }
 
     public String getAsk() {
@@ -117,7 +117,7 @@ public class SorPackagedetails implements Serializable {
     }
 
     public void setAsk(String ask) {
-        this.ask = ask == null ? null : ask.trim();
+        this.ask = ask;
     }
 
     public String getInputtype() {
@@ -125,14 +125,14 @@ public class SorPackagedetails implements Serializable {
     }
 
     public void setInputtype(String inputtype) {
-        this.inputtype = inputtype == null ? null : inputtype.trim();
+        this.inputtype = inputtype;
     }
 
     @Override
     public String toString() {
         return "SorPackagedetails{" +
                 "id=" + id +
-                ", warename=" + warename +
+                ", warename='" + warename + '\'' +
                 ", destination='" + destination + '\'' +
                 ", ticket=" + ticket +
                 ", actualcargoint=" + actualcargoint +

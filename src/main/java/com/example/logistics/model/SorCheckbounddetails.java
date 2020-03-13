@@ -19,7 +19,7 @@ public class SorCheckbounddetails implements Serializable {
 
     private BigDecimal volume;
 
-    private Boolean cargotype;
+    private int cargotype;
 
     private String direction;
 
@@ -69,11 +69,11 @@ public class SorCheckbounddetails implements Serializable {
         this.volume = volume;
     }
 
-    public Boolean getCargotype() {
+    public int getCargotype() {
         return cargotype;
     }
 
-    public void setCargotype(Boolean cargotype) {
+    public void setCargotype(int cargotype) {
         this.cargotype = cargotype;
     }
 

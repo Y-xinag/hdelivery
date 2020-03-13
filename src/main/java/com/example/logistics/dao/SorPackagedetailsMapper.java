@@ -1,30 +1,13 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.model.SorPackagedetails;
-import com.example.logistics.model.SorPackagedetailsExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Insert;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface SorPackagedetailsMapper {
-    int countByExample(SorPackagedetailsExample example);
 
-    int deleteByExample(SorPackagedetailsExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(SorPackagedetails record);
-
-    int insertSelective(SorPackagedetails record);
-
-    List<SorPackagedetails> selectByExample(SorPackagedetailsExample example);
-
-    SorPackagedetails selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") SorPackagedetails record, @Param("example") SorPackagedetailsExample example);
-
-    int updateByExample(@Param("record") SorPackagedetails record, @Param("example") SorPackagedetailsExample example);
-
-    int updateByPrimaryKeySelective(SorPackagedetails record);
-
-    int updateByPrimaryKey(SorPackagedetails record);
+    @Insert("insert into sor_packagedetails (ID,WareName,Destination,Ticket,ActualCargoInt,CargoInt,Weight,Volume,Service,ImportantHints,Ask,InputType) values(#{id},#{warename},#{destination},#{ticket},#{actualcargoint},#{cargoint},#{weight},#{volume},NOW(),#{importanthints},#{ask},'植入')")
+    int addSorPackagedetails(SorPackagedetails sorPackagedetails);
 }

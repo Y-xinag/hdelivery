@@ -3,28 +3,13 @@ package com.example.logistics.dao;
 import com.example.logistics.model.SorPackage;
 import com.example.logistics.model.SorPackageExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SorPackageMapper {
-    int countByExample(SorPackageExample example);
-
-    int deleteByExample(SorPackageExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(SorPackage record);
-
-    int insertSelective(SorPackage record);
-
-    List<SorPackage> selectByExample(SorPackageExample example);
-
-    SorPackage selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") SorPackage record, @Param("example") SorPackageExample example);
-
-    int updateByExample(@Param("record") SorPackage record, @Param("example") SorPackageExample example);
-
-    int updateByPrimaryKeySelective(SorPackage record);
-
-    int updateByPrimaryKey(SorPackage record);
+    @Insert("insert into sor_package(ID,PackagePerson,SealInt,Destination,ReckonDes,TimeLimit,TicketSum,CargoSum,WeightSum,VolumeSum,State,Ask) values (#{id},#{packageperson},#{sealint},#{destination},#{reckondes},NOW(),#{ticketsum},#{cargosum},#{weightsum},#{volumesum},#{state},#{ask})")
+    int addSorPackage(SorPackage sorPackage);
 }
