@@ -16,84 +16,90 @@
     <div class="operation">
         <!-- 向上间距 -->
         <div style="height: 10px;"></div>
-        <form action="">
+        <form class="layui-form">
             <!-- 操作按扭组 -->
             <div class="layui-form-item" style="padding-left: 11px;height: 30px;">
                 <div class="layui-inline">
-                    <button type="button" class="layui-btn layui-btn-small btnQuery" id="opSave">拆包</button>
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="opSave">拆包</button>
                 </div>
             </div>
-        </form>
-            <!-- 数据表格 -->
 
-    </div>
+            <!-- 数据表格 -->
     <table class="layui-table layui-form" style="width: 100%;margin: 1px auto;text-align: center;margin-top: 5px;">
         <tbody>
             <tr>
                 <td class="layui-bg-gray" width="10%">合包号</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入合包号" autocomplete="off" class="layui-input">
+                    <input type="text" name="id" placeholder="请输入合包号" autocomplete="off" class="layui-input">
                 </td>
                 <td class="layui-bg-gray" width="10%">拆包人</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入合包人" autocomplete="off" class="layui-input" value="">
+                    <select name="destroyperson" lay-verify="required">
+                        <option value=""></option>
+                        <option value="1">老王</option>
+                        <option value="2">赵四</option>
+                        <option value="3">老刘</option>
+                        <option value="4">挖宝</option>
+                    </select>
                 </td>
                 <td class="layui-bg-gray" width="10%">封签号</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入封签号" autocomplete="off" class="layui-input" value="">
+                    <input type="text" name="closeint" placeholder="请输入封签号" autocomplete="off" class="layui-input" value="">
                 </td>
                 <td class="layui-bg-gray" width="10%">到达地</td>
                 <td width="15%">
-                    <select name="city" lay-verify="required">
-                        <option value=""></option>
-                        <option value="0">北京</option>
-                        <option value="1">上海</option>
-                        <option value="2">广州</option>
-                        <option value="3">深圳</option>
-                        <option value="4">杭州</option>
-                    </select>
+                    <input type="text" name="arriveplace" placeholder="请输入到达地" autocomplete="off" class="layui-input" value="">
                 </td>
             </tr>
 
             <tr>
                 <td class="layui-bg-gray" width="10%">计算到达地</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入计算到达地" autocomplete="off" class="layui-input">
+                    <input type="text" name="planArriveplace" placeholder="请输入计算到达地" autocomplete="off" class="layui-input">
                 </td>
                 <td class="layui-bg-gray" width="10%">送达时限</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入送达时限" autocomplete="off" class="layui-input" value="">
+                    <input type="text" name="arrivetime" placeholder="默认当前时间" autocomplete="off" class="layui-input" value="" disabled>
                 </td>
                 <td class="layui-bg-gray" width="10%">总票数</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入总票数" autocomplete="off" class="layui-input" value="">
+                    <input type="text" name="allticket" placeholder="请输入总票数" autocomplete="off" class="layui-input" value="">
                 </td>
                 <td class="layui-bg-gray" width="10%">总件数</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入总件数" autocomplete="off" class="layui-input" value="">
+                    <input type="text" name="allcount" placeholder="请输入总件数" autocomplete="off" class="layui-input" value="">
                 </td>
             </tr>
 
             <tr>
                 <td class="layui-bg-gray" width="10%">总重量</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入总重量" autocomplete="off" class="layui-input">
+                    <input type="text" name="allweight" placeholder="请输入总重量" autocomplete="off" class="layui-input">
                 </td>
                 <td class="layui-bg-gray" width="10%">总体积</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入总体积" autocomplete="off" class="layui-input" value="">
+                    <input type="text" name="allbody" placeholder="请输入总体积" autocomplete="off" class="layui-input" value="">
                 </td>
                 <td class="layui-bg-gray" width="10%">状态</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入状态" autocomplete="off" class="layui-input" value="">
+                    <select name="stateint" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">正常</option>
+                        <option value="1">非正常</option>
+                    </select>
                 </td>
                 <td class="layui-bg-gray" width="10%">配载要求</td>
                 <td width="15%">
-                    <input type="text" name="title" placeholder="请输入配载要求" autocomplete="off" class="layui-input" value="">
+                    <select name="question" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">打包</option>
+                        <option value="1">非打包</option>
+                    </select>
                 </td>
             </tr>
         </tbody>
     </table>
+    </form>
 
     <table class="layui-table">
         <colgroup>
@@ -162,9 +168,9 @@
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript">
     //加载'form'模块，使checkbox、select、radio初始化
-    layui.use('form', function(){
-        var form = layui.form;
-    });
+    // layui.use('form', function(){
+    //     var form = layui.form;
+    // });
 
     $(function(){
         //显示、隐藏剩余的查询条件
@@ -172,8 +178,82 @@
             $("#hQuery").toggle();
         });
 
+    });
 
+    var bool = true;
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        $=layui.jquery;
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
 
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        // form.verify({
+        //     title: function(value){
+        //         if(value.length < 5){
+        //             return '标题至少得5个字符啊';
+        //         }
+        //     }
+        //     ,pass: [
+        //         /^[\S]{6,12}$/
+        //         ,'密码必须6到12位，且不能出现空格'
+        //     ]
+        //     ,content: function(value){
+        //         layedit.sync(editIndex);
+        //     }
+        // });
+
+        //监听指定开关
+        // form.on('switch(switchTest)', function(data){
+        //     layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+        //         offset: '6px'
+        //     });
+        //     layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        // });
+
+        //监听提交
+        form.on('submit(opSave)', function(data){
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // })
+            if (bool=true){
+                var formData = JSON.stringify(data.field);
+                alert(formData)
+                $.ajax({
+                    url : "/addSorDestroypackage",
+                    type : "POST",
+                    data : {
+                        formData : formData
+                    },
+                    success : function(data){
+                        if (data == "success") {
+                            // //window.location.href = "list.jsp";
+                            // //获得Frame索引
+                            // var index=parent.layer.getFrameIndex(window.name);
+                            // //关闭当前frame
+                            // parent.layer.close(index);
+                            location.reload();
+                        } else {
+                            layer.alert("添加失败");
+                        }
+                    }
+                });
+            }
+
+            return false;
+        });
     });
 
 </script>
