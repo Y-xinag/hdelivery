@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Component
 public class SorAbnormal implements Serializable {
-    private Integer id;
+    private String id;
 
     private Date launchdate;
 
@@ -29,11 +29,11 @@ public class SorAbnormal implements Serializable {
 
     private Date handledate;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -50,7 +50,7 @@ public class SorAbnormal implements Serializable {
     }
 
     public void setLaunchperson(String launchperson) {
-        this.launchperson = launchperson == null ? null : launchperson.trim();
+        this.launchperson = launchperson;
     }
 
     public String getLaunchcompany() {
@@ -58,7 +58,7 @@ public class SorAbnormal implements Serializable {
     }
 
     public void setLaunchcompany(String launchcompany) {
-        this.launchcompany = launchcompany == null ? null : launchcompany.trim();
+        this.launchcompany = launchcompany;
     }
 
     public Boolean getAbnormaltype() {
@@ -74,7 +74,7 @@ public class SorAbnormal implements Serializable {
     }
 
     public void setTransferint(String transferint) {
-        this.transferint = transferint == null ? null : transferint.trim();
+        this.transferint = transferint;
     }
 
     public String getCargoint() {
@@ -82,7 +82,7 @@ public class SorAbnormal implements Serializable {
     }
 
     public void setCargoint(String cargoint) {
-        this.cargoint = cargoint == null ? null : cargoint.trim();
+        this.cargoint = cargoint;
     }
 
     public String getPackageint() {
@@ -90,7 +90,7 @@ public class SorAbnormal implements Serializable {
     }
 
     public void setPackageint(String packageint) {
-        this.packageint = packageint == null ? null : packageint.trim();
+        this.packageint = packageint;
     }
 
     public Integer getHedgeabnint() {
@@ -120,7 +120,7 @@ public class SorAbnormal implements Serializable {
     @Override
     public String toString() {
         return "SorAbnormal{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", launchdate=" + launchdate +
                 ", launchperson='" + launchperson + '\'' +
                 ", launchcompany='" + launchcompany + '\'' +

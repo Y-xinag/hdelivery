@@ -1,30 +1,27 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.model.SorAbnormal;
-import com.example.logistics.model.SorAbnormalExample;
-import java.util.List;
+
+import com.example.logistics.model.SorCheckbound;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface SorAbnormalMapper {
-    int countByExample(SorAbnormalExample example);
 
-    int deleteByExample(SorAbnormalExample example);
+    @Insert("insert into sor_abnormal (ID,LaunchDate,LaunchPerson,LaunchCompany,AbnormalType,TransferInt,CargoInt,PackageInt,HedgeAbnInt,AboState,HandleDate) values (#{id},NOW(),#{launchperson},#{launchcompany},#{abnormaltype},#{transferint},#{cargoint},#{packageint},#{hedgeabnint},#{abostate},NOW())")
+    int addSorAbnormal(SorAbnormal sorAbnormal);
 
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(SorAbnormal record);
+    //查询分页
+    @Select("select *from sor_abnormal LIMIT #{pages},#{count}")
+    List<SorAbnormal> querySorAbnormal(@Param("pages") int pages, @Param("count") int count);
 
-    int insertSelective(SorAbnormal record);
-
-    List<SorAbnormal> selectByExample(SorAbnormalExample example);
-
-    SorAbnormal selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") SorAbnormal record, @Param("example") SorAbnormalExample example);
-
-    int updateByExample(@Param("record") SorAbnormal record, @Param("example") SorAbnormalExample example);
-
-    int updateByPrimaryKeySelective(SorAbnormal record);
-
-    int updateByPrimaryKey(SorAbnormal record);
+    //查询入库表数量
+    @Select("SELECT count(1) from sor_abnormal")
+    Integer pagecount();
 }

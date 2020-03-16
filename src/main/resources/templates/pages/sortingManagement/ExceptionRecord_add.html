@@ -13,11 +13,11 @@
 		    <tr>
 		    	<td class="layui-bg-gray" width="14%">异常编号</td>
 		      	<td width="20%">
-					<input type="text" name="title" placeholder="请输入异常编号" autocomplete="off" class="layui-input" value="" disabled>
+					<input type="text" name="id" placeholder="请输入异常编号" autocomplete="off" class="layui-input" value="">
 		      	</td>
 		      	<td class="layui-bg-gray" width="12%">异常类型</td>
 		      	<td width="20%">
-					<select name="city" lay-verify="required">
+					<select name="abnormaltype" lay-verify="required">
 						<option value=""></option>
 						<option value="0">有单无货</option>
 						<option value="1">有货无单</option>
@@ -25,50 +25,56 @@
 		      	</td>
 		      	<td class="layui-bg-gray" width="14%">状态</td>
 		      	<td width="20%">
-					<select name="city" lay-verify="required">
+					<select name="abostate" lay-verify="required">
 						<option value=""></option>
 						<option value="0">未处理</option>
 						<option value="1">已处理</option>
 					</select>
 		      	</td>
 		    </tr>
+
 			<tr>
-				<td class="layui-bg-gray" width="13%">异常说明</td>
-				<td colspan="5">
-					<input type="text" name="title" placeholder="请输入异常说明" autocomplete="off" class="layui-input" value="">
+				<td class="layui-bg-gray" width="14%">发起时间</td>
+				<td width="20%">
+					<input type="text" name="launchdate" placeholder="默认系统当前时间" autocomplete="off" class="layui-input" value="" disabled>
+				</td>
+				<td class="layui-bg-gray" width="12%">发起人</td>
+				<td width="20%">
+					<input type="text" name="launchperson" placeholder="请输入发起人" autocomplete="off" class="layui-input" value="">
+				</td>
+				<td class="layui-bg-gray" width="14%">发起单位</td>
+				<td width="20%">
+					<input type="text" name="launchcompany" placeholder="请输入发起单位" autocomplete="off" class="layui-input" value="">
 				</td>
 			</tr>
+
 		    <tr>
 		      	<td class="layui-bg-gray">单号</td>
 		      	<td>
-					<input type="text" name="title" placeholder="请输入单号" autocomplete="off" class="layui-input" value="">
+					<input type="text" name="cargoint" placeholder="请输入单号" autocomplete="off" class="layui-input" value="">
 				</td>
 		      	<td class="layui-bg-gray">合包号</td>
 		      	<td>
-					<input type="text" name="title" placeholder="请输入合包号" autocomplete="off" class="layui-input" value="">
+					<input type="text" name="packageint" placeholder="请输入合包号" autocomplete="off" class="layui-input" value="">
 				</td>
 		      	<td class="layui-bg-gray">交接单号</td>
 		      	<td>
-					<input type="text" name="title" placeholder="请输入交接单号" autocomplete="off" class="layui-input" value="">
+					<input type="text" name="transferint" placeholder="请输入交接单号" autocomplete="off" class="layui-input" value="">
 				</td>
 		    </tr>
 			<tr>
 				<td class="layui-bg-gray">对冲异常编号</td>
 				<td>
-					<input type="text" name="title" placeholder="对冲异常编号" autocomplete="off" class="layui-input" value="">
-				</td>
-				<td class="layui-bg-gray">异常记录人</td>
-				<td>
-					<input type="text" name="title" placeholder="异常记录人" autocomplete="off" class="layui-input" value="">
+					<input type="text" name="hedgeabnint" placeholder="对冲异常编号" autocomplete="off" class="layui-input" value="">
 				</td>
 				<td class="layui-bg-gray">异常记录时间</td>
 				<td>
-					<input type="text" name="title" placeholder="异常记录时间" autocomplete="off" class="layui-input" value="">
+					<input type="text" name="handledate" placeholder="异常记录时间" autocomplete="off" class="layui-input" value="" disabled>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="6">
-					<button class="layui-btn" style="background: #1da02b;">确定</button>
+					<button style="background: #1da02b;" type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">确定</button>
 					<button type="button" class="layui-btn layui-btn-primary">取消</button>
 				</td>
 			</tr>
@@ -79,13 +85,89 @@
 	<script type="text/javascript" src="/customs/jquery.min.js"></script>
 	<script type="text/javascript" src="/layui/layui.js"></script>
 	<script type="text/javascript">
-        
-        //加载'form'模块，使checkbox、select、radio初始化
-        layui.use('form', function(){
-           
+
+        // 加载'form'模块，使checkbox、select、radio初始化
+        //  layui.use('form', function(){
+        //
+        //  });
+
+        var bool = true;
+        layui.use(['form', 'layedit', 'laydate'], function(){
+            $=layui.jquery;
+            var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate;
+
+            //日期
+            laydate.render({
+                elem: '#date'
+            });
+            laydate.render({
+                elem: '#date1'
+            });
+
+            //创建一个编辑器
+            var editIndex = layedit.build('LAY_demo_editor');
+
+            //自定义验证规则
+            // form.verify({
+            //     title: function(value){
+            //         if(value.length < 5){
+            //             return '标题至少得5个字符啊';
+            //         }
+            //     }
+            //     ,pass: [
+            //         /^[\S]{6,12}$/
+            //         ,'密码必须6到12位，且不能出现空格'
+            //     ]
+            //     ,content: function(value){
+            //         layedit.sync(editIndex);
+            //     }
+            // });
+
+            //监听指定开关
+            // form.on('switch(switchTest)', function(data){
+            //     layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+            //         offset: '6px'
+            //     });
+            //     layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+            // });
+
+            //监听提交
+            form.on('submit(demo1)', function(data){
+                // layer.alert(JSON.stringify(data.field), {
+                //     title: '最终的提交信息'
+                // })
+                if (bool=true){
+                    var formData = JSON.stringify(data.field);
+                    alert(formData)
+                    $.ajax({
+                        url : "/addSorAbnormal",
+                        type : "POST",
+                        data : {
+                            formData : formData
+                        },
+                        success : function(data){
+                            if (data == "success") {
+                                //window.location.href = "list.jsp";
+                                //获得Frame索引
+                                var index=parent.layer.getFrameIndex(window.name);
+                                //关闭当前frame
+                                parent.layer.close(index);
+                            } else {
+                                layer.alert("添加失败");
+                            }
+                        }
+                    });
+                }
+
+                return false;
+            });
         });
-      
-    </script>
+
+
+	</script>
 </body> 
 </html>
     
