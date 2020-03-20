@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class SorPackage implements Serializable {
@@ -32,6 +33,10 @@ public class SorPackage implements Serializable {
 
     private Boolean ask;
 
+    private List<SorDestroypackage> sorDestroypackageList;
+
+    private List<SyEmp> syEmpList;
+
     public Integer getId() {
         return id;
     }
@@ -53,7 +58,7 @@ public class SorPackage implements Serializable {
     }
 
     public void setSealint(String sealint) {
-        this.sealint = sealint == null ? null : sealint.trim();
+        this.sealint = sealint;
     }
 
     public String getDestination() {
@@ -61,7 +66,7 @@ public class SorPackage implements Serializable {
     }
 
     public void setDestination(String destination) {
-        this.destination = destination == null ? null : destination.trim();
+        this.destination = destination;
     }
 
     public String getReckondes() {
@@ -69,7 +74,7 @@ public class SorPackage implements Serializable {
     }
 
     public void setReckondes(String reckondes) {
-        this.reckondes = reckondes == null ? null : reckondes.trim();
+        this.reckondes = reckondes;
     }
 
     public Date getTimelimit() {
@@ -128,6 +133,22 @@ public class SorPackage implements Serializable {
         this.ask = ask;
     }
 
+    public List<SorDestroypackage> getSorDestroypackageList() {
+        return sorDestroypackageList;
+    }
+
+    public void setSorDestroypackageList(List<SorDestroypackage> sorDestroypackageList) {
+        this.sorDestroypackageList = sorDestroypackageList;
+    }
+
+    public List<SyEmp> getSyEmpList() {
+        return syEmpList;
+    }
+
+    public void setSyEmpList(List<SyEmp> syEmpList) {
+        this.syEmpList = syEmpList;
+    }
+
     @Override
     public String toString() {
         return "SorPackage{" +
@@ -143,6 +164,8 @@ public class SorPackage implements Serializable {
                 ", volumesum=" + volumesum +
                 ", state=" + state +
                 ", ask=" + ask +
+                ", sorDestroypackageList=" + sorDestroypackageList +
+                ", syEmpList=" + syEmpList +
                 '}';
     }
 }

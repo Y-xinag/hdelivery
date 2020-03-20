@@ -1,321 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.logistics.dao.SorPackageMapper" >
-  <resultMap id="BaseResultMap" type="com.example.logistics.model.SorPackage" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="PackagePerson" property="packageperson" jdbcType="INTEGER" />
-    <result column="SealInt" property="sealint" jdbcType="VARCHAR" />
-    <result column="Destination" property="destination" jdbcType="VARCHAR" />
-    <result column="ReckonDes" property="reckondes" jdbcType="VARCHAR" />
-    <result column="TimeLimit" property="timelimit" jdbcType="TIMESTAMP" />
-    <result column="TicketSum" property="ticketsum" jdbcType="INTEGER" />
-    <result column="CargoSum" property="cargosum" jdbcType="INTEGER" />
-    <result column="WeightSum" property="weightsum" jdbcType="DECIMAL" />
-    <result column="VolumeSum" property="volumesum" jdbcType="DECIMAL" />
-    <result column="State" property="state" jdbcType="BIT" />
-    <result column="Ask" property="ask" jdbcType="BIT" />
+  <select id="queryAllpackage" resultMap="SorPackageMapper">
+      select
+        s1.ID,
+        s1.SealInt,
+        s1.PackagePerson,
+        s3.EmpName,
+        s1.Destination,
+        s2.DestroyPerson,
+        s2.ArrivePlace,
+        s1.TimeLimit from sor_package s1 LEFT JOIN sor_destroypackage s2 ON s1.ID=s2.ID
+        INNER JOIN sy_emp s3 ON s1.PackagePerson=s3.ID
+        ORDER BY s1.TimeLimit DESC
+        LIMIT #{pages},#{count}
+  </select>
+
+  <resultMap id="SorPackageMapper" type="SorPackage" >
+    <id column="ID" property="id" />
+    <result column="SorPackageMapper" property="SorPackage" />
+    <result column="SealInt" property="sealint" />
+    <result column="Destination" property="destination" />
+    <result column="ReckonDes" property="reckondes" />
+    <result column="TimeLimit" property="timelimit"/>
+    <result column="TicketSum" property="ticketsum" />
+    <result column="CargoSum" property="cargosum" />
+    <result column="WeightSum" property="weightsum" />
+    <result column="VolumeSum" property="volumesum" />
+    <result column="State" property="state" />
+    <result column="Ask" property="ask" />
+
+    <collection property="sorDestroypackageList" ofType="SorDestroypackage">
+      <result column="DestroyPerson" property="destroyperson"/>
+      <result column="ArrivePlace" property="arriveplace"/>
+    </collection>
+
+    <collection property="syEmpList" ofType="SyEmp">
+      <result column="EmpName" property="empname"/>
+    </collection>
+
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    ID, PackagePerson, SealInt, Destination, ReckonDes, TimeLimit, TicketSum, CargoSum, 
-    WeightSum, VolumeSum, State, Ask
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.SorPackageExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sor_package
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from sor_package
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from sor_package
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.example.logistics.model.SorPackageExample" >
-    delete from sor_package
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.logistics.model.SorPackage" >
-    insert into sor_package (ID, PackagePerson, SealInt, 
-      Destination, ReckonDes, TimeLimit, 
-      TicketSum, CargoSum, WeightSum, 
-      VolumeSum, State, Ask)
-    values (#{id,jdbcType=INTEGER}, #{packageperson,jdbcType=INTEGER}, #{sealint,jdbcType=VARCHAR}, 
-      #{destination,jdbcType=VARCHAR}, #{reckondes,jdbcType=VARCHAR}, #{timelimit,jdbcType=TIMESTAMP}, 
-      #{ticketsum,jdbcType=INTEGER}, #{cargosum,jdbcType=INTEGER}, #{weightsum,jdbcType=DECIMAL}, 
-      #{volumesum,jdbcType=DECIMAL}, #{state,jdbcType=BIT}, #{ask,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.logistics.model.SorPackage" >
-    insert into sor_package
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="packageperson != null" >
-        PackagePerson,
-      </if>
-      <if test="sealint != null" >
-        SealInt,
-      </if>
-      <if test="destination != null" >
-        Destination,
-      </if>
-      <if test="reckondes != null" >
-        ReckonDes,
-      </if>
-      <if test="timelimit != null" >
-        TimeLimit,
-      </if>
-      <if test="ticketsum != null" >
-        TicketSum,
-      </if>
-      <if test="cargosum != null" >
-        CargoSum,
-      </if>
-      <if test="weightsum != null" >
-        WeightSum,
-      </if>
-      <if test="volumesum != null" >
-        VolumeSum,
-      </if>
-      <if test="state != null" >
-        State,
-      </if>
-      <if test="ask != null" >
-        Ask,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="packageperson != null" >
-        #{packageperson,jdbcType=INTEGER},
-      </if>
-      <if test="sealint != null" >
-        #{sealint,jdbcType=VARCHAR},
-      </if>
-      <if test="destination != null" >
-        #{destination,jdbcType=VARCHAR},
-      </if>
-      <if test="reckondes != null" >
-        #{reckondes,jdbcType=VARCHAR},
-      </if>
-      <if test="timelimit != null" >
-        #{timelimit,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ticketsum != null" >
-        #{ticketsum,jdbcType=INTEGER},
-      </if>
-      <if test="cargosum != null" >
-        #{cargosum,jdbcType=INTEGER},
-      </if>
-      <if test="weightsum != null" >
-        #{weightsum,jdbcType=DECIMAL},
-      </if>
-      <if test="volumesum != null" >
-        #{volumesum,jdbcType=DECIMAL},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=BIT},
-      </if>
-      <if test="ask != null" >
-        #{ask,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.example.logistics.model.SorPackageExample" resultType="java.lang.Integer" >
-    select count(*) from sor_package
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update sor_package
-    <set >
-      <if test="record.id != null" >
-        ID = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.packageperson != null" >
-        PackagePerson = #{record.packageperson,jdbcType=INTEGER},
-      </if>
-      <if test="record.sealint != null" >
-        SealInt = #{record.sealint,jdbcType=VARCHAR},
-      </if>
-      <if test="record.destination != null" >
-        Destination = #{record.destination,jdbcType=VARCHAR},
-      </if>
-      <if test="record.reckondes != null" >
-        ReckonDes = #{record.reckondes,jdbcType=VARCHAR},
-      </if>
-      <if test="record.timelimit != null" >
-        TimeLimit = #{record.timelimit,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.ticketsum != null" >
-        TicketSum = #{record.ticketsum,jdbcType=INTEGER},
-      </if>
-      <if test="record.cargosum != null" >
-        CargoSum = #{record.cargosum,jdbcType=INTEGER},
-      </if>
-      <if test="record.weightsum != null" >
-        WeightSum = #{record.weightsum,jdbcType=DECIMAL},
-      </if>
-      <if test="record.volumesum != null" >
-        VolumeSum = #{record.volumesum,jdbcType=DECIMAL},
-      </if>
-      <if test="record.state != null" >
-        State = #{record.state,jdbcType=BIT},
-      </if>
-      <if test="record.ask != null" >
-        Ask = #{record.ask,jdbcType=BIT},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update sor_package
-    set ID = #{record.id,jdbcType=INTEGER},
-      PackagePerson = #{record.packageperson,jdbcType=INTEGER},
-      SealInt = #{record.sealint,jdbcType=VARCHAR},
-      Destination = #{record.destination,jdbcType=VARCHAR},
-      ReckonDes = #{record.reckondes,jdbcType=VARCHAR},
-      TimeLimit = #{record.timelimit,jdbcType=TIMESTAMP},
-      TicketSum = #{record.ticketsum,jdbcType=INTEGER},
-      CargoSum = #{record.cargosum,jdbcType=INTEGER},
-      WeightSum = #{record.weightsum,jdbcType=DECIMAL},
-      VolumeSum = #{record.volumesum,jdbcType=DECIMAL},
-      State = #{record.state,jdbcType=BIT},
-      Ask = #{record.ask,jdbcType=BIT}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.SorPackage" >
-    update sor_package
-    <set >
-      <if test="packageperson != null" >
-        PackagePerson = #{packageperson,jdbcType=INTEGER},
-      </if>
-      <if test="sealint != null" >
-        SealInt = #{sealint,jdbcType=VARCHAR},
-      </if>
-      <if test="destination != null" >
-        Destination = #{destination,jdbcType=VARCHAR},
-      </if>
-      <if test="reckondes != null" >
-        ReckonDes = #{reckondes,jdbcType=VARCHAR},
-      </if>
-      <if test="timelimit != null" >
-        TimeLimit = #{timelimit,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ticketsum != null" >
-        TicketSum = #{ticketsum,jdbcType=INTEGER},
-      </if>
-      <if test="cargosum != null" >
-        CargoSum = #{cargosum,jdbcType=INTEGER},
-      </if>
-      <if test="weightsum != null" >
-        WeightSum = #{weightsum,jdbcType=DECIMAL},
-      </if>
-      <if test="volumesum != null" >
-        VolumeSum = #{volumesum,jdbcType=DECIMAL},
-      </if>
-      <if test="state != null" >
-        State = #{state,jdbcType=BIT},
-      </if>
-      <if test="ask != null" >
-        Ask = #{ask,jdbcType=BIT},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.SorPackage" >
-    update sor_package
-    set PackagePerson = #{packageperson,jdbcType=INTEGER},
-      SealInt = #{sealint,jdbcType=VARCHAR},
-      Destination = #{destination,jdbcType=VARCHAR},
-      ReckonDes = #{reckondes,jdbcType=VARCHAR},
-      TimeLimit = #{timelimit,jdbcType=TIMESTAMP},
-      TicketSum = #{ticketsum,jdbcType=INTEGER},
-      CargoSum = #{cargosum,jdbcType=INTEGER},
-      WeightSum = #{weightsum,jdbcType=DECIMAL},
-      VolumeSum = #{volumesum,jdbcType=DECIMAL},
-      State = #{state,jdbcType=BIT},
-      Ask = #{ask,jdbcType=BIT}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
 </mapper>
