@@ -18,7 +18,7 @@ public class IaeDeparture implements Serializable {
 
     private String destination;
 
-    private Integer warename;
+    private String warename;
 
     private Integer cargocount;
 
@@ -84,11 +84,11 @@ public class IaeDeparture implements Serializable {
         this.destination = destination == null ? null : destination.trim();
     }
 
-    public Integer getWarename() {
+    public String getWarename() {
         return warename;
     }
 
-    public void setWarename(Integer warename) {
+    public void setWarename(String warename) {
         this.warename = warename;
     }
 

@@ -1,30 +1,18 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.model.IaeDeparture;
-import com.example.logistics.model.IaeDepartureExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IaeDepartureMapper {
-    int countByExample(IaeDepartureExample example);
+    @Select("select *from iae_departure  ORDER BY TimeLimit DESC LIMIT #{pages},#{count}")
+    List<IaeDeparture> queryIaeDeparture(@Param("pages") int pages, @Param("count") int count);
 
-    int deleteByExample(IaeDepartureExample example);
-
-    int deleteByPrimaryKey(String id);
-
-    int insert(IaeDeparture record);
-
-    int insertSelective(IaeDeparture record);
-
-    List<IaeDeparture> selectByExample(IaeDepartureExample example);
-
-    IaeDeparture selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") IaeDeparture record, @Param("example") IaeDepartureExample example);
-
-    int updateByExample(@Param("record") IaeDeparture record, @Param("example") IaeDepartureExample example);
-
-    int updateByPrimaryKeySelective(IaeDeparture record);
-
-    int updateByPrimaryKey(IaeDeparture record);
+    //查询配载表数量
+    @Select("select count(1) from iae_departure")
+    Integer pagecount();
 }
