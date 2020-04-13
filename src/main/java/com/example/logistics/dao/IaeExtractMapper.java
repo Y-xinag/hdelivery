@@ -1,30 +1,18 @@
 package com.example.logistics.dao;
 
+
 import com.example.logistics.model.IaeExtract;
-import com.example.logistics.model.IaeExtractExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IaeExtractMapper {
-    int countByExample(IaeExtractExample example);
+    @Select("select *from iae_extract  ORDER BY EstimateDate DESC LIMIT #{pages},#{count}")
+    List<IaeExtract> queryIaeExtract(@Param("pages") int pages, @Param("count") int count);
 
-    int deleteByExample(IaeExtractExample example);
-
-    int deleteByPrimaryKey(String id);
-
-    int insert(IaeExtract record);
-
-    int insertSelective(IaeExtract record);
-
-    List<IaeExtract> selectByExample(IaeExtractExample example);
-
-    IaeExtract selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") IaeExtract record, @Param("example") IaeExtractExample example);
-
-    int updateByExample(@Param("record") IaeExtract record, @Param("example") IaeExtractExample example);
-
-    int updateByPrimaryKeySelective(IaeExtract record);
-
-    int updateByPrimaryKey(IaeExtract record);
+    //查询配载表数量
+    @Select("select count(1) from iae_extract")
+    Integer pagecount();
 }

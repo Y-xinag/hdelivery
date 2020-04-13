@@ -109,45 +109,48 @@
                         </div>
 
                         <!-- 数据表格 -->
-                        <table class="layui-table">
-                            <colgroup>
-                                <col width="50">
-                                <col width="60">
-                                <col width="100">
-                                <col width="120">
-                                <col width="90">
-                                <col width="90">
-                                <col width="150">
-                                <col width="80">
-                                <col>
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th><input type="checkbox" name="check" lay-skin="primary"></th>
-                                <th>序号</th>
-                                <th>出港单位</th>
-                                <th>航班车次</th>
-                                <th>运输方式</th>
-                                <th>货票号</th>
-                                <th>预计到港时间</th>
-                                <th>件数</th>
-                                <th>重要提示</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><input type="checkbox" name="check" lay-skin="primary"></td>
-                                <td>1</td>
-                                <td>长沙分部</td>
-                                <td>CA1001</td>
-                                <td>航空</td>
-                                <td>HP1001</td>
-                                <td>2017-11-11 11:11:11</td>
-                                <td>10</td>
-                                <td>重要提示重要提示</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <!--<table class="layui-table">-->
+                            <!--<colgroup>-->
+                                <!--<col width="50">-->
+                                <!--<col width="60">-->
+                                <!--<col width="100">-->
+                                <!--<col width="120">-->
+                                <!--<col width="90">-->
+                                <!--<col width="90">-->
+                                <!--<col width="150">-->
+                                <!--<col width="80">-->
+                                <!--<col>-->
+                            <!--</colgroup>-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th><input type="checkbox" name="check" lay-skin="primary"></th>-->
+                                <!--<th>序号</th>-->
+                                <!--<th>出港单位</th>-->
+                                <!--<th>航班车次</th>-->
+                                <!--<th>运输方式</th>-->
+                                <!--<th>货票号</th>-->
+                                <!--<th>预计到港时间</th>-->
+                                <!--<th>件数</th>-->
+                                <!--<th>重要提示</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr>-->
+                                <!--<td><input type="checkbox" name="check" lay-skin="primary"></td>-->
+                                <!--<td>1</td>-->
+                                <!--<td>长沙分部</td>-->
+                                <!--<td>CA1001</td>-->
+                                <!--<td>航空</td>-->
+                                <!--<td>HP1001</td>-->
+                                <!--<td>2017-11-11 11:11:11</td>-->
+                                <!--<td>10</td>-->
+                                <!--<td>重要提示重要提示</td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+
+                        <table class="layui-hide" id="demo" lay-filter="test"></table>
+
                     </form>
                 </div>
             </div>
@@ -364,6 +367,52 @@
     layui.use('table', function(){
         var table = layui.table;
     });
+
+
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function() {
+        $ = layui.jquery;
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , carousel = layui.carousel //轮播
+            , upload = layui.upload //上传
+            , element = layui.element //元素操作
+            , slider = layui.slider //滑块
+
+
+        table.render({
+            elem: '#demo'
+            , height: 420
+            , url: '/queryIaeExtract' //数据接口
+            , title: '用户表'
+            , limit: 5
+            , limits: [5, 10, 15, 20]
+            , page: true //开启分页
+            //, toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            // ,totalRow: true //开启合计行
+            , cols: [
+                [
+
+                    {field: 'id', title: '航班车次', width: 50, sort: true, fixed: 'left', totalRowText: '合计：'}
+                    , {field: 'vehicleint', title: '出港单位', width: 60}
+                    , {field: 'transportway', title: '运输方式', width: 120, sort: true, totalRow: true}
+                    , {field: 'waybillid', title: '货票号', width: 180, sort: true}
+                    , {field: 'estimatedate', title: '预计到港时间', width: 130, sort: true, totalRow: true}
+                    , {field: 'cargon', title: '件数', width: 130, sort: true, totalRow: true}
+                    , {field: 'importanthints', title: '重要提示', width: 130, sort: true, totalRow: true}
+
+                ]
+            ]
+        });
+
+    })
+
+
+
+
+
+
 
     //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
