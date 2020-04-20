@@ -1,30 +1,19 @@
 package com.example.logistics.dao;
 
+import com.example.logistics.model.IaeLineresource;
 import com.example.logistics.model.IaeTimeinput;
 import com.example.logistics.model.IaeTimeinputExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IaeTimeinputMapper {
-    int countByExample(IaeTimeinputExample example);
+    @Select("select *from IAE_TimeInput  ORDER BY InputDate DESC LIMIT #{pages},#{count}")
+    List<IaeLineresource> queryIaeTimeinput(@Param("pages") int pages, @Param("count") int count);
 
-    int deleteByExample(IaeTimeinputExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(IaeTimeinput record);
-
-    int insertSelective(IaeTimeinput record);
-
-    List<IaeTimeinput> selectByExample(IaeTimeinputExample example);
-
-    IaeTimeinput selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") IaeTimeinput record, @Param("example") IaeTimeinputExample example);
-
-    int updateByExample(@Param("record") IaeTimeinput record, @Param("example") IaeTimeinputExample example);
-
-    int updateByPrimaryKeySelective(IaeTimeinput record);
-
-    int updateByPrimaryKey(IaeTimeinput record);
+    //查询配载表数量
+    @Select("select count(1) from IAE_TimeInput")
+    Integer pagecount();
 }

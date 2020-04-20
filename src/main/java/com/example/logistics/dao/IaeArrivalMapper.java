@@ -1,30 +1,17 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.model.IaeArrival;
-import com.example.logistics.model.IaeArrivalExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IaeArrivalMapper {
-    int countByExample(IaeArrivalExample example);
+    @Select("select *from iae_arrival  ORDER BY TimeLimit DESC LIMIT #{pages},#{count}")
+    List<IaeArrival> queryIaeArrival(@Param("pages") int pages, @Param("count") int count);
 
-    int deleteByExample(IaeArrivalExample example);
-
-    int deleteByPrimaryKey(String id);
-
-    int insert(IaeArrival record);
-
-    int insertSelective(IaeArrival record);
-
-    List<IaeArrival> selectByExample(IaeArrivalExample example);
-
-    IaeArrival selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") IaeArrival record, @Param("example") IaeArrivalExample example);
-
-    int updateByExample(@Param("record") IaeArrival record, @Param("example") IaeArrivalExample example);
-
-    int updateByPrimaryKeySelective(IaeArrival record);
-
-    int updateByPrimaryKey(IaeArrival record);
+    //查询配载表数量
+    @Select("select count(1) from iae_arrival")
+    Integer pagecount();
 }

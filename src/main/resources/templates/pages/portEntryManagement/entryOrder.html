@@ -144,51 +144,54 @@
                         </div>
 
                         <!-- 数据表格 -->
-                        <table class="layui-table">
-                            <colgroup>
-                                <col width="50">
-                                <col width="90">
-                                <col width="90">
-                                <col width="100">
-                                <col width="80">
-                                <col width="80">
-                                <col width="90">
-                                <col width="80">
-                                <col width="80">
-                                <col width="80">
-                                <col>
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th><input type="checkbox" name="check" lay-skin="primary"></th>
-                                <th>工作单号</th>
-                                <th>派送单位</th>
-                                <th>货物地址</th>
-                                <th>分单人</th>
-                                <th>分单时间</th>
-                                <th title="入库运转中心">入库中心</th>
-                                <th>入库时间</th>
-                                <th>出库时间</th>
-                                <th>送达时限</th>
-                                <th title="进港分拨批次">批次</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><input type="checkbox" name="check" lay-skin="primary"></td>
-                                <td>GZD1001</td>
-                                <td>长沙分部</td>
-                                <td><p class="overlength" title="湖南省长沙市涉外国际公馆5栋2单元">湖南省长沙市涉外国际公馆5栋2单元</p></td>
-                                <td>老王</td>
-                                <td><p class="overlength" title="2017-11-11 11:11:11">2017-11-11 11:11:11</p></td>
-                                <td>深圳分部</td>
-                                <td><p class="overlength" title="2017-11-11 11:11:11">2017-11-11 11:11:11</p></td>
-                                <td><p class="overlength" title="2017-11-11 11:11:11">2017-11-11 11:11:11</p></td>
-                                <td><p class="overlength" title="2017-11-11 11:11:11">2017-11-11 11:11:11</p></td>
-                                <td>批次</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <!--<table class="layui-table">-->
+                            <!--<colgroup>-->
+                                <!--<col width="50">-->
+                                <!--<col width="90">-->
+                                <!--<col width="90">-->
+                                <!--<col width="100">-->
+                                <!--<col width="80">-->
+                                <!--<col width="80">-->
+                                <!--<col width="90">-->
+                                <!--<col width="80">-->
+                                <!--<col width="80">-->
+                                <!--<col width="80">-->
+                                <!--<col>-->
+                            <!--</colgroup>-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th><input type="checkbox" name="check" lay-skin="primary"></th>-->
+                                <!--<th>工作单号</th>-->
+                                <!--<th>派送单位</th>-->
+                                <!--<th>货物地址</th>-->
+                                <!--<th>分单人</th>-->
+                                <!--<th>分单时间</th>-->
+                                <!--<th title="入库运转中心">入库中心</th>-->
+                                <!--<th>入库时间</th>-->
+                                <!--<th>出库时间</th>-->
+                                <!--<th>送达时限</th>-->
+                                <!--<th title="进港分拨批次">批次</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr>-->
+                                <!--<td><input type="checkbox" name="check" lay-skin="primary"></td>-->
+                                <!--<td>GZD1001</td>-->
+                                <!--<td>长沙分部</td>-->
+                                <!--<td><p class="overlength" title="湖南省长沙市涉外国际公馆5栋2单元">湖南省长沙市涉外国际公馆5栋2单元</p></td>-->
+                                <!--<td>老王</td>-->
+                                <!--<td><p class="overlength" title="2017-11-11 11:11:11">2017-11-11 11:11:11</p></td>-->
+                                <!--<td>深圳分部</td>-->
+                                <!--<td><p class="overlength" title="2017-11-11 11:11:11">2017-11-11 11:11:11</p></td>-->
+                                <!--<td><p class="overlength" title="2017-11-11 11:11:11">2017-11-11 11:11:11</p></td>-->
+                                <!--<td><p class="overlength" title="2017-11-11 11:11:11">2017-11-11 11:11:11</p></td>-->
+                                <!--<td>批次</td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+
+                        <table class="layui-hide" id="demo" lay-filter="test"></table>
+
                     </form>
                 </div>
             </div>
@@ -368,6 +371,50 @@
     layui.use('table', function(){
         var table = layui.table;
     });
+
+
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function() {
+        $ = layui.jquery;
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , carousel = layui.carousel //轮播
+            , upload = layui.upload //上传
+            , element = layui.element //元素操作
+            , slider = layui.slider //滑块
+
+
+        table.render({
+            elem: '#demo'
+            , height: 420
+            , url: '/queryIaeArrival' //数据接口
+            , title: '用户表'
+            , limit: 5
+            , limits: [5, 10, 15, 20]
+            , page: true //开启分页
+            //, toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            // ,totalRow: true //开启合计行
+            , cols: [
+                [
+
+                    {field: 'id', title: '工作单号', width: 50, sort: true, fixed: 'left', totalRowText: '合计：'}
+                    , {field: 'sendcompany', title: '派送单位', width: 60}
+                    , {field: 'cargoaddress', title: '货物地址', width: 120, sort: true, totalRow: true}
+                    , {field: 'issueperson', title: '分单人', width: 180, sort: true}
+                    , {field: 'issuedate', title: '分单时间', width: 130, sort: true, totalRow: true}
+                    , {field: 'workaddress', title: '入库中心', width: 130, sort: true, totalRow: true}
+                    , {field: 'storagedate', title: '入库时间', width: 130, sort: true, totalRow: true}
+                    , {field: 'outbounddate', title: '出库时间', width: 120, sort: true, totalRow: true}
+                    , {field: 'timelimit', title: '送达时限', width: 180, sort: true}
+                    , {field: 'batch', title: '批次', width: 130, sort: true, totalRow: true}
+                ]
+            ]
+        });
+
+    })
+
+
 
     //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
