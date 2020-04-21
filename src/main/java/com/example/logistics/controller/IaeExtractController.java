@@ -33,8 +33,6 @@ public class IaeExtractController {
 
         response.setContentType("text/html;charset=utf-8");
         response.setCharacterEncoding("utf-8");
-
-        System.out.println("进了");
         // 分页查询，并按照ID降序
         PageHelper.startPage(pages, count);
         List<IaeExtract> list = iaeExtractService.queryIaeExtract((pages - 1) * count, count);
@@ -47,7 +45,6 @@ public class IaeExtractController {
             String jsonString = JSON.toJSONString(objectJson, SerializerFeature.DisableCircularReferenceDetect);
             PrintWriter out = response.getWriter();
             out.write(jsonString);
-            System.out.println(jsonString);
         }
     }
 

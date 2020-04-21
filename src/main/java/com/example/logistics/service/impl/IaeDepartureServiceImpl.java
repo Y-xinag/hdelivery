@@ -23,4 +23,9 @@ public class IaeDepartureServiceImpl implements IaeDepartureService {
     public Integer pagecount() {
         return iaeDepartureMapper.pagecount();
     }
+
+    @Override
+    public List<IaeDeparture> queryIaejkAll(int pages, int count) {
+        return iaeDepartureMapper.queryIaejkAll(pages, count);
+    }
 }

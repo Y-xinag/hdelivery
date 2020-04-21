@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class IaeDeparture implements Serializable {
@@ -44,12 +45,18 @@ public class IaeDeparture implements Serializable {
 
     private String entrustcompany;
 
+    private List<IaeArrival> iaeArrivalList;
+
+    private List<IaeLineresource> iaeLineresourceList;
+
+    private List<IaeExtract> iaeExtractList;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public String getPackingid() {
@@ -57,7 +64,7 @@ public class IaeDeparture implements Serializable {
     }
 
     public void setPackingid(String packingid) {
-        this.packingid = packingid == null ? null : packingid.trim();
+        this.packingid = packingid;
     }
 
     public Boolean getTransfer() {
@@ -81,7 +88,7 @@ public class IaeDeparture implements Serializable {
     }
 
     public void setDestination(String destination) {
-        this.destination = destination == null ? null : destination.trim();
+        this.destination = destination;
     }
 
     public String getWarename() {
@@ -137,7 +144,7 @@ public class IaeDeparture implements Serializable {
     }
 
     public void setAsk(String ask) {
-        this.ask = ask == null ? null : ask.trim();
+        this.ask = ask;
     }
 
     public String getTakecargoperson() {
@@ -145,7 +152,7 @@ public class IaeDeparture implements Serializable {
     }
 
     public void setTakecargoperson(String takecargoperson) {
-        this.takecargoperson = takecargoperson == null ? null : takecargoperson.trim();
+        this.takecargoperson = takecargoperson;
     }
 
     public String getTackcargoaddress() {
@@ -153,7 +160,7 @@ public class IaeDeparture implements Serializable {
     }
 
     public void setTackcargoaddress(String tackcargoaddress) {
-        this.tackcargoaddress = tackcargoaddress == null ? null : tackcargoaddress.trim();
+        this.tackcargoaddress = tackcargoaddress;
     }
 
     public Integer getPayment() {
@@ -169,7 +176,7 @@ public class IaeDeparture implements Serializable {
     }
 
     public void setImportanthints(String importanthints) {
-        this.importanthints = importanthints == null ? null : importanthints.trim();
+        this.importanthints = importanthints;
     }
 
     public Date getSurplustime() {
@@ -185,7 +192,31 @@ public class IaeDeparture implements Serializable {
     }
 
     public void setEntrustcompany(String entrustcompany) {
-        this.entrustcompany = entrustcompany == null ? null : entrustcompany.trim();
+        this.entrustcompany = entrustcompany;
+    }
+
+    public List<IaeArrival> getIaeArrivalList() {
+        return iaeArrivalList;
+    }
+
+    public void setIaeArrivalList(List<IaeArrival> iaeArrivalList) {
+        this.iaeArrivalList = iaeArrivalList;
+    }
+
+    public List<IaeLineresource> getIaeLineresourceList() {
+        return iaeLineresourceList;
+    }
+
+    public void setIaeLineresourceList(List<IaeLineresource> iaeLineresourceList) {
+        this.iaeLineresourceList = iaeLineresourceList;
+    }
+
+    public List<IaeExtract> getIaeExtractList() {
+        return iaeExtractList;
+    }
+
+    public void setIaeExtractList(List<IaeExtract> iaeExtractList) {
+        this.iaeExtractList = iaeExtractList;
     }
 
     @Override
@@ -196,7 +227,7 @@ public class IaeDeparture implements Serializable {
                 ", transfer=" + transfer +
                 ", actualcount=" + actualcount +
                 ", destination='" + destination + '\'' +
-                ", warename=" + warename +
+                ", warename='" + warename + '\'' +
                 ", cargocount=" + cargocount +
                 ", weight=" + weight +
                 ", volume=" + volume +
@@ -209,6 +240,9 @@ public class IaeDeparture implements Serializable {
                 ", importanthints='" + importanthints + '\'' +
                 ", surplustime=" + surplustime +
                 ", entrustcompany='" + entrustcompany + '\'' +
+                ", iaeArrivalList=" + iaeArrivalList +
+                ", iaeLineresourceList=" + iaeLineresourceList +
+                ", iaeExtractList=" + iaeExtractList +
                 '}';
     }
 }

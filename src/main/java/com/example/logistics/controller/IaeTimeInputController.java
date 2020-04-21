@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.logistics.model.IaeDeparture;
 import com.example.logistics.model.IaeLineresource;
+import com.example.logistics.model.IaeTimeinput;
 import com.example.logistics.service.IaeTimeinputService;
 import com.example.logistics.util.ObjectJson;
 import com.github.pagehelper.PageHelper;
@@ -36,7 +37,7 @@ public class IaeTimeInputController {
         System.out.println("进了");
         // 分页查询，并按照ID降序
         PageHelper.startPage(pages, count);
-        List<IaeLineresource> list = iaeTimeinputService.queryIaeTimeinput((pages - 1) * count, count);
+        List<IaeTimeinput> list = iaeTimeinputService.queryIaeTimeinput((pages - 1) * count, count);
         Integer num = iaeTimeinputService.pagecount();
         if (list.size()>0){
             objectJson.setCode(0);

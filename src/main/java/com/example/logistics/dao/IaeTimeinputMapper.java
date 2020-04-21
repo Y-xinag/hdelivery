@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IaeTimeinputMapper {
     @Select("select *from IAE_TimeInput  ORDER BY InputDate DESC LIMIT #{pages},#{count}")
-    List<IaeLineresource> queryIaeTimeinput(@Param("pages") int pages, @Param("count") int count);
+    List<IaeTimeinput> queryIaeTimeinput(@Param("pages") int pages, @Param("count") int count);
 
     //查询配载表数量
     @Select("select count(1) from IAE_TimeInput")
