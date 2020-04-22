@@ -2,10 +2,11 @@ package com.example.logistics.helperentity;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Component
-public class IaeDepartureEntity {
+public class IaeDepartureEntity implements Serializable {
     private String id;
     private String packingid;
     private Date storagedate;

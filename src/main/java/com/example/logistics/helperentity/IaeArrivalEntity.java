@@ -1,34 +1,21 @@
-package com.example.logistics.model;
+package com.example.logistics.helperentity;
 
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Component
-public class IaeArrival implements Serializable {
+public class IaeArrivalEntity implements Serializable {
     private String id;
-
     private String sendcompany;
-
     private String cargoaddress;
-
-    private String issueperson;
-
-    private Date issuedate;
-
-    private String workaddress;
-
     private Date storagedate;
-
-    private Date outbounddate;
-
     private Date timelimit;
-
     private Date batch;
-
-    private List<IaeLineresource> iaeLineresourceList;
+    private String carrier;
+    private String acceptcompany;
+    private String abnormalremarks;
 
     public String getId() {
         return id;
@@ -54,44 +41,12 @@ public class IaeArrival implements Serializable {
         this.cargoaddress = cargoaddress;
     }
 
-    public String getIssueperson() {
-        return issueperson;
-    }
-
-    public void setIssueperson(String issueperson) {
-        this.issueperson = issueperson;
-    }
-
-    public Date getIssuedate() {
-        return issuedate;
-    }
-
-    public void setIssuedate(Date issuedate) {
-        this.issuedate = issuedate;
-    }
-
-    public String getWorkaddress() {
-        return workaddress;
-    }
-
-    public void setWorkaddress(String workaddress) {
-        this.workaddress = workaddress;
-    }
-
     public Date getStoragedate() {
         return storagedate;
     }
 
     public void setStoragedate(Date storagedate) {
         this.storagedate = storagedate;
-    }
-
-    public Date getOutbounddate() {
-        return outbounddate;
-    }
-
-    public void setOutbounddate(Date outbounddate) {
-        this.outbounddate = outbounddate;
     }
 
     public Date getTimelimit() {
@@ -110,28 +65,42 @@ public class IaeArrival implements Serializable {
         this.batch = batch;
     }
 
-    public List<IaeLineresource> getIaeLineresourceList() {
-        return iaeLineresourceList;
+    public String getCarrier() {
+        return carrier;
     }
 
-    public void setIaeLineresourceList(List<IaeLineresource> iaeLineresourceList) {
-        this.iaeLineresourceList = iaeLineresourceList;
+    public void setCarrier(String carrier) {
+        this.carrier = carrier;
+    }
+
+    public String getAcceptcompany() {
+        return acceptcompany;
+    }
+
+    public void setAcceptcompany(String acceptcompany) {
+        this.acceptcompany = acceptcompany;
+    }
+
+    public String getAbnormalremarks() {
+        return abnormalremarks;
+    }
+
+    public void setAbnormalremarks(String abnormalremarks) {
+        this.abnormalremarks = abnormalremarks;
     }
 
     @Override
     public String toString() {
-        return "IaeArrival{" +
+        return "IaeArrivalEntity{" +
                 "id='" + id + '\'' +
                 ", sendcompany='" + sendcompany + '\'' +
                 ", cargoaddress='" + cargoaddress + '\'' +
-                ", issueperson='" + issueperson + '\'' +
-                ", issuedate=" + issuedate +
-                ", workaddress='" + workaddress + '\'' +
                 ", storagedate=" + storagedate +
-                ", outbounddate=" + outbounddate +
                 ", timelimit=" + timelimit +
                 ", batch=" + batch +
-                ", iaeLineresourceList=" + iaeLineresourceList +
+                ", carrier='" + carrier + '\'' +
+                ", acceptcompany='" + acceptcompany + '\'' +
+                ", abnormalremarks='" + abnormalremarks + '\'' +
                 '}';
     }
 }

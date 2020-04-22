@@ -23,4 +23,9 @@ public class IaeArrivalServiceImpl implements IaeArrivalService {
     public Integer pagecount() {
         return iaeArrivalMapper.pagecount();
     }
+
+    @Override
+    public List<IaeArrival> queryIaeArrivalNo(int pages, int count) {
+        return iaeArrivalMapper.queryIaeArrivalNo(pages, count);
+    }
 }
